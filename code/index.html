@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- scripts -->
+    <script src="content.js" type="text/javascript"></script>
+    <script src="index.js" type="text/javascript"></script>
+    <script src="sortToGrops.js" type="text/javascript"></script>
+    <script src="completeSentence.js" type="text/javascript"></script>
+    <!-- <script src="questions.js" type="text/javascript"></script> -->
+    <script src="tillder/tillder.js" type="text/javascript"></script>
+    <!-- links -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tillder/tillder.css">
+    <!-- must come last -->
+    <link rel="stylesheet" href="tools.css"> 
+    <!-- librarys -->
+    <script src="../assets/librarys/dragDropTouch.js" type="text/javascript"></script>
+    <!-- icon -->
+    <link rel="shortcut icon" href="../assets/images/">
+    <title>טי"לפון </title>
+</head>
+<body>
+    <div class="bodyContainer">
+        <!-- loader -->
+        <div class="loader">
+            <img src="../assets/images/homePage/loder.gif" alt="Loading..." />
+        </div>
+        <!-- name entry -->
+        <div class="nameEntry darkScreen">
+            <div class="nameContainer">
+                <label for="name">לפני שנתחיל רצינו לדעת איך לקרוא לכם</label>
+                <input type="text" id="name" name="name">
+                <div class="submitName">ok</div>
+            </div>
+        </div>
+        <!-- top bar -->
+        <div class="topBar">
+            <img src="../assets/images/topBar/tillLogoWhite.svg" alt="tillLogo">
+            <div>
+                <div id="battery">0%</div>
+                <img src="../assets/images/topBar/batteryWhite.png" alt="tillLogo">
+            </div>
+        </div>
+        <!-- alert -->
+        <div class="alert darkScreen">
+            <div class="alertContainer">
+                <div class="alertText"></div>
+                <div class="alertButton"></div>
+            </div>
+        </div>
+        <!-- home page -->
+        <div class="homePage">
+            <div class="appsContainer"></div>
+        </div>
+        <!-- tillder -->
+        <div class="tillder hidden bg">
+            <img class="tillderTitle centerX" src="../assets/images/tillder/tillder.png" alt="tillder">
+            <div class="tillderContentContainer flexCenter"></div>
+        </div>
+        <!-- for multiple and binary questions -->
+        <div class="multipleQuestionContainer"></div>
+        <!-- for complete the sentence -->
+        <div class="completeSentenceContainer"></div>
+        <!-- for sort to groups -->
+        <div class="sortToGroupsContainer"></div>
+    </div>
+</body>
+</html>
