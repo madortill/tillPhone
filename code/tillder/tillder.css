@@ -1,5 +1,6 @@
 .tillder {
     background-color: white;
+    font-family: "Calibri";
 }
 
 .tillderTitle {
@@ -8,7 +9,7 @@
 }
 
 .tillderQuestionContainer {
-    width: 70vw;
+    width: 75vw;
     height: 50vh;
     background-image: url("../../assets/images/tillder/picFrame.png");
     background-size: 100% 100%;
@@ -24,12 +25,21 @@
 }
 
 .tillder .ansContainer {
+    margin-top: 2em;
     width: 100%;
+}
+
+.tillder .ans {
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .tillder .ansPic {
     width: 10vw;
-    /* height: 10vh; */
+    height: 5vh;
     border-radius: 50%;
     border: 0.4em solid #bfbfbf;
     text-align: center;
