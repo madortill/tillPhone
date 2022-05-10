@@ -7,14 +7,16 @@ const DATA = {
             {
                 type: `binary`,
                 src: `../assets/images/homePage/tillder.png`,
-                question: `שאלת נכון או לא נכון שהתשובה אליה היא נכון`,
-                correctAns: true
+                question: `שאלת נכון או לא נכון שהתשובה אליה היא לא נכון`,
+                correctAns: false,
+                selectedAns: ``,
             },
             {
                 type: `binary`,
                 src: `../assets/images/homePage/tillder.png`,
                 question: `שאלת נכון או לא נכון שהתשובה אליה היא נכון`,
-                correctAns: true
+                correctAns: true,
+                selectedAns: ``,
             },
         ],
     },

@@ -58,7 +58,7 @@ body, html {
 
 .nameEntry #name:focus{
     outline: none;
-    height: 7vh;
+    height: 6vh;
 }
 
 .nameEntry #name {

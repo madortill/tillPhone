@@ -1,6 +1,7 @@
 let userName;
 let nPercent = 0;
 const PERCENT_PER_APP = 100/Object.keys(DATA).length;
+const PASSING_RATE = 0.5;
 const BONUS = 2;// NOT MORE THEN 5
 
 
@@ -77,7 +78,12 @@ const updatePercentage = (nPercentToAdd) => {
 Description: calculate the current percentage and send to update */
 const calcPercentageWin = (correctAnswers, answers, bonus) => {
     let winningRatio = correctAnswers/answers;
-    updatePercentage(Math.floor(PERCENT_PER_APP * winningRatio + bonus));
+    let percentage = Math.floor(PERCENT_PER_APP * winningRatio);
+    if (bonus){
+        percentage = percentage + bonus
+    }
+    updatePercentage(percentage);
+    return percentage;
 }
 
 /*

@@ -19,7 +19,7 @@
 
 @font-face {
     font-family: DancingScript;
-    src: url("../assets/fonts/dancingScript/DancingScript-Regular.ttf");
+    src: url("../assets/fonts/dancingScript/DancingScript-SemiBold.ttf");
     font-weight: 500;
 }
 
@@ -52,11 +52,20 @@
     }
 }
 
-/* classes */
-.hidden {
-    display: none;
+@keyframes slideRight {
+    100% {
+        transform: translateX(150%);
+    }
 }
 
+@keyframes slideLeft {
+    100% {
+        transform: translateX(-150%);
+    }
+}
+
+
+/* classes */
 .darkScreen {
     position: fixed;
     top: 0;
@@ -85,5 +94,10 @@
 .flexCenter {
     display: flex;
     align-content: center;
+    align-items: center;
     justify-content: center;
+}
+
+.hidden {
+    display: none;
 }
