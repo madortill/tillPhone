@@ -72,13 +72,12 @@ const onClickAnswer = (event) => {
     }
     // send to next question.
     nTillderCurrentQuestion++;
-    setTimeout(()=>{       
-        if(nTillderCurrentQuestion < AMOUNT_OF_TILLDER_QUESTION) {
-            addContentToQuestion();
-        } else {
-            endTillderExer();
-        }
-    }, DELAY_AFTER_QUESTION)
+    if(nTillderCurrentQuestion < AMOUNT_OF_TILLDER_QUESTION) {
+        setTimeout(addContentToQuestion, DELAY_AFTER_QUESTION)
+    } else {
+        endTillderExer();
+    }
+
 }
 
 /* endTillderExer
@@ -89,6 +88,7 @@ const endTillderExer = () => {
         El("img",{cls: `sendToHome`, listeners: {click: startApp}, attributes: {src: `../assets/images/tillder/backArrow.svg`}})
     );
     document.querySelector(`.tillder`).append(endContainer);
+    document.querySelector(`.tillderEndContainer`).classList.add(`fadeIn`)
     let feedback;
     // add feedback accordingly
     if(nTillderCorrectAnswers/AMOUNT_OF_TILLDER_QUESTION >= PASSING_RATE){ // win - add precentegt
