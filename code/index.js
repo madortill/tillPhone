@@ -1,5 +1,6 @@
 let userName;
 let nPercent = 0;
+let strCurrentApp;
 const PERCENT_PER_APP = 100/Object.keys(DATA).length;
 const PASSING_RATE = 0.5;
 const BONUS = 2;// NOT MORE THEN 5
@@ -23,7 +24,7 @@ const startApp = () => {
     document.querySelector(`.nameEntry`).classList.add(`hidden`);
     let app;
     for(key of Object.keys(DATA)){
-        app = El("div", {cls: `app`, listeners: {"click": tillder}},
+        app = El("div", {classes: [`app`, `${key}App`], listeners: {"click": tillder}},
             El("img", {attributes: {class: `appIcon`, src: DATA[key].icon}}),
             El("div", {cls: `appTitle`}, key),
         );
@@ -34,6 +35,15 @@ const startApp = () => {
         document.querySelector(`.appsContainer`).append(app);
     };
     alert(`${userName}! הסוללה במצב 0% וזקוקה להטענה! זה הזמן לשחק במשחקים ולצבור נקודות כדי להגיע ל100%.`, `מוכנים לאתגר!`)
+}
+
+/* sendHome
+--------------------------------------------------------------
+Description: hide and enable recent app, shoe home page*/
+const sendHome = () => {
+    document.querySelector(`.homePage`).classList.remove(`hidden`);
+    document.querySelector(`.${strCurrentApp}`).classList.add(`hidden`);
+    document.querySelector(`.appsContainer > .${strCurrentApp}App`).removeEventListener(`click`, eval(strCurrentApp));
 }
 
 /* alert

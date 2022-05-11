@@ -4,12 +4,13 @@ let nTillderCorrectAnswers = 0;
 let arrTillderQuestions = [];
 // const
 const AMOUNT_OF_TILLDER_QUESTION = DATA.tillder.amountOfQuestions; // how many questions we want out of the array
-const DELAY_AFTER_QUESTION = 500;
+const DELAY_AFTER_QUESTION = 300;
 
 /* tillder
 --------------------------------------------------------------
 Description: start tillder app*/
 const tillder = () => {
+    strCurrentApp = "tillder";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillder`).classList.remove(`hidden`);
     arrTillderQuestions = shuffle(DATA.tillder.appContent);
@@ -84,10 +85,11 @@ const onClickAnswer = (event) => {
 --------------------------------------------------------------
 Description: */
 const endTillderExer = () => {
-    let endContainer = El("div", {classes: ["tillderEndContainer"]},
-        El("img",{cls: `sendToHome`, listeners: {click: startApp}, attributes: {src: `../assets/images/tillder/backArrow.svg`}})
-    );
+    nTillderCurrentQuestion = 0;
+    let endContainer = El("div", {classes: ["tillderEndContainer"]});
     document.querySelector(`.tillder`).append(endContainer);
+    let back = El("img",{cls: `sendToHome`, listeners: {click: sendHome}, attributes: {src: `../assets/images/tillder/arrowRight.svg`}})
+    document.querySelector(`.tillder`).append(back);
     document.querySelector(`.tillderEndContainer`).classList.add(`fadeIn`)
     let feedback;
     // add feedback accordingly
@@ -131,6 +133,47 @@ const endTillderExer = () => {
 /* reviewAnswers
 --------------------------------------------------------------
 Description: start tillder app*/
-const reviewAnswers = () => {
-    console.log("עוברים על התשובותהנכונוךץץץץ");
+const reviewAnswers = (event) => {
+    document.querySelector(`.tillderEndContainer`).classList.add(`hidden`);
+    document.querySelector(`.tillderContentContainer`).innerHTML = "";
+    // update current ans
+    if(event.currentTarget.classList[1] === "arrowLeft") {
+        nTillderCurrentQuestion--;
+        if(nTillderCurrentQuestion < 0) {
+            nTillderCurrentQuestion += AMOUNT_OF_TILLDER_QUESTION;
+        }
+    } else if(event.currentTarget.classList[1] === "arrowRight"){
+        nTillderCurrentQuestion++;
+        if(nTillderCurrentQuestion === AMOUNT_OF_TILLDER_QUESTION) {
+            nTillderCurrentQuestion = 0;
+        }
+    }
+    // add question
+    let question = El("div", {classes: [`tillderQuestionContainer`, `flexCenter`]}, 
+        El("img", {cls: `tillderPic`, attributes: {src: arrTillderQuestions[nTillderCurrentQuestion].src}},),
+        El("div", {cls: `tillderQuestion`}, arrTillderQuestions[nTillderCurrentQuestion].question),
+    );
+    document.querySelector(`.tillderContentContainer`).append(question);
+    // add answeres
+    let ansContainer = El("div", {classes: [`ansContainer`, `flexCenter`]},
+        El("img", {classes: [`arrowPic`, `arrowRight`], attributes: {src: `../assets/images/tillder/arrowRight.svg`}, listeners: {click : reviewAnswers}},),
+        El("div", {classes: [`binaryAns`, `true`, `ans`]},
+        El("img", {classes: [`ansPic`], attributes: {src: `../assets/images/tillder/vMark.svg`}},), "נכון"
+        ),
+        El("div", {classes: [`binaryAns`, `false`, `ans`]},
+        El("img", {classes: [`ansPic`], attributes: {src: `../assets/images/tillder/xMark.svg`}},),"לא נכון"
+        ),
+        El("img", {classes: [`arrowPic`, `arrowLeft`], attributes: {src: `../assets/images/tillder/arrowRight.svg`}, listeners: {click : reviewAnswers}},),
+    );
+    document.querySelector(`.tillderContentContainer`).append(ansContainer);
+    // show feedback - correct ans
+    let correctAnswer;
+    if(arrTillderQuestions[nTillderCurrentQuestion].correctAns){
+        correctAnswer = El("div", {cls: `tillderFeedBackCorrectAns`}, "התשובה הנכונה היא נכון");
+    } else {
+        correctAnswer = El("div", {cls: `tillderFeedBackCorrectAns`}, "התשובה הנכונה היא לא נכון");
+    }
+    document.querySelector(`.tillderQuestionContainer`).append(correctAnswer);
+    // show user selected answer
+    document.querySelector(`.${arrTillderQuestions[nTillderCurrentQuestion].selectedAns} .ansPic`).style.backgroundColor = "rgb(209, 209, 209)";
 }

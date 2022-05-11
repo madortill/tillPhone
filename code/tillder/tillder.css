@@ -16,14 +16,20 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
     flex-wrap: wrap;
+    text-align: center;
+
+}
+
+.tillderQuestionContainer div {
+    padding: 1em;
 }
 
 .tillderQuestionContainer.slideRight {
-    animation: slideRight 1s forwards;
+    animation: slideRight 0.5s forwards;
 }
 
 .tillderQuestionContainer.slideLeft {
-    animation: slideLeft 1s forwards;
+    animation: slideLeft 0.5s forwards;
 }
 
 .tillderContentContainer {
@@ -116,4 +122,24 @@
     top: 8vh;
     right: 2vw;
     width: 7vw;
+}
+
+.tillder .arrowPic {
+    width: 8vw;
+    height: 4vh;
+    border-radius: 50%;
+    border: 0.4em solid #bfbfbf;
+    text-align: center;
+    padding: 0.6em;
+}
+
+.tillder .tillderFeedBackCorrectAns {
+    width: 70vw;
+    border-radius: 2em;
+    border: 0.4em solid #bfbfbf;
+    background-color: white;
+    text-align: center;
+    padding: 0.5em;
+    position: absolute;
+    top: 50vh;
 }
