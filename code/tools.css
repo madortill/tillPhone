@@ -23,6 +23,12 @@
     font-weight: 500;
 }
 
+@font-face {
+    font-family: Amatica;
+    src: url("../assets/fonts/Amatica/AmaticaSC-Regular.ttf");
+    font-weight: 500;
+}
+
 /* animations */
 @keyframes fadeOut {
     100% {

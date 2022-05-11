@@ -17,7 +17,6 @@
     background-repeat: no-repeat;
     flex-wrap: wrap;
     text-align: center;
-
 }
 
 .tillderQuestionContainer div {
@@ -142,4 +141,8 @@
     padding: 0.5em;
     position: absolute;
     top: 50vh;
+}
+
+.tillderPic {
+    width: 40vw;
 }

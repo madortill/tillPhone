@@ -24,14 +24,10 @@ const startApp = () => {
     document.querySelector(`.nameEntry`).classList.add(`hidden`);
     let app;
     for(key of Object.keys(DATA)){
-        app = El("div", {classes: [`app`, `${key}App`], listeners: {"click": tillder}},
+        app = El("div", {cls: `app`, listeners: {"click": eval(key)}},
             El("img", {attributes: {class: `appIcon`, src: DATA[key].icon}}),
             El("div", {cls: `appTitle`}, key),
         );
-        // app = El("div", {cls: `app`, listeners: {"click": eval(key)}},
-        //     El("img", {attributes: {class: `appIcon`, src: DATA[key].icon}}),
-        //     El("div", {cls: `appTitle`}, key),
-        // );
         document.querySelector(`.appsContainer`).append(app);
     };
     alert(`${userName}! הסוללה במצב 0% וזקוקה להטענה! זה הזמן לשחק במשחקים ולצבור נקודות כדי להגיע ל100%.`, `מוכנים לאתגר!`)
