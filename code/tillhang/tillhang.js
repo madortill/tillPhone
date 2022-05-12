@@ -127,7 +127,7 @@ const tillhangEnd = () => {
         content = El("div", {classes: [`tillhangContainer`, `flexCenter`]},
             El("div",{cls: `tillhangTitleDefinition`}, `האיש נתלה! פשוט אי אפשר לסמוך עליכם`),
             El("div",{cls: `tillhangDefinition`}, `ניחשתם נכון ${nTillhangCorrectAnswers} מושגים מתוך ${AMOUNT_OF_TILLHANG_QUESTION}`),
-            El("div",{cls: `tillhangDefinition`},`צילמתם את התלייה והתבזבזו לכם 5 אחוזים`),
+            El("div",{cls: `tillhangDefinition`},`התקשרתם לאמבולנס והתבזבזו לכם 5 אחוזים`),
             El("img",{classes: [`tillhangEndMan`], attributes: {src: `../assets/images/tillhang/man.png`}}),
             El("div",{cls: `tillhangEndButton`, listeners: {click: sendHome}},`נמחקתי`),
 
