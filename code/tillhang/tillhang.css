@@ -77,7 +77,7 @@
 
 .tillHangNextQuestion {
     position: absolute;
-    top: 85vh;
+    bottom: 10vh;
     left: 5vw;
     width: 10vw;
 }
