@@ -24,7 +24,7 @@ const startApp = () => {
     document.querySelector(`.nameEntry`).classList.add(`hidden`);
     let app;
     for(key of Object.keys(DATA)){
-        app = El("div", {cls: `app`, listeners: {"click": eval(key)}},
+        app = El("div", {classes: [`app`, `${key}App`], listeners: {"click": eval(key)}},
             El("img", {attributes: {class: `appIcon`, src: DATA[key].icon}}),
             El("div", {cls: `appTitle`}, key),
         );

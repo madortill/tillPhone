@@ -16,7 +16,7 @@ const DATA = {
     // tillhang
     "tillhang": {
         icon: `../assets/images/homePage/tillhang.png`,
-        amountOfQuestions: 1, // how many questions will actualy appear
+        amountOfQuestions: 2, // how many questions will actualy appear
         appContent:  [
             {
                 type: `binary`,
@@ -28,10 +28,20 @@ const DATA = {
                 `ש`,
                 `ג`,
                 `-`,
-                `א`,
+                `א`
+            ],
+            },
+            {
+                type: `binary`,
+                src: `../assets/images/homePage/tillder.png`,
+                definition: `הגדרה של עוד מושג כי מושג זה כיף`,
+                answer: [// if you want two words put a dash between them, not more then 8 letters
+                `מ`,
+                `ו`,
+                `ש`,
                 `ג`,
                 `-`,
-                `א`
+                `ב`
             ],
             },
         ],
