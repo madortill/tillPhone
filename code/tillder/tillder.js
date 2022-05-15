@@ -30,25 +30,25 @@ const addContentToQuestion = () => {
     document.querySelector(`.tillderContentContainer`).append(question);
     // add answeres
     let ansContainer = El("div", {classes: [`ansContainer`, `flexCenter`]},
-        El("div", {classes: [`binaryAns`, `true`, `ans`] , listeners: {click : onClickAnswer}},
+        El("div", {classes: [`binaryAns`, `true`, `ans`] , listeners: {click : onClickTillderAnswer}},
         El("img", {classes: [`ansPic`], attributes: {src: `../assets/images/tillder/vMark.svg`}},), "נכון"
     ),
-        El("div", {classes: [`binaryAns`, `false`, `ans`] , listeners: {click : onClickAnswer}},
+        El("div", {classes: [`binaryAns`, `false`, `ans`] , listeners: {click : onClickTillderAnswer}},
         El("img", {classes: [`ansPic`], attributes: {src: `../assets/images/tillder/xMark.svg`}},),"לא נכון"
     ),
     );
     document.querySelector(`.tillderContentContainer`).append(ansContainer);
-    document.querySelector(`.tillderQuestionContainer`).addEventListener('swiped', onClickAnswer);
+    document.querySelector(`.tillderQuestionContainer`).addEventListener('swiped', onClickTillderAnswer);
 }
 
-/* onClickAnswer    
+/* onClickTillderAnswer    
 --------------------------------------------------------------
 Description: */
-const onClickAnswer = (event) => {
+const onClickTillderAnswer = (event) => {
     // remove listeners
-    document.querySelector(`.tillderQuestionContainer`).removeEventListener('swiped', onClickAnswer);
-    document.querySelector(`.tillderContentContainer .true`).removeEventListener('click', onClickAnswer);
-    document.querySelector(`.tillderContentContainer .false`).removeEventListener('click', onClickAnswer);
+    document.querySelector(`.tillderQuestionContainer`).removeEventListener('swiped', onClickTillderAnswer);
+    document.querySelector(`.tillderContentContainer .true`).removeEventListener('click', onClickTillderAnswer);
+    document.querySelector(`.tillderContentContainer .false`).removeEventListener('click', onClickTillderAnswer);
     // save selected answer
     if(event.currentTarget.classList[0] === "tillderQuestionContainer") {
         // if swipe
