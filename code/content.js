@@ -53,7 +53,7 @@ const DATA = {
     },
     // tillone
     "tillone": {
-        "icon": "../assets/images/homePage/tillone.png",
+        "icon": "../assets/images/homePage/tillOne.png",
         "amountOfQuestions": 2, // how many questions will actualy appear
         "appContent":  [
             {
