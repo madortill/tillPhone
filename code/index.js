@@ -65,7 +65,7 @@ const alert = (text, button) => {
 Description: update the percentage */
 const updatePercentage = (nPercentToAdd) => {
     nPercent = nPercent + nPercentToAdd
-    document.querySelector(`#battery`).innerHTML = `${nPercent}%`;
+    document.querySelector(`#battery`).innerHTML = `${Math.floor(nPercent)}%`;
     if(nPercent < 5){
         // lowBattery();
     } else if (nPercent > 5 && nPercent <= 20){
@@ -84,12 +84,12 @@ const updatePercentage = (nPercentToAdd) => {
 Description: calculate the current percentage and send to update */
 const calcPercentageWin = (correctAnswers, answers, bonus) => {
     let winningRatio = correctAnswers/answers;
-    let percentage = Math.floor(PERCENT_PER_APP * winningRatio);
+    let percentage = PERCENT_PER_APP * winningRatio;
     if (bonus){
         percentage = percentage + bonus
     }
     updatePercentage(percentage);
-    return percentage;
+    return Math.floor(percentage);
 }
 
 /*

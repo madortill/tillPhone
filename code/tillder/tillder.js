@@ -163,7 +163,7 @@ const reviewAnswers = (event) => {
         El("div", {classes: [`binaryAns`, `false`, `ans`]},
         El("img", {classes: [`ansPic`], attributes: {src: `../assets/images/tillder/xMark.svg`}},),"לא נכון"
         ),
-        El("img", {classes: [`arrowPic`, `arrowLeft`], attributes: {src: `../assets/images/tillder/arrowRight.svg`}, listeners: {click : reviewAnswers}},),
+        El("img", {classes: [`arrowPic`, `arrowLeft`], attributes: {src: `../assets/images/tillder/leftArrow.svg`}, listeners: {click : reviewAnswers}},),
     );
     document.querySelector(`.tillderContentContainer`).append(ansContainer);
     document.querySelector(`.tillderContentContainer  .${arrTillderQuestions[nTillderCurrentQuestion].correctAns} .ansPic`).style.borderColor = "#20a830";

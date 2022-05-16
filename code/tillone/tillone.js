@@ -34,7 +34,7 @@ const addContentToTilloneQuestion = () => {
             ),
             arrTilloneQuestions[nTilloneCurrentQuestion].answers[i],
         );
-        document.querySelector(`.ansContainer`).append(answer);
+        document.querySelector(`.tillone .ansContainer`).append(answer);
     }
 }
 
