@@ -49,7 +49,7 @@ const DATA = {
     // tillone
     "tillone": {
         icon: `../assets/images/homePage/tillone.png`,
-        amountOfQuestions: 1, // how many questions will actualy appear
+        amountOfQuestions: 3, // how many questions will actualy appear
         appContent:  [
             {
                 type: `multiple`,

@@ -114,7 +114,7 @@
 .tilloneFeedbackTextContainer {
     background-color: white;
     width: 74vw;
-    height: 40vh;
+    height: 35vh;
     display: flex;
     align-items: center ;
     flex-direction: column;
@@ -124,13 +124,14 @@
 .tilloneFeedbackBlue {
     background-color: #b2c6df;
     width: fit-content;
-    padding: 0.2em;
+    padding: 0.3em;
+    font-size: 0.9em;
 }
 
 .tilloneFeedbackGray {
     background-color: #dae6f4;
     width: 74vw;
-    padding: 2em 0;
+    padding: 1.7em 0;
 }
 
 .tilloneFeedbackTitleIcon {
@@ -143,5 +144,21 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.4em;
+
+}
+
+.tilloneEndIcon {
+    width: 5vw;
+}
+
+.tilloneEndbuttonContainer {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0.4em;
+    border-radius: 1em;
+    width: 22vw;
+    margin: 1em;
 
 }

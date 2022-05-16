@@ -81,28 +81,32 @@ const tilloneEnd = () => {
     // show right container
     document.querySelector(`.tilloneReviewContainer`).innerHTML = "";
     document.querySelector(`.tilloneTopBar`).innerHTML = ``;
-    let content;
-    if(nTilloneCorrectAnswers/AMOUNT_OF_TILLONE_QUESTION >= PASSING_RATE) {
-        content = El("div", {classes: [`tilloneFeedbackContainer`, `flexCenter`]},
-            El("div", {cls: `tilloneFeedbackTitleContainer`}, 
-                El("div", {classes: [`bold`]}, `שלום, ${userName}`),
-                El("div", {cls: `tilloneFeedbackTitle`}, 
-                    El("img",{attributes: {class: `tilloneFeedbackTitleIcon`, src: `../assets/images/tillone/checkMark.png`}}),
-                    El("div", {cls: `tilloneFeedbackTitleText`}, `כל הכבוד! מכאן ישר לשלישות`)
-                ),
+    let content = El("div", {classes: [`tilloneFeedbackContainer`, `flexCenter`]},
+        El("div", {cls: `tilloneFeedbackTitleContainer`}, 
+            El("div", {classes: [`bold`]}, `שלום, ${userName}`),
+            El("div", {cls: `tilloneFeedbackTitle`}, 
+                El("img",{attributes: {class: `tilloneFeedbackTitleIcon`, src: `../assets/images/tillone/checkMark.png`}}),
+                El("div", {cls: `tilloneFeedbackTitleText`}, `כל הכבוד! מכאן ישר לשלישות`)
             ),
-            El("div", {cls: `tilloneFeedbackTextContainer`}, 
-                El("div", {classes: [`tilloneFeedbackBlue`, `bold`]}, `איזה דיווח אוטומטי!`),
-                El("img", {attributes: {src: `../assets/images/tillone/home.svg`, class: `tilloneAnswerIcon`}}),
-                El("div", {cls: `tilloneFeedbackText`}, `${nTilloneCorrectAnswers} תשובות נכונות`),
-                El("div", {cls: `tilloneFeedbackBattery`}, `זכיתם ב${calcPercentageWin(nTilloneCorrectAnswers, AMOUNT_OF_TILLONE_QUESTION)}% טעינה`),
-                El("div", {cls: `tilloneFeedbackGray`}, `${AMOUNT_OF_TILLONE_QUESTION - nTilloneCorrectAnswers} תשובות שגויות`),
-            ),
-
-        );
-    } else {
-        updatePercentage(-5);
-        // crossCircle.svg
-    }
+        ),
+        El("div", {cls: `tilloneFeedbackTextContainer`}, 
+            El("div", {classes: [`tilloneFeedbackBlue`, `bold`]}, `איזה דיווח אוטומטי!`),
+            El("img", {attributes: {src: `../assets/images/tillone/home.svg`, class: `tilloneAnswerIcon`}}),
+            El("div", {cls: `tilloneFeedbackText`}, `${nTilloneCorrectAnswers} תשובות נכונות`),
+            El("div", {cls: `tilloneFeedbackBattery`}, `זכיתם ב${calcPercentageWin(nTilloneCorrectAnswers, AMOUNT_OF_TILLONE_QUESTION)}% טעינה`),
+            El("div", {cls: `tilloneFeedbackGray`}, `${AMOUNT_OF_TILLONE_QUESTION - nTilloneCorrectAnswers} תשובות שגויות`),
+        ),
+        El("div", {cls: `tilloneEndbuttonContainer`, listeners: {click: sendHome}}, 
+            El("img", {attributes: {src: `../assets/images/tillone/calendar.svg`, class: `tilloneEndIcon`}}),
+            El("div", {classes: [`bold`]}, `דיווחתי!`),
+        ),
+    );
     document.querySelector(`.tillone`).append(content);
+    if(nTilloneCorrectAnswers/AMOUNT_OF_TILLONE_QUESTION < PASSING_RATE) {
+        document.querySelector(`.tilloneFeedbackTitleText`).innerHTML = `השלישות מאוכזבים ממך! תחזור מחר`;
+        document.querySelector(`.tilloneFeedbackBlue`).innerHTML = `פשוט תקלה בדיווח`;
+        document.querySelector(`.tilloneFeedbackBattery`).innerHTML = `חבל סתם בזבזתם 5%`;
+        document.querySelector(`.tilloneFeedbackTitleIcon`).setAttribute(`src`, `../assets/images/tillone/crossCircle.svg`);
+        updatePercentage(-5);
+    }
 }
