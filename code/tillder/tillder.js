@@ -166,14 +166,20 @@ const reviewAnswers = (event) => {
         El("img", {classes: [`arrowPic`, `arrowLeft`], attributes: {src: `../assets/images/tillder/arrowRight.svg`}, listeners: {click : reviewAnswers}},),
     );
     document.querySelector(`.tillderContentContainer`).append(ansContainer);
-    // show feedback - correct ans
-    let correctAnswer;
-    if(arrTillderQuestions[nTillderCurrentQuestion].correctAns){
-        correctAnswer = El("div", {cls: `tillderFeedBackCorrectAns`}, "התשובה הנכונה היא נכון");
-    } else {
-        correctAnswer = El("div", {cls: `tillderFeedBackCorrectAns`}, "התשובה הנכונה היא לא נכון");
+    document.querySelector(`.tillderContentContainer  .${arrTillderQuestions[nTillderCurrentQuestion].correctAns} .ansPic`).style.borderColor = "#20a830";
+    if(String(arrTillderQuestions[nTillderCurrentQuestion].correctAns) !== String(arrTillderQuestions[nTillderCurrentQuestion].selectedAns)){
+        document.querySelector(`.${arrTillderQuestions[nTillderCurrentQuestion].selectedAns} .ansPic`).style.borderColor = "#ff0000";
     }
-    document.querySelector(`.tillderQuestionContainer`).append(correctAnswer);
-    // show user selected answer
-    document.querySelector(`.${arrTillderQuestions[nTillderCurrentQuestion].selectedAns} .ansPic`).style.backgroundColor = "rgb(209, 209, 209)";
+
+    // // show feedback - correct ans
+    // let correctAnswer;
+    // if(arrTillderQuestions[nTillderCurrentQuestion].correctAns){
+    //     correctAnswer = El("div", {cls: `tillderFeedBackCorrectAns`}, "התשובה הנכונה היא נכון");
+    // } else {
+    //     correctAnswer = El("div", {cls: `tillderFeedBackCorrectAns`}, "התשובה הנכונה היא לא נכון");
+    // }
+    // document.querySelector(`.tillderQuestionContainer`).append(correctAnswer);
+    // // show user selected answer
+    // document.querySelector(`.${arrTillderQuestions[nTillderCurrentQuestion].selectedAns} .ansPic`).style.backgroundColor = "rgb(209, 209, 209)";
+    
 }
