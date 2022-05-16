@@ -167,8 +167,10 @@ const reviewAnswers = (event) => {
     );
     document.querySelector(`.tillderContentContainer`).append(ansContainer);
     document.querySelector(`.tillderContentContainer  .${arrTillderQuestions[nTillderCurrentQuestion].correctAns} .ansPic`).style.borderColor = "#20a830";
+    document.querySelector(`.tillderContentContainer  .${arrTillderQuestions[nTillderCurrentQuestion].correctAns} .ansPic`).style.backgroundColor = "rgb(32 168 48 / 0.7)";
     if(String(arrTillderQuestions[nTillderCurrentQuestion].correctAns) !== String(arrTillderQuestions[nTillderCurrentQuestion].selectedAns)){
         document.querySelector(`.${arrTillderQuestions[nTillderCurrentQuestion].selectedAns} .ansPic`).style.borderColor = "#ff0000";
+        document.querySelector(`.${arrTillderQuestions[nTillderCurrentQuestion].selectedAns} .ansPic`).style.backgroundColor = "rgb(255 0 0 / 0.5)";
     }
 
     // // show feedback - correct ans
