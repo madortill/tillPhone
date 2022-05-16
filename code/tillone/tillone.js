@@ -78,5 +78,31 @@ const onClickTilloneAnswer = (event) => {
 --------------------------------------------------------------
 Description: start tillone app*/
 const tilloneEnd = () => {
-    console.log("סיימתי");
+    // show right container
+    document.querySelector(`.tilloneReviewContainer`).innerHTML = "";
+    document.querySelector(`.tilloneTopBar`).innerHTML = ``;
+    let content;
+    if(nTilloneCorrectAnswers/AMOUNT_OF_TILLONE_QUESTION >= PASSING_RATE) {
+        content = El("div", {classes: [`tilloneFeedbackContainer`, `flexCenter`]},
+            El("div", {cls: `tilloneFeedbackTitleContainer`}, 
+                El("div", {classes: [`bold`]}, `שלום, ${userName}`),
+                El("div", {cls: `tilloneFeedbackTitle`}, 
+                    El("img",{attributes: {class: `tilloneFeedbackTitleIcon`, src: `../assets/images/tillone/checkMark.png`}}),
+                    El("div", {cls: `tilloneFeedbackTitleText`}, `כל הכבוד! מכאן ישר לשלישות`)
+                ),
+            ),
+            El("div", {cls: `tilloneFeedbackTextContainer`}, 
+                El("div", {classes: [`tilloneFeedbackBlue`, `bold`]}, `איזה דיווח אוטומטי!`),
+                El("img", {attributes: {src: `../assets/images/tillone/home.svg`, class: `tilloneAnswerIcon`}}),
+                El("div", {cls: `tilloneFeedbackText`}, `${nTilloneCorrectAnswers} תשובות נכונות`),
+                El("div", {cls: `tilloneFeedbackBattery`}, `זכיתם ב${calcPercentageWin(nTilloneCorrectAnswers, AMOUNT_OF_TILLONE_QUESTION)}% טעינה`),
+                El("div", {cls: `tilloneFeedbackGray`}, `${AMOUNT_OF_TILLONE_QUESTION - nTilloneCorrectAnswers} תשובות שגויות`),
+            ),
+
+        );
+    } else {
+        updatePercentage(-5);
+        // crossCircle.svg
+    }
+    document.querySelector(`.tillone`).append(content);
 }

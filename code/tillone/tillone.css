@@ -1,6 +1,4 @@
 .tillone {
-    /* background-color: #b2c6df;
-    background-color: #dae6f4; */
     background-color: #f6e466;
     font-family: "Assistant";
 }
@@ -106,4 +104,44 @@
 
 .tilloneNextArrrow {
     width: 9vw;
+}
+
+.tilloneFeedbackContainer {
+    flex-direction: column;
+    text-align: center;
+}
+
+.tilloneFeedbackTextContainer {
+    background-color: white;
+    width: 74vw;
+    height: 40vh;
+    display: flex;
+    align-items: center ;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tilloneFeedbackBlue {
+    background-color: #b2c6df;
+    width: fit-content;
+    padding: 0.2em;
+}
+
+.tilloneFeedbackGray {
+    background-color: #dae6f4;
+    width: 74vw;
+    padding: 2em 0;
+}
+
+.tilloneFeedbackTitleIcon {
+    width: 5vw;
+    padding: 0.4em;
+}
+
+.tilloneFeedbackTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4em;
+
 }
