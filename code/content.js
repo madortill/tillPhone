@@ -89,21 +89,23 @@ const DATA = {
     // tillgram
     "tillgram": {
         "icon": "../assets/images/homePage/tillgram.jpg",
-        // "amountOfQuestions": 2, // how many questions will actualy appear
+        // "amountOfQuestions": 1, // how many questions will actualy appear
         "appContent":  [
             {
-                "type": "binary",
-                "src": "../assets/images/homePage/tillder.png",
-                "question": "שאלת נכון או לא נכון שהתשובה אליה היא נכון",
-                "correctAns": true,
-                "selectedAns": "",
+                "title": "כותרת לנושא",
+                "icon": "../assets/images/tillgram/dog.jpg",
+                "text": "היי אני טקסט שנלווה לתמונה והוא גם מאוד קשור אליה ועוזר לתאר אותה ואת הקשר לנושא",
+                "src": ["../assets/images/tillgram/exemplePic.jpg", "../assets/images/tillgram/exemple2.jpg", "../assets/images/tillgram/exemple3.jpg"],
+                "currentPic": 0, // dont tuch
+                "notRead": true,
             },
             {
-                "type": "binary",
-                "src": "../assets/images/homePage/tillder.png",
-                "question": "שאלת נכון או לא נכון שהתשובה אליה היא לא נכון",
-                "correctAns": false,
-                "selectedAns": "",
+                "title": "כותרת לנושא",
+                "icon": "../assets/images/tillgram/dog.jpg",
+                "text": "היי אני טקסט שנלווה לתמונה והוא גם מאוד קשור אליה ועוזר לתאר אותה ואת הקשר לנושא",
+                "src": ["../assets/images/tillgram/exemplePic.jpg", "../assets/images/tillgram/exemple2.jpg", "../assets/images/tillgram/exemple3.jpg"],
+                "currentPic": 0, // dont tuch
+                "notRead": true,
             },
         ],
     },

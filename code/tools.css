@@ -35,6 +35,12 @@
     font-weight: 500;
 }
 
+@font-face {
+    font-family: frenchScript;
+    src: url("../assets/fonts/frenchScript/OPTIFrench-Script.otf");
+    font-weight: 200;
+}
+
 /* animations */
 @keyframes fadeOut {
     100% {
