@@ -15,6 +15,7 @@ const tillgram = () => {
 --------------------------------------------------------------
 Description: start tillgram app*/
 const createTillgranContent = () => {
+    // create title
     let title = El("div", {classes: [`tillgramTitleContainer`, `centerX`]},
         El("div", {cls: `tillgramTitle`}, `Tillgram`),
         El("div", {classes: [`tillgramIconContainer`, `flexCenter`]},
@@ -24,6 +25,7 @@ const createTillgranContent = () => {
         ),
     );
     document.querySelector(`.tillgram`).append(title);
+    // create page content - pics and texts
     let pageContent;
     for(let i = 0; i <  DATA.tillgram.appContent.length; i++){
         currentPost = DATA.tillgram.appContent[i]
@@ -32,14 +34,17 @@ const createTillgranContent = () => {
                 El("img", {attributes: {src: currentPost.icon, class: `tillgramPicIcon`}},),
                 currentPost.title
             ),
-            El("img",
-                {attributes: {
-                    src: currentPost.src[currentPost.currentPic],
-                    class: `tillgramPic ${i} tillgramPic${i}`},
-                listeners: {dblclick: onRead}},
+            El("div", {classes: [`tillgramPicContainer`, `tillgramPicContainer${i}`]},
+                El("img",
+                    {attributes: {
+                        src: currentPost.src[currentPost.currentPic],
+                        class: `tillgramPic ${i} tillgramPic${i}`},
+                    listeners: {dblclick: onRead}},
+                ),
+                El("div",{classes: [`tillgramReadAnimation`, `tillgramReadAnimation${i}`]}, `%`)
             ),
             El("div", {cls: `tillgramButtomIcon`},
-                El("img", {attributes: {src: `../assets/images/tillgram/readIcon.svg`, class: `tillgramPicButtomIcon readIcon${i}`}},),
+                El("img", {attributes: {src: `../assets/images/tillgram/readIcon.svg`, class: `tillgramPicButtomIcon ${i} readIcon${i}`}, listeners: {click: onRead}},),
                 El("img", {attributes: {src: `../assets/images/tillgram/heart.svg`, class: `tillgramPicButtomIcon`}},),
                 El("img", {attributes: {src: `../assets/images/tillgram/rocket.svg`, class: `tillgramPicButtomIcon`}},),
             ),
@@ -48,8 +53,18 @@ const createTillgranContent = () => {
         document.querySelector(`.tillgramPageContent`).append(pageContent);
         if (currentPost.src.length > 1) {
             document.querySelector(`.tillgramPic${i}`).addEventListener('swiped', caruslePics);
+            let picNumber = El("div", {classes: [`tillgramPicNumber`,`tillgramPicNumber${i}`]}, `1/${currentPost.src.length}`);
+            document.querySelector(`.tillgramPicContainer${i}`).append(picNumber);
         }
     }
+    // add end button
+    let endButton = El("div", {classes: [`tillgramEndButtonContainer`, `centerX`, `flexCenter`]},
+        El("img", {attributes: {src: `../assets/images/tillgram/checkMark.jpg`, class: `tillgramEndIcon`}},),
+        El("div", {classes: [`tillgramEndText`, `bold`]}, `You’re all caught up`),
+        El("div", {classes: [`tillgramEndTextGray`]}, `ראית את כל הפוסטים החדשים באפליקציה.`),
+        El("div", {classes: [`tillgramEndButton`], listeners: {click: sendHome}}, `יציאה מהאפליקציה`),
+    );
+    document.querySelector(`.tillgramPageContent`).append(endButton);
 }
 
 /* onRead
@@ -59,8 +74,9 @@ const onRead = (event) => {
     let currentPic = event.currentTarget.classList[1];
     if (DATA.tillgram.appContent[currentPic].notRead) {
         calcPercentageWin(1 , AMOUNT_OF_TILLGRAM_QUESTION);
-        DATA.tillgram.appContent[currentPic].notRead = false
         document.querySelector(`.tillgram .readIcon${currentPic}`).setAttribute("src", `../assets/images/tillgram/readIconSelected.svg`);
+        document.querySelector(`.tillgramReadAnimation${currentPic}`).style.animation = "fadeInEnlarged 1s";
+        DATA.tillgram.appContent[currentPic].notRead = false
     }
 }
 
@@ -76,5 +92,6 @@ const caruslePics = (event) => {
         currentPic--;
     }
     document.querySelector(`.tillgram .tillgramPic${currentPicContainer}`).setAttribute("src", DATA.tillgram.appContent[currentPicContainer].src[currentPic]);
+    document.querySelector(`.tillgramPicNumber${currentPicContainer}`).innerHTML = `${currentPic + 1}/${DATA.tillgram.appContent[currentPicContainer].src.length}`;
     DATA.tillgram.appContent[currentPicContainer].currentPic = currentPic;
 }

@@ -28,7 +28,7 @@
     position: absolute;
     bottom: 0vh;
     width: 100vw;
-    height: 80vh;
+    height: 75vh;
     overflow-y: scroll;
 }
 
@@ -63,4 +63,54 @@
 
 .tillgramPictureContainer {
     padding-bottom: 1em;
+}
+
+.tillgramPicContainer  {
+    position: relative;
+}
+
+.tillgramPicNumber {  
+    position: absolute;
+    top: 2vh;
+    right: 3vw;
+    background-color: #000000ad;
+    border-radius: 1em;
+    color: white;
+    padding: 0.2em 0.7em;
+    font-size: 0.9em;
+}
+
+.tillgramReadAnimation {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    font-size: 5em;
+    font-weight: bold;
+    font-family: "DancingScript";
+    opacity: 0;
+    visibility: hidden;
+    text-shadow: -3px -3px 0 rgba(255, 255, 255, 0.492), 3px -3px 0 rgba(255, 255, 255, 0.492), -3px 3px 0 rgba(255, 255, 255, 0.492), 3px 3px 0 rgba(255, 255, 255, 0.492);
+}
+
+.tillgramEndIcon {
+    width: 11vw;
+    padding: 0.3em;
+
+}
+
+.tillgramEndButtonContainer {
+    flex-direction: column;
+    width: fit-content;
+}
+
+.tillgramEndTextGray {
+    color: gray;
+}
+
+.tillgramEndButton {
+    font-weight: bold;
+    color: #4193ef;
+    padding: 0.2em;
 }
