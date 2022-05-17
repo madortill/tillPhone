@@ -1,6 +1,10 @@
 // question
 let nTillotoCorrectAnswers = 0;
+let nTillotoWrongAnswers = 0;
+let nFlippedCards = 0;
 let arrTillotoCards = [];
+// const
+const AMOUNT_OF_TILLOTO_QUESTION = DATA.tilloto.amountOfQuestions;
 /* tilloto
 --------------------------------------------------------------
 Description: start tilloto app*/
@@ -8,7 +12,7 @@ const tilloto = () => {
     strCurrentApp = "tilloto";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tilloto`).classList.remove(`hidden`);
-    arrTillotoCards = shuffle(DATA.tilloto.appContent[0].src.slice().concat(DATA.tilloto.appContent[0].definitions.slice()));
+    arrTillotoCards = shuffle(DATA.tilloto.appContent);
     createTillotoContent();
 }
 
@@ -18,14 +22,14 @@ Description: start tillgram app*/
 const createTillotoContent = () => {
     let card;
     for(let i = 0; i < arrTillotoCards.length; i++) {
-        if(arrTillotoCards[i].includes("assets")){
-            card = El("div", {classes: [`tillotoCard`, `tillotoCard${i}`, `flexCenter`], listeners: {click: flipCard}},
-                El("img", {attributes: {class: `tillotoCardBack`, src: arrTillotoCards[i]}}),
+        if(Object.keys(arrTillotoCards[i])[0] === "src"){
+            card = El("div", {classes: [`tillotoCard`, `tillotoCard${arrTillotoCards[i].group}`, `flexCenter`], listeners: {click: flipCard}},
+                El("img", {attributes: {class: `tillotoCardBack`, src: arrTillotoCards[i].src}}),
                 El("img", {attributes: {class: `tillotoCardFront`, src: `../assets/images/tilloto/tillLogo.svg`}}),
             );
         } else {
-            card = El("div", {classes: [`tillotoCard`, `tillotoCard${i}`, `flexCenter`], listeners: {click: flipCard}},
-                El("div", {attributes: {class: `tillotoCardBack`}}, arrTillotoCards[i]),
+            card = El("div", {classes: [`tillotoCard`, `tillotoCard${arrTillotoCards[i].group}`, `flexCenter`], listeners: {click: flipCard}},
+                El("div", {attributes: {class: `tillotoCardBack`}}, arrTillotoCards[i].definitions),
                 El("img", {attributes: {class: `tillotoCardFront`, src: `../assets/images/tilloto/tillLogo.svg`}}),
             );
         }
@@ -34,32 +38,29 @@ const createTillotoContent = () => {
 }
 
 const flipBackCards = () => {
-    document.querySelectorAll('.card:not(.matched)').forEach(card => {
+    document.querySelectorAll('.tillotoCard:not(.matched)').forEach(card => {
         card.classList.remove('flipped')
     })
-
-    state.flippedCards = 0
+    nTillotoWrongAnswers++;
+    nFlippedCards = 0
 }
 
 const flipCard = (event) => {
-    let card = event.currenttarget;
-    // state.flippedCards++
-    // state.totalFlips++
+    let card = event.currentTarget;
+    nFlippedCards++ 
 
-    // if (!state.gameStarted) {
-    //     startGame()
-    // }
-
-    if (state.flippedCards <= 2) {
+    if (nFlippedCards <= 2) {
         card.classList.add('flipped')
     }
 
-    if (state.flippedCards === 2) {
+    if (nFlippedCards === 2) {
         const flippedCards = document.querySelectorAll('.flipped:not(.matched)')
-
-        if (flippedCards[0].innerText === flippedCards[1].innerText) {
-            flippedCards[0].classList.add('matched')
-            flippedCards[1].classList.add('matched')
+        if (flippedCards[0].classList[1] === flippedCards[1].classList[1]) {
+            nTillotoCorrectAnswers++;
+            flippedCards[0].removeEventListener("click", flipCard);
+            flippedCards[1].removeEventListener("click", flipCard);
+            flippedCards[0].classList.add('matched');
+            flippedCards[1].classList.add('matched');
         }
 
         setTimeout(() => {
@@ -68,18 +69,8 @@ const flipCard = (event) => {
     }
 
     // If there are no more cards that we can flip, we won the game
-    if (!document.querySelectorAll('.tillotoCard:not(.flipped)').length) {
-        setTimeout(() => {
-            selectors.boardContainer.classList.add('flipped')
-            selectors.win.innerHTML = `
-                <span class="win-text">
-                    You won!<br />
-                    with <span class="highlight">${state.totalFlips}</span> moves<br />
-                    under <span class="highlight">${state.totalTime}</span> seconds
-                </span>
-            `
-
-            clearInterval(state.loop)
-        }, 1000)
+    if (nTillotoCorrectAnswers === AMOUNT_OF_TILLOTO_QUESTION) {
+        console.log("win");
+        setTimeout(sendHome, 1000);
     }
 }

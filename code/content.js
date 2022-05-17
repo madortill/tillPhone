@@ -111,11 +111,55 @@ const DATA = {
     // tilloto
     "tilloto": {
         "icon": "../assets/images/homePage/tilloto.jpg",
-        "amountOfQuestions": 4, // how many pers of cards will actualy appear
+        "amountOfQuestions": 6, // how many pers of cards will actualy appear
         "appContent":  [
             {
-                "definitions": ["אוטו", "כלב", "ציפור", "יער",],
-                "src":  ["../assets/images/tilloto/exemplePic.jpg", "../assets/images/tilloto/exemple1.jpg", "../assets/images/tilloto/exemple2.jpg", "../assets/images/tilloto/exemple3.jpg"],
+                "src": "../assets/images/tilloto/exemple1.jpg",
+                "group": "1",
+            },
+            {
+                "definitions": "כלב",
+                "group": "1",
+            },
+            {
+                "src": "../assets/images/tilloto/exemple6.jpg",
+                "group": "2",
+            },
+            {
+                "definitions": "פנדה",
+                "group": "2",
+            },
+            {
+                "src": "../assets/images/tilloto/exemple7.jpg",
+                "group": "3",
+            },
+            {
+                "definitions": "אריה",
+                "group": "3",
+            },
+            {
+                "src": "../assets/images/tilloto/exemple8.jpg",
+                "group": "4",
+            },
+            {
+                "definitions": "דולפין",
+                "group": "4",
+            },
+            {
+                "src": "../assets/images/tilloto/exemple4.jpg",
+                "group": "5",
+            },
+            {
+                "definitions": "סוס",
+                "group": "5",
+            },
+            {
+                "src": "../assets/images/tilloto/exemple5.jpg",
+                "group": "6",
+            },
+            {
+                "definitions": "זאב",
+                "group": "6",
             },
         ],
     },
