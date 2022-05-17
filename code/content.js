@@ -89,7 +89,6 @@ const DATA = {
     // tillgram
     "tillgram": {
         "icon": "../assets/images/homePage/tillgram.jpg",
-        // "amountOfQuestions": 1, // how many questions will actualy appear
         "appContent":  [
             {
                 "title": "כותרת לנושא",
@@ -106,6 +105,17 @@ const DATA = {
                 "src": ["../assets/images/tillgram/exemplePic.jpg", "../assets/images/tillgram/exemple2.jpg", "../assets/images/tillgram/exemple3.jpg"],
                 "currentPic": 0, // dont tuch
                 "notRead": true,
+            },
+        ],
+    },
+    // tilloto
+    "tilloto": {
+        "icon": "../assets/images/homePage/tilloto.jpg",
+        "amountOfQuestions": 4, // how many pers of cards will actualy appear
+        "appContent":  [
+            {
+                "definitions": ["אוטו", "כלב", "ציפור", "יער",],
+                "src":  ["../assets/images/tilloto/exemplePic.jpg", "../assets/images/tilloto/exemple1.jpg", "../assets/images/tilloto/exemple2.jpg", "../assets/images/tilloto/exemple3.jpg"],
             },
         ],
     },

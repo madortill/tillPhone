@@ -8,13 +8,13 @@ const tillgram = () => {
     strCurrentApp = "tillgram";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillgram`).classList.remove(`hidden`);
-    createTillgranContent();
+    createTillgramContent();
 }
 
-/* createTillgranContent
+/* createTillgramContent
 --------------------------------------------------------------
 Description: start tillgram app*/
-const createTillgranContent = () => {
+const createTillgramContent = () => {
     // create title
     let title = El("div", {classes: [`tillgramTitleContainer`, `centerX`]},
         El("div", {cls: `tillgramTitle`}, `Tillgram`),
