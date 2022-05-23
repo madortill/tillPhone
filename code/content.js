@@ -112,6 +112,7 @@ const DATA = {
     "tilloto": {
         "icon": "../assets/images/homePage/tilloto.jpg",
         "amountOfQuestions": 6, // how many pers of cards will actualy appear
+        "lose": 20, // how many attemptes they have until they lose
         "appContent":  [
             {
                 "src": "../assets/images/tilloto/exemple1.jpg",
