@@ -1,19 +1,19 @@
 const DATA = { 
     // tillder
     "tillder": {
-        "icon": "../assets/images/homePage/tillder.png",
+        "icon": "../assets/images/homePage/tillder.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
         "appContent":  [
             {
                 "type": "binary",
-                "src": "../assets/images/homePage/tillder.png",
+                "src": "../assets/images/tillder/dog.jpg",
                 "question": "שאלת נכון או לא נכון שהתשובה אליה היא נכון",
                 "correctAns": true,
                 "selectedAns": "",
             },
             {
                 "type": "binary",
-                "src": "../assets/images/homePage/tillder.png",
+                "src": "../assets/images/tillder/exemple6.jpg",
                 "question": "שאלת נכון או לא נכון שהתשובה אליה היא לא נכון",
                 "correctAns": false,
                 "selectedAns": "",

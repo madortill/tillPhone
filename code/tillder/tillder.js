@@ -21,24 +21,33 @@ const tillder = () => {
 --------------------------------------------------------------
 Description: */
 const addContentToQuestion = () => {
-    document.querySelector(`.tillderContentContainer`).innerHTML = "";
+    document.querySelector(`.tillderContentHeadContainer`).innerHTML = "";
+    document.querySelector(`.tillderTitle`).classList.remove(`hidden`);
+
+    let container = El("div", {cls: `tillderContentContainer`}, );
+    document.querySelector(`.tillderContentHeadContainer`).append(container);
     // add question
     let question = El("div", {classes: [`tillderQuestionContainer`, `flexCenter`]}, 
-        El("img", {cls: `tillderPic`, attributes: {src: arrTillderQuestions[nTillderCurrentQuestion].src}},),
+        // El("img", {cls: `tillderPic`, attributes: {src: arrTillderQuestions[nTillderCurrentQuestion].src}},),
         El("div", {cls: `tillderQuestion`}, arrTillderQuestions[nTillderCurrentQuestion].question),
     );
     document.querySelector(`.tillderContentContainer`).append(question);
+    document.querySelector(`.tillderContentContainer`).style.backgroundImage = `url(${arrTillderQuestions[nTillderCurrentQuestion].src})`;
+    let gradient = El("div", {classes: [`tillderGradientContainer`, `flexCenter`]}, );
+    document.querySelector(`.tillderContentContainer`).append(gradient);
     // add answeres
-    let ansContainer = El("div", {classes: [`ansContainer`, `flexCenter`]},
+    let ansContainer = El("div", {classes: [`ansContainer`,]},
         El("div", {classes: [`binaryAns`, `true`, `ans`] , listeners: {click : onClickTillderAnswer}},
-        El("img", {classes: [`ansPic`], attributes: {src: `../assets/images/tillder/vMark.svg`}},), "נכון"
+        El("img", {classes: [`ansPic`], attributes: {src: `../assets/images/tillder/heart_icon.svg`}},),
     ),
         El("div", {classes: [`binaryAns`, `false`, `ans`] , listeners: {click : onClickTillderAnswer}},
-        El("img", {classes: [`ansPic`], attributes: {src: `../assets/images/tillder/xMark.svg`}},),"לא נכון"
+        El("img", {classes: [`ansPic`], attributes: {src: `../assets/images/tillder/wrong_icon.svg`}},),
     ),
     );
     document.querySelector(`.tillderContentContainer`).append(ansContainer);
-    document.querySelector(`.tillderQuestionContainer`).addEventListener('swiped', onClickTillderAnswer);
+    handlePan();
+    document.querySelector(`.tillderContentContainer`).addEventListener('swiped', onClickTillderAnswer);
+
 }
 
 /* onClickTillderAnswer    
@@ -46,31 +55,58 @@ const addContentToQuestion = () => {
 Description: */
 const onClickTillderAnswer = (event) => {
     // remove listeners
-    document.querySelector(`.tillderQuestionContainer`).removeEventListener('swiped', onClickTillderAnswer);
+    document.querySelector(`.tillderContentContainer`).removeEventListener('swiped', onClickTillderAnswer);
     document.querySelector(`.tillderContentContainer .true`).removeEventListener('click', onClickTillderAnswer);
     document.querySelector(`.tillderContentContainer .false`).removeEventListener('click', onClickTillderAnswer);
     // save selected answer
-    if(event.currentTarget.classList[0] === "tillderQuestionContainer") {
+    if(event.currentTarget.classList[0] === "tillderContentContainer") {
         // if swipe
         if(event.detail.dir === "left") {
             arrTillderQuestions[nTillderCurrentQuestion].selectedAns = false;
+            let feedBackPic = El("img", {cls: `tillderFeedBackPic`, attributes:{src: "../assets/images/tillder/wrong.svg"}}, );
+            document.querySelector(`.tillderContentContainer`).append(feedBackPic);
         } else if (event.detail.dir === "right") {
             arrTillderQuestions[nTillderCurrentQuestion].selectedAns = true;
+            let feedBackPic = El("img", {cls: `tillderFeedBackPic`, attributes:{src: "../assets/images/tillder/right.svg"}}, );
+            document.querySelector(`.tillderContentContainer`).append(feedBackPic);
         }
     } else {
         arrTillderQuestions[nTillderCurrentQuestion].selectedAns = event.currentTarget.classList[1];
     }
+    // add swipe animation
+    if (String(arrTillderQuestions[nTillderCurrentQuestion].selectedAns) === `true`){
+        document.querySelector(`.tillderContentContainer`).classList.add(`slideRight`);
+    } else {
+        document.querySelector(`.tillderContentContainer`).classList.add(`slideLeft`);
+    }
+
+    document.querySelector(`.tillderTitle`).classList.add(`hidden`);
+    let container = El("div", {cls: `tillderFeedBackContainer`},
+        El("div", {classes: [`tillderGradientContainer`, `flexCenter`]}, ),
+        El("img", {attributes: {class: "tillderFeedBackIcon", src: "../assets/images/tillder/heart_icon.svg"}}),
+        El("img", {attributes: {class: "tillderFeedBackText", src: "../assets/images/tillder/right_answer.svg"}}),
+        El("div", {attributes: {class: "tillderFeedBackNextButton"}, listeners: {click: afterQuestionFeedback}}, "המשך לשאלה הבאה"),
+    );
+    document.querySelector(`.tillderContentHeadContainer`).append(container);
+    document.querySelector(`.tillderFeedBackContainer`).style.backgroundImage = `url(${arrTillderQuestions[nTillderCurrentQuestion].src})`;
+
     // check if answer is correct
     if (String(arrTillderQuestions[nTillderCurrentQuestion].selectedAns) === String(arrTillderQuestions[nTillderCurrentQuestion].correctAns)){
         nTillderCorrectAnswers++;
+    } else {
+        document.querySelector(`.tillderFeedBackIcon`).setAttribute("src", "../assets/images/tillder/wrong_icon.svg")
+        document.querySelector(`.tillderFeedBackText`).setAttribute("src", "../assets/images/tillder/wrong_answer.svg")
     }
 
-// add swipe animation
-    if (String(arrTillderQuestions[nTillderCurrentQuestion].selectedAns) === `true`){
-        document.querySelector(`.tillderQuestionContainer`).classList.add(`slideRight`);
-    } else {
-        document.querySelector(`.tillderQuestionContainer`).classList.add(`slideLeft`);
+    if (nTillderCurrentQuestion + 1 === AMOUNT_OF_TILLDER_QUESTION) {
+        document.querySelector(`.tillderFeedBackNextButton    `).innerHTML = "לסיום התרגול"
     }
+}
+
+/* endTillderExer
+--------------------------------------------------------------
+Description: */
+const afterQuestionFeedback = () => {
     // send to next question.
     nTillderCurrentQuestion++;
     if(nTillderCurrentQuestion < AMOUNT_OF_TILLDER_QUESTION) {
@@ -78,110 +114,148 @@ const onClickTillderAnswer = (event) => {
     } else {
         endTillderExer();
     }
-
 }
 
 /* endTillderExer
 --------------------------------------------------------------
 Description: */
 const endTillderExer = () => {
-    nTillderCurrentQuestion = 0;
-    let endContainer = El("div", {classes: ["tillderEndContainer"]});
-    document.querySelector(`.tillder`).append(endContainer);
-    let back = El("img",{cls: `sendToHome`, listeners: {click: sendHome}, attributes: {src: `../assets/images/tillder/arrowRight.svg`}})
-    document.querySelector(`.tillder`).append(back);
-    document.querySelector(`.tillderEndContainer`).classList.add(`fadeIn`)
+    document.querySelector(`.tillderFeedBackContainer`).innerHTML = "";
+    let gradient = El("div", {classes: [`tillderGradientContainer`]}, );
+    document.querySelector(`.tillderFeedBackContainer`).append(gradient);
+    document.querySelector(`.tillderFeedBackContainer`).classList.add("end");
     let feedback;
     // add feedback accordingly
     if(nTillderCorrectAnswers/AMOUNT_OF_TILLDER_QUESTION >= PASSING_RATE){ // win - add precentegt
-        feedback = El("div", {classes: ["tillderFeedbackTitle", "flexCenter"]}, 
-        El("div", {cls: `FeedbackTitle`}, `It’s a Match!`),
-        El("div", {cls: `Feedback`}, `ידענו שאתם מתאימים!`),
-        El("div", {cls: `FeedbackAnswers`},),
+        feedback = El("div", {classes: ["tillderFeedbackTitle"]}, 
+        El("img", {attributes: {class: "tillderFeedBackIcon", src: "../assets/images/tillder/kol_hakavod.svg"}}),
+        El("img", {attributes: {class: "tillderFeedBackTextEnd", src: "../assets/images/tillder/good_ending.svg"}}),
         El("div", {cls: `Feedback`}, `קבלו ${calcPercentageWin(nTillderCorrectAnswers, AMOUNT_OF_TILLDER_QUESTION)}% לסוללה שלכם`),
+        El("img", {listeners: {click: sendHome}, attributes: {class: "tillderFeedBackEndButton endButtons", src: "../assets/images/tillder/finish_button.svg"}}),
+        El("img", {listeners: {click: restartTilder}, attributes: {class: "tillderFeedBackRestartButton endButtons", src: "../assets/images/tillder/restart_button .svg"}}),
         );
     } else {// loose - remove 5 %
-        feedback = El("div", {classes: ["tillderFeedbackTitle", "flexCenter"]}, 
-        El("div", {cls: `FeedbackTitle`}, `It’s not a Match!`),
-        El("div", {cls: `Feedback`}, `אתם לא מתאימים לתרגול הזה!`),
-        El("div", {cls: `FeedbackAnswers`},),
+        feedback = El("div", {classes: ["tillderFeedbackTitle"]}, 
+        El("img", {attributes: {class: "tillderFeedBackIcon", src: "../assets/images/tillder/oyyy.svg"}}),
+        El("img", {attributes: {class: "tillderFeedBackTextEnd", src: "../assets/images/tillder/bad_ending.svg"}}),
         El("div", {cls: `Feedback`}, `סתם בזבזתם 5%....`),
+        El("img", {listeners: {click: restartTilder}, attributes: {class: "tillderFeedBackRestartButton endButtons", src: "../assets/images/tillder/restart_button .svg"}}),
         );
         updatePercentage(-5);
     }
-    document.querySelector(`.tillderEndContainer`).append(feedback);
-    // add pics and answers counts
-    let pic = El("div", {classes: [`picContainer`, `flexCenter`]},
-        El("img", {attributes: {src: `../assets/images/tillder/FeedBackPic.svg`, class: `picTillderEnd`}}),
-        El("img", {attributes: {src: `../assets/images/tillder/FeedBackPic.svg`, class: `picTillderEnd`}}),
-    );
-    document.querySelector(`.FeedbackAnswers`).append(pic);
-    let answers =El("div", {classes: [`answerContainer`, `flexCenter`]},
-        El("div", {cls: `tillderAnsFeedback`}, `${nTillderCorrectAnswers} תשובות נכונות`),
-        El("div", {cls: `tillderAnsFeedback`}, `${AMOUNT_OF_TILLDER_QUESTION - nTillderCorrectAnswers} תשובות שגויות`),
-    );
-    document.querySelector(`.FeedbackAnswers`).append(answers);
-
-    // add review button
-    let review = El("div", {classes: [`reivewButton`, `flexCenter`], listeners: {click: reviewAnswers}},
-        El("img", {attributes: {src: `../assets/images/tillder/scrollingIcon.svg`, class: `tillderScroll`}}),
-        `לצפייה בתשובות הנכונות`
-    );
-    document.querySelector(`.tillderEndContainer`).append(review);
+    document.querySelector(`.tillderFeedBackContainer`).append(feedback);
 }
 
-/* reviewAnswers
+/* restartTilder
 --------------------------------------------------------------
-Description: start tillder app*/
-const reviewAnswers = (event) => {
-    document.querySelector(`.tillderEndContainer`).classList.add(`hidden`);
-    document.querySelector(`.tillderContentContainer`).innerHTML = "";
-    // update current ans
-    if(event.currentTarget.classList[1] === "arrowLeft") {
-        nTillderCurrentQuestion--;
-        if(nTillderCurrentQuestion < 0) {
-            nTillderCurrentQuestion += AMOUNT_OF_TILLDER_QUESTION;
-        }
-    } else if(event.currentTarget.classList[1] === "arrowRight"){
-        nTillderCurrentQuestion++;
-        if(nTillderCurrentQuestion === AMOUNT_OF_TILLDER_QUESTION) {
-            nTillderCurrentQuestion = 0;
-        }
-    }
-    // add question
-    let question = El("div", {classes: [`tillderQuestionContainer`, `flexCenter`]}, 
-        El("img", {cls: `tillderPic`, attributes: {src: arrTillderQuestions[nTillderCurrentQuestion].src}},),
-        El("div", {cls: `tillderQuestion`}, arrTillderQuestions[nTillderCurrentQuestion].question),
-    );
-    document.querySelector(`.tillderContentContainer`).append(question);
-    // add answeres
-    let ansContainer = El("div", {classes: [`ansContainer`, `flexCenter`]},
-        El("img", {classes: [`arrowPic`, `arrowRight`], attributes: {src: `../assets/images/tillder/arrowRight.svg`}, listeners: {click : reviewAnswers}},),
-        El("div", {classes: [`binaryAns`, `true`, `ans`]},
-        El("img", {classes: [`ansPic`], attributes: {src: `../assets/images/tillder/vMark.svg`}},), "נכון"
-        ),
-        El("div", {classes: [`binaryAns`, `false`, `ans`]},
-        El("img", {classes: [`ansPic`], attributes: {src: `../assets/images/tillder/xMark.svg`}},),"לא נכון"
-        ),
-        El("img", {classes: [`arrowPic`, `arrowLeft`], attributes: {src: `../assets/images/tillder/leftArrow.svg`}, listeners: {click : reviewAnswers}},),
-    );
-    document.querySelector(`.tillderContentContainer`).append(ansContainer);
-    document.querySelector(`.tillderContentContainer  .${arrTillderQuestions[nTillderCurrentQuestion].correctAns} .ansPic`).style.borderColor = "#20a830";
-    document.querySelector(`.tillderContentContainer  .${arrTillderQuestions[nTillderCurrentQuestion].correctAns} .ansPic`).style.backgroundColor = "rgb(32 168 48 / 0.7)";
-    if(String(arrTillderQuestions[nTillderCurrentQuestion].correctAns) !== String(arrTillderQuestions[nTillderCurrentQuestion].selectedAns)){
-        document.querySelector(`.${arrTillderQuestions[nTillderCurrentQuestion].selectedAns} .ansPic`).style.borderColor = "#ff0000";
-        document.querySelector(`.${arrTillderQuestions[nTillderCurrentQuestion].selectedAns} .ansPic`).style.backgroundColor = "rgb(255 0 0 / 0.5)";
-    }
+Description: */
+const restartTilder = () => {
+    // reset verubles
+    nTillderCurrentQuestion = 0;
+    nTillderCorrectAnswers = 0;
+    arrTillderQuestions = shuffle(DATA.tillder.appContent);
+    addContentToQuestion();
 
-    // // show feedback - correct ans
-    // let correctAnswer;
-    // if(arrTillderQuestions[nTillderCurrentQuestion].correctAns){
-    //     correctAnswer = El("div", {cls: `tillderFeedBackCorrectAns`}, "התשובה הנכונה היא נכון");
-    // } else {
-    //     correctAnswer = El("div", {cls: `tillderFeedBackCorrectAns`}, "התשובה הנכונה היא לא נכון");
-    // }
-    // document.querySelector(`.tillderQuestionContainer`).append(correctAnswer);
-    // // show user selected answer
-    // document.querySelector(`.${arrTillderQuestions[nTillderCurrentQuestion].selectedAns} .ansPic`).style.backgroundColor = "rgb(209, 209, 209)";
-    
 }
+
+const handlePan = () => {
+       
+	var reqAnimationFrame = (function () {
+	    return window[Hammer.prefixed(window, 'requestAnimationFrame')] || function (callback) {
+	        window.setTimeout(callback, 1000 / 60);
+	    };
+	})();
+
+    let transform;
+    let angle = 3;
+    var ticking = false;
+    var screen = document.querySelector(".tillder");
+    let el = document.querySelector(`.tillderContentContainer`);
+    var START_X = Math.round((screen.offsetWidth - el.offsetWidth) / 2);
+
+    var mc = new Hammer.Manager(el);
+    mc.add(new Hammer.Pan({ threshold: 0, pointers: 0 }));
+
+	mc.on("panright panleft", onPan);
+	mc.on("panend", resetElement);
+
+    resetElement();
+
+	function resetElement() {
+        let feedBackPic = document.querySelector(`.tillderFeedBackPic`);
+        if(feedBackPic) {
+            document.querySelector(`.tillderContentContainer`).removeChild(feedBackPic);
+        }
+	    el.classList.add('animate');
+	    transform = {
+	        translate: { x: 0, y: 0 },
+	        scale: 1,
+	        angle: 0,
+	        rx: 0,
+	        ry: 0,
+	        rz: 0
+	    };
+	    requestElementUpdate();
+	}
+
+	function updateElementTransform() {
+	    var value = [
+	        'translate3d(' + transform.translate.x + 'px, ' + transform.translate.y + 'px, 0)',
+	        'scale(' + transform.scale + ', ' + transform.scale + ')',
+	        'rotate3d('+ transform.rx +','+ transform.ry +','+ transform.rz +','+  transform.angle + 'deg)'
+	    ];
+
+	    value = value.join(" ");
+	    el.style.webkitTransform = value;
+	    el.style.mozTransform = value;
+	    el.style.transform = value;
+	    ticking = false;
+	}
+
+	function requestElementUpdate() {
+	    if(!ticking) {
+	        reqAnimationFrame(updateElementTransform);
+	        ticking = true;
+	    }
+	}
+
+    
+    function onPan(ev) {
+        transform.translate = {
+            x: START_X + ev.deltaX,
+            y: 0
+        };
+
+        if (transform.angle < 10) {
+            transform.angle += 1;
+        }
+        let feedBackPic = document.querySelector(`.tillderFeedBackPic`);
+        if(feedBackPic) {
+            document.querySelector(`.tillderContentContainer`).removeChild(feedBackPic)  
+        }
+        if (ev.additionalEvent === "panright") {
+            transform.angle = angle;
+            transform.rz = -1;
+            let feedBackPic = El("img", {cls: `tillderFeedBackPic`, attributes:{src: "../assets/images/tillder/right.svg"}}, );
+            document.querySelector(`.tillderContentContainer`).append(feedBackPic);
+            if (transform.translate.x > 300) {
+                const event = new CustomEvent("swiped", {detail: {dir : "right"}});
+                document.querySelector(`.tillderContentContainer`).dispatchEvent(event)
+    
+            }
+        } else if (ev.additionalEvent === "panleft") {
+            transform.angle = angle;
+            transform.rz = 1;
+            let feedBackPic = El("img", {classes: [`tillderFeedBackPic`, `tillderFeedBackPicWrong`], attributes:{src: "../assets/images/tillder/wrong.svg"}}, );
+            document.querySelector(`.tillderContentContainer`).append(feedBackPic);
+            if (transform.translate.x < -300) {
+                const event = new CustomEvent("swiped", {detail: {dir : "left"}});
+                document.querySelector(`.tillderContentContainer`).dispatchEvent(event)
+    
+            }
+        }
+   
+	    requestElementUpdate();
+	}
+}
+
