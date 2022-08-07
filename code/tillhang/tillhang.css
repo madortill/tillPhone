@@ -2,7 +2,7 @@
     color: white;
     font-family: "matka";
     background-image: url("../../assets/images/tillhang/background.svg");
-    background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
