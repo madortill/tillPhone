@@ -47,6 +47,12 @@
     font-weight: 200;
 }
 
+@font-face {
+    font-family: matka;
+    src: url("../assets/fonts/OS-Luizi-FFC-v1/it_mankala.ttf");
+    font-weight: 500;
+}
+
 /* animations */
 @keyframes fadeOut {
     100% {

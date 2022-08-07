@@ -4,7 +4,7 @@ let strCurrentApp;
 const PERCENT_PER_APP = 100/Object.keys(DATA).length;
 const PASSING_RATE = 0.5;
 const BONUS = 2;// NOT MORE THEN 5
-
+var elem = document.querySelector("html");
 
 /* loading function
 --------------------------------------------------------------
@@ -13,7 +13,20 @@ window.addEventListener("load", () => {
     document.querySelector(`.loader`).classList.add(`fade`);
     document.querySelector(`.nameEntry`).classList.add(`fade`);
     document.querySelector(`.submitName`).addEventListener(`click`,startApp);
+    document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
 });
+
+function openFullscreen() {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullscreen) { /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+}
 
 /* startApp
 --------------------------------------------------------------
