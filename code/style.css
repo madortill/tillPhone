@@ -146,6 +146,7 @@ body, html {
 
 .alertText {
     margin: 0.2em;
+    margin-top: 1em;
     padding: 1em;
 }
 
