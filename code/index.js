@@ -32,8 +32,7 @@ function openFullscreen() {
     document.addEventListener('webkitfullscreenchange', exitHandler, false);
 }
 
-function exitHandler()
-{
+function exitHandler(){
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
         let addFullscreen = El("img", {attributes: {src: "../assets/images/homePage/fullScreenButton.svg", class: "fullScreenButton"}, listeners: {"click": openFullscreen}});
         document.querySelector(".logoAndFullScreen").prepend(addFullscreen);
