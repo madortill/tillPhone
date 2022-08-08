@@ -28,7 +28,7 @@
     position: absolute;
     bottom: 0vh;
     width: 100vw;
-    height: 78vh;
+    height: 85vh;
     overflow-y: scroll;
 }
 
@@ -107,6 +107,7 @@
 
 .tillgramEndTextGray {
     color: gray;
+    width: fit-content;
 }
 
 .tillgramEndButton {

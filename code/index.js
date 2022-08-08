@@ -25,6 +25,19 @@ function openFullscreen() {
       elem.webkitRequestFullscreen();
     } else if (elem.msRequestFullscreen) { /* IE/Edge */
       elem.msRequestFullscreen();
+    } 
+    document.addEventListener('fullscreenchange', exitHandler, false);
+    document.addEventListener('mozfullscreenchange', exitHandler, false);
+    document.addEventListener('MSFullscreenChange', exitHandler, false);
+    document.addEventListener('webkitfullscreenchange', exitHandler, false);
+}
+
+function exitHandler()
+{
+    console.log("השתנה הגודל מסך");
+    if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement)
+    {
+    alert("יצאתי ממסך מלא");
     }
 }
 
