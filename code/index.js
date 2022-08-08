@@ -34,10 +34,14 @@ function openFullscreen() {
 
 function exitHandler()
 {
-    console.log("השתנה הגודל מסך");
-    if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement)
-    {
-    alert("יצאתי ממסך מלא");
+    if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
+        let addFullscreen = El("img", {attributes: {src: "../assets/images/homePage/fullScreenButton.svg", class: "fullScreenButton"}, listeners: {"click": openFullscreen}});
+        document.querySelector(".logoAndFullScreen").prepend(addFullscreen);
+    } else {
+        let addFullscreen = document.querySelector(".fullScreenButton")
+        if (addFullscreen) {
+            document.querySelector(".logoAndFullScreen").removeChild(addFullscreen);
+        }
     }
 }
 

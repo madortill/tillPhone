@@ -182,3 +182,7 @@ body, html {
     width: 16vw;
     border-radius: 0.9em;
 }
+
+.fullScreenButton {
+    padding-left: 0.3em;
+}
