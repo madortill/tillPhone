@@ -74,6 +74,21 @@
     }
 }
 
+@keyframes popInAndOut {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    50% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 @keyframes fadeInEnlarged {
     100% {
         opacity: 1;

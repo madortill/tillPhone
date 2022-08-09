@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
     document.querySelector(`.loader`).classList.add(`fade`);
     document.querySelector(`.nameEntry`).classList.add(`fade`);
     document.querySelector(`.submitName`).addEventListener(`click`,startApp);
-    document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
+    // document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
 });
 
 function openFullscreen() {
@@ -59,7 +59,10 @@ const startApp = () => {
         );
         document.querySelector(`.appsContainer`).append(app);
     };
-    alert(`${userName}! הסוללה במצב 0% וזקוקה להטענה! זה הזמן לשחק במשחקים ולצבור נקודות כדי להגיע ל100%.`, `מוכנים לאתגר!`)
+    alert(`${userName}! הסוללה במצב 0% וזקוקה להטענה! זה הזמן לשחק במשחקים ולצבור נקודות כדי להגיע ל100%.`, `מוכנים לאתגר!`);
+    new ldBar("#batteryProgress");
+    document.querySelector("#batteryProgress").style.width = "52vw"
+    document.querySelector("#batteryProgress").style.height = "52vw"
 }
 
 /* sendHome
@@ -69,6 +72,11 @@ const sendHome = () => {
     document.querySelector(`.homePage`).classList.remove(`hidden`);
     document.querySelector(`.${strCurrentApp}`).classList.add(`hidden`);
     document.querySelector(`.appsContainer > .${strCurrentApp}App`).removeEventListener(`click`, eval(strCurrentApp));
+    ldBar("#batteryProgress").set(Math.floor(nPercent));
+    document.querySelector(".batteryProgressContainer").classList.add("progressAnimation");
+    document.querySelector(".batteryProgressContainer").addEventListener("animationend", () => {
+        document.querySelector(".batteryProgressContainer").classList.remove("progressAnimation");
+    },)
 }
 
 /* alert
@@ -95,14 +103,18 @@ Description: update the percentage */
 const updatePercentage = (nPercentToAdd) => {
     nPercent = nPercent + nPercentToAdd
     document.querySelector(`#battery`).innerHTML = `${Math.floor(nPercent)}%`;
+    // createProgress();
     if(nPercent < 5){
         // lowBattery();
     } else if (nPercent > 5 && nPercent <= 20){
         // change pic to low battery
+        document.querySelector(".ldBar path.mainline").style.stroke = "rgb(210, 8, 8)";
     } else if (nPercent > 20 && nPercent <= 50){
         // change pic to half battery
+        document.querySelector(".ldBar path.mainline").style.stroke = "rgb(8 210 97)";
     } else if (nPercent > 50 && nPercent < 100){
         // change pic to high battery
+        document.querySelector(".ldBar path.mainline").style.stroke = "rgb(8 210 97)";
     } else if (nPercent >= 100) {
         // endGame();
     }

@@ -16,6 +16,13 @@
     <script src="tillgram/tillgram.js" type="text/javascript"></script>
     <script src="tilloto/tilloto.js" type="text/javascript"></script>
     <script src="tillsapp/tillsapp.js" type="text/javascript"></script>
+    <!-- librarys -->
+    <script src="../assets/librarys/dragDropTouch.js" type="text/javascript"></script>
+    <script src="../assets/librarys/swiped-events.min.js" type="text/javascript"></script>
+    <script src="../assets/librarys/hammer.js" type="text/javascript"></script>
+    <script src="../assets/librarys/hammerTime.js" type="text/javascript"></script>
+    <script src="../assets/librarys/loading-bar.min.js"></script>
+    <link rel="stylesheet" href="../assets/librarys/loading-bar.min.css">
     <!-- links -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="tillder/tillder.css">
@@ -26,11 +33,7 @@
     <link rel="stylesheet" href="tillsapp/tillsapp.css">
     <!-- must come last -->
     <link rel="stylesheet" href="tools.css"> 
-    <!-- librarys -->
-    <script src="../assets/librarys/dragDropTouch.js" type="text/javascript"></script>
-    <script src="../assets/librarys/swiped-events.min.js" type="text/javascript"></script>
-    <script src="../assets/librarys/hammer.js" type="text/javascript"></script>
-    <script src="../assets/librarys/hammerTime.js" type="text/javascript"></script>
+
     <!-- icon -->
     <link rel="shortcut icon" href="../assets/images/homePage/tilllogoBlack.svg">
     <title>טי"לפון </title>
@@ -99,8 +102,19 @@
                 <div class="tillsappMainPageHeader">
                     <div class="tillsappHeadline">TillsApp</div>
                 </div>
-                <div class="tillsappPageContent"></div>
+                <div class="tillsappPageContent tillsappContainer1 tillsappContainer"></div>
+                <div class="tillsappInstractionsContainer tillsappContainer2 tillsappContainer hidden">
+
+                </div>
+                <div class="tillsappProgressContainer tillsappContainer3 tillsappContainer hidden">
+                    <!-- <div id="batteryProgress" class="label-center centerX" data-value="0" data-preset="circle"></div> -->
+                </div>
             </div>
+        </div>
+
+        <!-- battery progress -->
+        <div class="batteryProgressContainer darkScreen">
+            <div id="batteryProgress" class="label-center centerX" data-value="0" data-preset="circle"></div>
         </div>
     </div>
 </body>

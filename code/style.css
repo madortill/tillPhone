@@ -186,3 +186,32 @@ body, html {
 .fullScreenButton {
     padding-left: 0.3em;
 }
+
+.ldBar path.mainline {
+    stroke-width: 4;
+    stroke: rgb(210, 8, 8);
+    stroke-linecap: round;
+}
+
+.ldBar path.baseline {
+    stroke-width: 6;
+    stroke-linecap: round;
+}
+
+#batteryProgress {
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ldBar.label-center>.ldBar-label {
+    font-size: 1.3em;
+    color: white;
+}
+
+.progressAnimation {
+    animation: popInAndOut 3s 0.2s forwards;
+}
+
+.batteryProgressContainer {
+    visibility: hidden;
+}
