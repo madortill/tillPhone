@@ -169,7 +169,9 @@ const DATA = {
         "icon": "../assets/images/homePage/tillsapp.webp",
         "amountOfQuestions": 2, // how many questions will actualy appear
         "appContent":  {
-            "תרגול בנושא 1": [
+            "תרגול בנושא 1": {
+                pic: "../assets/images/tillsapp/example1.jpg",
+                content: [
                 {
                     "type": "binary",
                     "src": "../assets/images/tillder/dog.jpg",
@@ -184,13 +186,26 @@ const DATA = {
                     "correctAns": false,
                     "selectedAns": "",
                 },
-            ],
-            "תרגול בנושא 2": [
+            ],},
+            "תרגול בנושא 2": {
+                pic: "../assets/images/tillsapp/example1.jpg",
+                content: [
                 {
                     "type": "binary",
-                    "src": "../assets/images/tillder/dog.jpg",
-                    "question": "שאלת נכון או לא נכון שהתשובה אליה היא נכון",
-                    "correctAns": true,
+                    "src": "../assets/images/tillder/exemple6.jpg",
+                    "question": "שאלת נכון או לא נכון שהתשובה אליה היא לא נכון",
+                    "correctAns": false,
+                    "selectedAns": "",
+                },
+            ],},
+            "תרגול בנושא 3": {
+                pic: "../assets/images/tillsapp/example1.jpg",
+                content: [
+                {
+                    "type": "binary",
+                    "src": "../assets/images/tillder/exemple6.jpg",
+                    "question": "שאלת נכון או לא נכון שהתשובה אליה היא לא נכון",
+                    "correctAns": false,
                     "selectedAns": "",
                 },
                 {
@@ -200,7 +215,14 @@ const DATA = {
                     "correctAns": false,
                     "selectedAns": "",
                 },
-            ],
+                {
+                    "type": "binary",
+                    "src": "../assets/images/tillder/exemple6.jpg",
+                    "question": "שאלת נכון או לא נכון שהתשובה אליה היא לא נכון",
+                    "correctAns": false,
+                    "selectedAns": "",
+                },
+            ],},
         },
     },
 };
