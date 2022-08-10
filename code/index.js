@@ -102,22 +102,28 @@ const alert = (text, button) => {
 Description: update the percentage */
 const updatePercentage = (nPercentToAdd) => {
     nPercent = nPercent + nPercentToAdd
-    document.querySelector(`#battery`).innerHTML = `${Math.floor(nPercent)}%`;
     // createProgress();
-    if(nPercent < 5){
+    if(nPercent <= 0){
         // lowBattery();
-    } else if (nPercent > 5 && nPercent <= 20){
+    } else if (nPercent > 0 && nPercent <= 20){
         // change pic to low battery
+        document.querySelector("#batteryImg").setAttribute("src", "../assets/images/topBar/batteryEmpty.svg");
         document.querySelector(".ldBar path.mainline").style.stroke = "rgb(210, 8, 8)";
-    } else if (nPercent > 20 && nPercent <= 50){
+    } else if (nPercent > 20 && nPercent < 50){
         // change pic to half battery
-        document.querySelector(".ldBar path.mainline").style.stroke = "rgb(8 210 97)";
-    } else if (nPercent > 50 && nPercent < 100){
+        document.querySelector("#batteryImg").setAttribute("src", "../assets/images/topBar/batteryAlmostEmpty.svg");
+        document.querySelector(".ldBar path.mainline").style.stroke = "rgb(248, 178, 106)";
+    } else if (nPercent >= 50 && nPercent < 100){
         // change pic to high battery
-        document.querySelector(".ldBar path.mainline").style.stroke = "rgb(8 210 97)";
+        document.querySelector("#batteryImg").setAttribute("src", "../assets/images/topBar/batteryAlmostFull.svg");
+        document.querySelector(".ldBar path.mainline").style.stroke = "rgb(119, 184, 104)";
     } else if (nPercent >= 100) {
+        nPercent = 100;
+        document.querySelector("#batteryImg").setAttribute("src", "../assets/images/topBar/batteryFull.svg");
+        document.querySelector(".ldBar path.mainline").style.stroke = "rgb(67, 172, 81)";
         // endGame();
     }
+    document.querySelector(`#battery`).innerHTML = `${Math.floor(nPercent)}%`;
 }
 
 /* calcPercentage

@@ -164,13 +164,15 @@ const DATA = {
             },
         ],
     },
-    // tillsapp
-    "tillsapp": {
-        "icon": "../assets/images/homePage/tillsapp.webp",
+    // tillsms
+    "tillsms": {
+        "icon": "../assets/images/homePage/tillsms.webp",
         "amountOfQuestions": 2, // how many questions will actualy appear
-        "appContent":  {
-            "תרגול בנושא 1": {
-                pic: "../assets/images/tillsapp/example1.jpg",
+        "appContent": [
+            {
+                pic: "../assets/images/tillsms/example1.jpg",
+                title: "תרגול בנושא 1",
+                curretntQuestion: 0,
                 content: [
                 {
                     "type": "binary",
@@ -187,8 +189,9 @@ const DATA = {
                     "selectedAns": "",
                 },
             ],},
-            "תרגול בנושא 2": {
-                pic: "../assets/images/tillsapp/example1.jpg",
+            {
+                pic: "../assets/images/tillsms/example1.jpg",
+                title: "תרגול בנושא 2",
                 content: [
                 {
                     "type": "binary",
@@ -198,8 +201,9 @@ const DATA = {
                     "selectedAns": "",
                 },
             ],},
-            "תרגול בנושא 3": {
-                pic: "../assets/images/tillsapp/example1.jpg",
+            {
+                pic: "../assets/images/tillsms/example1.jpg",
+                title: "תרגול בנושא 3",
                 content: [
                 {
                     "type": "binary",
@@ -223,6 +227,7 @@ const DATA = {
                     "selectedAns": "",
                 },
             ],},
-        },
+        ]
+        
     },
 };

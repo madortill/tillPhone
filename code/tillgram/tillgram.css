@@ -107,7 +107,8 @@
 
 .tillgramEndTextGray {
     color: gray;
-    width: fit-content;
+    width: 70vw;
+    text-align: center;
 }
 
 .tillgramEndButton {

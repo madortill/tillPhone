@@ -1,0 +1,164 @@
+.tillsms {
+    background-color: white;
+    font-family: Heebo;
+    font-weight: 100;
+}
+
+.tillsmsMainPageHeader {
+    background-color: #1c7c9f;
+    position: absolute;
+    width: 100%;
+    height: 15vh;
+    box-shadow: 0px -3px 10px black;
+}
+
+.tillsmsHeadline {
+    color: white;
+    font-size: 1.3em;
+    position: absolute;
+    top: 5vh;
+    padding: 1em;
+}
+
+.tillsmsCameraIcon {
+    width: 5vw;
+}
+
+.tillsmsTopNav {
+    width: 95%;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+}
+
+
+.tillsmsCategory {
+    padding: 0.2em 1em;
+    margin: 0 0.2em;
+    opacity: 0.7;
+}
+
+.tillsmsChoosenCategory {
+    border-bottom: 0.2em white solid;
+    opacity: 1;
+}
+
+.tillsmsExercise  {
+    display: flex;
+    align-items: center;
+}
+
+.tillsmsExerciseCounter {
+    color: #1c7c9f;
+    background-color: white;
+    border-radius: 50%;
+    width: 4.5vw;
+    text-align: center;
+    font-size: 0.7em;
+    font-weight: 200;
+    margin-right: 0.7em;
+}
+
+.tillsmsContainer {
+    position: absolute;
+    width: 100%;
+    top: 15vh;
+    height: 85vh;
+    overflow-y: scroll;
+}
+
+.tillsmsExerPic {
+    width: 14vw;
+    border-radius: 50%;
+    padding: 0.8em;
+}
+
+.tillsmsExerciseContainer {
+    display: flex;
+    align-items: center;
+    padding: 0.2em 0;
+}
+
+.tillsmsExerText {
+    width: 70vw;
+    color: #383838;
+}
+
+.tillsmsExerTitle {
+    font-size: 1.1em; 
+}
+
+.tillsmsExerStatus {
+    font-size: 0.85em;
+}
+
+
+.tillsmsExerCounterContainer {
+    padding-bottom: 0.5em;
+}
+
+.tillsmsExerCounter {
+    color: rgb(8, 180, 210);
+    font-size: 0.9em;
+    font-weight: 200;
+    padding-bottom: 0.2em;
+}
+
+.tillsmsExerAmount {
+    color: white;
+    background-color: rgb(8, 180, 210);
+    font-size: 0.7em;
+    text-align: center;
+    border-radius: 50%;
+    width: 4.5vw;
+    padding: 0.2em;
+}
+
+.tillsmsExerHeader {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    color: white;
+}
+
+.tillsmsExerHeader > div {
+    color: white;
+}
+
+.tillsmsExerHeader > .tillsmsExerText {
+    width: 60vw;
+}
+
+.tillsmsExerHeader > .tillsmsExerPic {
+    padding: 0.8em 0.2em;
+    margin-left: 0.6em;
+}
+
+.tillsmsExerPage {
+    background-image: url("../../assets/images/tillsms/bg.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.tillsmsExerheaderContainer {
+    background-color: #1c7c9f;
+    position: absolute;
+    width: 100%;
+    height: 16vh;
+    box-shadow: 0px -3px 10px black;
+}
+
+.tillsmsExerArrow {
+    width: 8vw;
+    padding-right: 0.2em;
+}
+
+/* #89C2D7 */
+
+.animate__pulse {
+    animation: pulse ease-in-out 3s forwards
+}
