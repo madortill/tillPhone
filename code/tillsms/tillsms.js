@@ -79,6 +79,7 @@ const switchCategory = (event) => {
 Description: */
 const startExer = (event) => {
     document.querySelector(`.tillsmsAnswerKeybord`).style.pointerEvents ="none";
+    document.querySelector(`.tillsmsAnswerKeybord`).classList.remove("hidden")
     // show exer page and save exer index of exer and question
     document.querySelector(`.tillsmsMainPage`).classList.add("hidden");
     document.querySelector(`.tillsmsExerPage`).classList.remove("hidden");
@@ -94,6 +95,9 @@ const startExer = (event) => {
             document.querySelector(`.tillsmsExerPage`).removeChild(header);
             document.querySelector(`.tillsmsExerPage`).classList.add("hidden");
             document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).classList.add("hidden");
+            document.querySelectorAll(".animate__pulse").forEach(el => {
+                el.classList.remove("animate__pulse");
+            })
         }}}),
             El("img",{attributes: {class: "tillsmsExerPic",src: arrtillsmsQuestions[tillsmsCurrentExer].pic}}),
             El("div", {cls: "tillsmsExerText"},
@@ -121,6 +125,7 @@ const startQuestion = () => {
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).classList.remove("hidden");
     }
     if (ntillsmsCurrentQuestion === arrtillsmsQuestions[tillsmsCurrentExer].content.length) {
+        document.querySelector(`.tillsmsAnswerKeybord`).classList.add("hidden")
         return;
     }
     document.querySelector(`.tillsmsAnswerKeybord`).style.pointerEvents ="all";
@@ -287,5 +292,13 @@ const endTillsmsExer = () => {
     document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerStatus`).innerHTML = `סטטוס: ${arrtillsmsQuestions[tillsmsCurrentExer].status}`;
     document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerAmount`).classList.add("hidden")
     document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).style.color = "rgb(143 143 143)";
+    document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).style.height = "84vh";
+    document.querySelector(`.tillsmsAnswerKeybord`).classList.add("hidden")
 
+    let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble", `Exer${tillsmsCurrentExer}Question${ntillsmsCurrentQuestion}`]},
+    El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+    El("div",{classes: ["tillsmsQuestion", `Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`]}, "מעולה! התרגול הסתיים יכולים לעבור לתרגול הבא"),
+    );
+    document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(feedback);
+    document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
 }
