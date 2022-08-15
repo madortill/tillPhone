@@ -173,6 +173,7 @@ const DATA = {
                 pic: "../assets/images/tillsms/example1.jpg",
                 title: "תרגול בנושא 1",
                 curretntQuestion: 0,
+                status: "לא הותחל",
                 content: [
                 {
                     type: `manyPics`,
@@ -200,39 +201,28 @@ const DATA = {
                 pic: "../assets/images/tillsms/example1.jpg",
                 title: "תרגול בנושא 2",
                 curretntQuestion: 0,
+                status: "לא הותחל",
                 content: [
                 {
-                    type: `multipleAllPic`,
-                    question: `שאלה אמריקאית שהתשובות שלה הן תמונות`,
-                    answers: [`./assets/panda.jpg`, `./assets/dog.jpg`, `./assets/panda.jpg`, `./assets/dog.jpg`],// the legth will determine how many pics will be im the question, one correct ans
-                    correctAns: `ans1`
+                    type: `manyChoices`,
+                    question: `שאלה עם המון אפשרויות שאפשר לבחור מהן כמה שרוצים`,
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: [ "תשובה 1", "תשובה 2", "תשובה 3", "תשובה 4", "תשובה 5", "תשובה 6", "תשובה 7", "תשובה 8", "תשובה 9", "תשובה 10", "תשובה 11", "תשובה 12",],// the legth will determine how many answers will apear
+                    correctAns: [`ans1`, `ans6`] // the legth will determine how many answers are reqwiered
                 },
             ],},
             {
                 pic: "../assets/images/tillsms/example1.jpg",
                 title: "תרגול בנושא 3",
                 curretntQuestion: 0,
+                status: "לא הותחל",
                 content: [
                 {
-                    "type": "binary",
-                    "src": "../assets/images/tillder/exemple6.jpg",
-                    "question": "שאלת נכון או לא נכון שהתשובה אליה היא לא נכון",
-                    "correctAns": false,
-                    "selectedAns": "",
-                },
-                {
-                    "type": "binary",
-                    "src": "../assets/images/tillder/exemple6.jpg",
-                    "question": "שאלת נכון או לא נכון שהתשובה אליה היא לא נכון",
-                    "correctAns": false,
-                    "selectedAns": "",
-                },
-                {
-                    "type": "binary",
-                    "src": "../assets/images/tillder/exemple6.jpg",
-                    "question": "שאלת נכון או לא נכון שהתשובה אליה היא לא נכון",
-                    "correctAns": false,
-                    "selectedAns": "",
+                    type: `manyChoices`,
+                    question: `שאלה עם המון אפשרויות שאפשר לבחור מהן כמה שרוצים`,
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: [ "תשובה 1", "תשובה 2", "תשובה 3", "תשובה 4", "תשובה 5", "תשובה 6", "תשובה 7", "תשובה 8", "תשובה 9",],// the legth will determine how many answers will apear
+                    correctAns: [`ans2`, `ans5`] // the legth will determine how many answers are reqwiered
                 },
             ],},
         ]

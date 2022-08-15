@@ -38,7 +38,7 @@ const createtillsmsContent = () => {
             El("img",{attributes: {class: "tillsmsExerPic",src: arrtillsmsQuestions[exer].pic}}),
             El("div", {cls: "tillsmsExerText"},
                 El("div", {cls: "tillsmsExerTitle"}, arrtillsmsQuestions[exer].title),
-                El("div", {cls: "tillsmsExerStatus"}, "סטטוס: לא הותחל"),
+                El("div", {cls: "tillsmsExerStatus"}, `סטטוס: ${arrtillsmsQuestions[exer].status}`),
             ),
             El("div", {cls: "tillsmsExerCounterContainer"},
                 El("div", {cls: "tillsmsExerCounter"}, `0/${arrtillsmsQuestions[exer].content.length}`),
@@ -47,6 +47,7 @@ const createtillsmsContent = () => {
             
         );
         document.querySelector(".tillsmsPageContent").append(exerContainer);
+        arrtillsmsQuestions[exer].status = "בביצוע";
     }
     document.querySelectorAll(".tillsmsContainer").forEach(elem => {
         elem.addEventListener("swiped", switchCategory);
@@ -77,6 +78,7 @@ const switchCategory = (event) => {
 --------------------------------------------------------------
 Description: */
 const startExer = (event) => {
+    document.querySelector(`.tillsmsAnswerKeybord`).style.pointerEvents ="none";
     // show exer page and save exer index of exer and question
     document.querySelector(`.tillsmsMainPage`).classList.add("hidden");
     document.querySelector(`.tillsmsExerPage`).classList.remove("hidden");
@@ -87,6 +89,7 @@ const startExer = (event) => {
         El("div",{cls: "tillsmsExerHeader"},
         El("img",{attributes: {class: "tillsmsExerArrow",src: "../assets/images/tillsms/arrowRight.svg"}, listeners: {"click": () => {
             document.querySelector(`.tillsmsMainPage`).classList.remove("hidden");
+            document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerStatus`).innerHTML = `סטטוס: ${arrtillsmsQuestions[tillsmsCurrentExer].status}`;
             let header = document.querySelector(`.tillsmsExerheaderContainer`)
             document.querySelector(`.tillsmsExerPage`).removeChild(header);
             document.querySelector(`.tillsmsExerPage`).classList.add("hidden");
@@ -95,7 +98,7 @@ const startExer = (event) => {
             El("img",{attributes: {class: "tillsmsExerPic",src: arrtillsmsQuestions[tillsmsCurrentExer].pic}}),
             El("div", {cls: "tillsmsExerText"},
                 El("div", {cls: "tillsmsExerTitle"}, arrtillsmsQuestions[tillsmsCurrentExer].title),
-                El("div", {cls: "tillsmsExerStatus"}, "סטטוס: בביצוע"),
+                El("div", {cls: "tillsmsExerStatus"}, `סטטוס: ${arrtillsmsQuestions[tillsmsCurrentExer].status}`),
             ),
             El("div", {cls: "tillsmsExerCounter"}, `${ntillsmsCurrentQuestion}/${arrtillsmsQuestions[tillsmsCurrentExer].content.length}`),
         )
@@ -109,7 +112,6 @@ const startExer = (event) => {
 Description: */
 const startQuestion = () => {
     // restore event listeners and save current question object
-    document.querySelector(`.tillsmsAnswerKeybord`).style.pointerEvents ="all";
     objTillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].content[ntillsmsCurrentQuestion];
     // create question container on first visit and shoe it on next visits
     if (!document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`)) {
@@ -118,6 +120,10 @@ const startQuestion = () => {
     } else {
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).classList.remove("hidden");
     }
+    if (ntillsmsCurrentQuestion === arrtillsmsQuestions[tillsmsCurrentExer].content.length) {
+        return;
+    }
+    document.querySelector(`.tillsmsAnswerKeybord`).style.pointerEvents ="all";
     // create question if it hasn't been created already
     if (!document.querySelector(`.Exer${tillsmsCurrentExer}Question${ntillsmsCurrentQuestion}`)) {
         let question = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble", `Exer${tillsmsCurrentExer}Question${ntillsmsCurrentQuestion}`]},
@@ -150,6 +156,7 @@ const startQuestion = () => {
             break;
     }
 
+    strTillsmsCorrectAnswer = [];
     objTillsmsCurrentQuestion.answers.forEach((ans, index) => {
         objTillsmsCurrentQuestion.correctAns.forEach(e => {
             if(index === (e.slice(3) - 1)) {
@@ -254,18 +261,31 @@ const checkAnswer = () => {
             document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).append(pic)
         })
     }
-    strTillsmsCorrectAnswer = [];
     document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
 
     // update current answer in array and resave it to varuble
     arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion++;
     ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion;
+    document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${ntillsmsCurrentQuestion}/${arrtillsmsQuestions[tillsmsCurrentExer].content.length}`,
+    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${ntillsmsCurrentQuestion}/${arrtillsmsQuestions[tillsmsCurrentExer].content.length}`,
     // move to next question or end exer
     setTimeout(() => {
         if(ntillsmsCurrentQuestion <  arrtillsmsQuestions[tillsmsCurrentExer].content.length) {
             startQuestion();
         } else {
-            // questionsEnd();
+            endTillsmsExer();
         }
     }, 2100);
+}
+
+/* endTillsmsExer
+--------------------------------------------------------------
+Description: */
+const endTillsmsExer = () => {
+    arrtillsmsQuestions[tillsmsCurrentExer].status = "הסתיים";
+    document.querySelector(".tillsmsExerPage .tillsmsExerStatus").innerHTML = `סטטוס: ${arrtillsmsQuestions[tillsmsCurrentExer].status}`;
+    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerStatus`).innerHTML = `סטטוס: ${arrtillsmsQuestions[tillsmsCurrentExer].status}`;
+    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerAmount`).classList.add("hidden")
+    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).style.color = "rgb(143 143 143)";
+
 }
