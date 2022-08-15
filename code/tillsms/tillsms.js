@@ -1,5 +1,6 @@
 // question
 let ntillsmsCorrectAnswers = 0;
+let strTillsmsCorrectAnswer = [];
 let ntillsmsCurrentQuestion;
 let arrtillsmsQuestions = DATA.tillsms.appContent;
 let pageNum = 1;
@@ -76,10 +77,12 @@ const switchCategory = (event) => {
 --------------------------------------------------------------
 Description: */
 const startExer = (event) => {
+    // show exer page and save exer index of exer and question
     document.querySelector(`.tillsmsMainPage`).classList.add("hidden");
     document.querySelector(`.tillsmsExerPage`).classList.remove("hidden");
     tillsmsCurrentExer = Number(event.currentTarget.classList[1].slice(11));
     ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion;
+    // create header and stsrt question
     let exerHeader = El("div",{cls: "tillsmsExerheaderContainer"},
         El("div",{cls: "tillsmsExerHeader"},
         El("img",{attributes: {class: "tillsmsExerArrow",src: "../assets/images/tillsms/arrowRight.svg"}, listeners: {"click": () => {
@@ -98,7 +101,6 @@ const startExer = (event) => {
         )
     );
     document.querySelector(".tillsmsExerPage").append(exerHeader);
-    // arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion++;
     startQuestion();
 }
 
@@ -106,15 +108,17 @@ const startExer = (event) => {
 --------------------------------------------------------------
 Description: */
 const startQuestion = () => {
+    // restore event listeners and save current question object
     document.querySelector(`.tillsmsAnswerKeybord`).style.pointerEvents ="all";
     objTillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].content[ntillsmsCurrentQuestion];
+    // create question container on first visit and shoe it on next visits
     if (!document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`)) {
         let questionContainer = El("div", {classes: ["tillsmsQuestionContainer", `tillsmsQuestionContainer${tillsmsCurrentExer}`]});
         document.querySelector(`.tillsmsExerPage`).append(questionContainer);
     } else {
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).classList.remove("hidden");
     }
-
+    // create question if it hasn't been created already
     if (!document.querySelector(`.Exer${tillsmsCurrentExer}Question${ntillsmsCurrentQuestion}`)) {
         let question = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble", `Exer${tillsmsCurrentExer}Question${ntillsmsCurrentQuestion}`]},
             El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
@@ -123,21 +127,42 @@ const startQuestion = () => {
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(question);
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
     }
-
+    // ampty answer container and fill it acording to type
     document.querySelector(`.tillsmsAnswersContainer`).innerHTML = "";
     switch (objTillsmsCurrentQuestion.type) {
         case "manyChoices":
             tillsmsCurrentAns = [];
             objTillsmsCurrentQuestion.answers.forEach((ans, index) => {
-                let answer = El("div", {classes: [`manyChoices`, `ans${index + 1}`, `ans`] , listeners: {click: onClickManyChoices}}, ans);
+                let answer = El("div", {classes: [`manyChoices`, `ans${index + 1}`, `tillsmsAns`] , listeners: {click: onClickManyChoices}}, ans);
                 document.querySelector(`.tillsmsAnswersContainer`).append(answer);
             })
             break;
-    
+        case "manyPics":
+            tillsmsCurrentAns = [];
+            objTillsmsCurrentQuestion.answers.forEach((ans, index) => {
+                let answer = El("div", {classes: [`manyChoices`, `ans${index + 1}`, `tillsmsAns`] , listeners: {click: onClickManyChoices}},
+                    El("img", {attributes: {src: ans}, classes: [`manyPicsAns`] },)
+                );
+                document.querySelector(`.tillsmsAnswersContainer`).append(answer);
+            })
+            break;
         default:
             break;
     }
 
+    objTillsmsCurrentQuestion.answers.forEach((ans, index) => {
+        objTillsmsCurrentQuestion.correctAns.forEach(e => {
+            if(index === (e.slice(3) - 1)) {
+                strTillsmsCorrectAnswer.push(ans);
+            }
+        })
+    })
+
+    // control grid columns
+    document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns = "";
+    for(let i = 0; i < Math.ceil(Math.sqrt(objTillsmsCurrentQuestion.answers.length)); i++) {
+        document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns += " 1fr";
+    }
 }
 
 
@@ -145,6 +170,7 @@ const startQuestion = () => {
 --------------------------------------------------------------
 Description: */
 const onClickManyChoices = (event) => {
+    // check if ans was clicked before, add or remove to arry acordingly
     let currAns = event.currentTarget.classList[1];
     if(document.querySelector(`.${currAns}`).style.backgroundColor === "rgb(201, 223, 231)") {
         document.querySelector(`.${currAns}`).style.backgroundColor = "white";
@@ -153,15 +179,27 @@ const onClickManyChoices = (event) => {
         tillsmsCurrentAns.push(event.currentTarget.classList[1]);
         document.querySelector(`.${currAns}`).style.backgroundColor = "rgb(201, 223, 231)";
     }
+    // add text or pics in send bar
     document.querySelector(`.tillsmsSendBar`).innerHTML = "";
     objTillsmsCurrentQuestion.answers.forEach((ans, index) => {
         tillsmsCurrentAns.forEach(e => {
             if(index === (e.slice(3) - 1)) {
-                document.querySelector(`.tillsmsSendBar`).innerHTML += `${ans}, `;
+                if(objTillsmsCurrentQuestion.type === "manyChoices") {
+                    document.querySelector(`.tillsmsSendBar`).innerHTML += `${ans}, `;
+                } else {
+                    document.querySelector(".tillsmsSendBar").classList.add("tillsmsSendBarWithPic")
+                    let pic = El("img",{attributes: {src: ans, class: "tillsmsSendBarPic"}});
+                    document.querySelector(`.tillsmsSendBar`).append(pic)
+                }
             }
         })
     })
-
+    // remove last "," from text
+    if(objTillsmsCurrentQuestion.type === "manyChoices") {
+        let answerTyped = document.querySelector(`.tillsmsSendBar`).innerHTML;
+        document.querySelector(`.tillsmsSendBar`).innerHTML = answerTyped.slice(0, answerTyped.length - 2);
+    }
+    // add or remove check button listener
     if(tillsmsCurrentAns.length === objTillsmsCurrentQuestion.correctAns.length){
         document.querySelector(`.tillsmsSendArrow`).addEventListener("click", checkAnswer);
     } else {
@@ -184,45 +222,50 @@ const compareOutOfOrder = (arr1, arr2) => {
 --------------------------------------------------------------
 Description: */
 const checkAnswer = () => {
+    // save send bar content and empty it, send messege with answers
     let answerContentToSend = document.querySelector(`.tillsmsSendBar`).innerHTML;
+    document.querySelector(".tillsmsSendBar").classList.remove("tillsmsSendBarWithPic")
     document.querySelector(`.tillsmsSendBar`).innerHTML = "";
     let answerToSend = El("div",{classes: ["animate__pulse", "tillsmsAnswerBubble", `Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}`]},
-        El("div",{cls: "tillsmsAnswer"}, answerContentToSend),
+        El("div",{classes: ["tillsmsAnswer", `Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Content`]},),
         El("img",{ attributes: {src: "../assets/images/tillsms/white.svg", class: "bubbleArrow"}}),
     );
     document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(answerToSend); 
+    document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Content`).innerHTML = answerContentToSend;
     document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
-    
+    // disable event listeners
     document.querySelector(`.tillsmsAnswerKeybord`).style.pointerEvents ="none";
     document.querySelector(`.tillsmsSendArrow`).removeEventListener("click", checkAnswer);
-
-    if (objTillsmsCurrentQuestion.type === "manyChoices") {
-        // compare arrays
-        if(compareOutOfOrder(tillsmsCurrentAns, objTillsmsCurrentQuestion.correctAns)) {
-            ntillsmsCorrectAnswers++;
-        }
-    // } else {
-    //     if (tillsmsCurrentAns === String(objTillsmsCurrentQuestion.correctAns)){
-    //         ntillsmsCorrectAnswers++;
-    //         if(document.querySelector(`.dropDownTitle`)) {
-    //             document.querySelector(`.dropDownTitle`).style.backgroundColor = "green"; 
-    //         } else {
-    //             document.querySelector(`.${tillsmsCurrentAns}`).style.backgroundColor = "green";   
-    //         }
-    //     } else {
-    //         if(document.querySelector(`.dropDownTitle`)) {
-    //             document.querySelector(`.dropDownTitle`).style.backgroundColor = "red"; 
-    //         } else {
-    //             document.querySelector(`.${tillsmsCurrentAns}`).style.backgroundColor = "red";   
-    //         }
-    //     }
+    // check if answer was correct, if so update varuble and send messege
+    let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble", `Exer${tillsmsCurrentExer}Question${ntillsmsCurrentQuestion}`]},
+    El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+    El("div",{classes: ["tillsmsQuestion", `Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`]},),
+    );
+    document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(feedback);
+    if(compareOutOfOrder(tillsmsCurrentAns, objTillsmsCurrentQuestion.correctAns)) {
+        ntillsmsCorrectAnswers++;
+        document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = "כל הכבוד! תשובה נכונה"
+    } else if (objTillsmsCurrentQuestion.type === "manyChoices"){
+        document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `אופס! טעות. התשובה היא: <br> ${strTillsmsCorrectAnswer.join(', ')}`
+    } else if (objTillsmsCurrentQuestion.type === "manyPics") {
+        document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `אופס! טעות. התשובה היא:`
+        strTillsmsCorrectAnswer.forEach(src => {
+            let pic = El("img",{attributes: {src: src, class: "tillsmsSendBarPic"}});
+            document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).append(pic)
+        })
     }
-    ntillsmsCurrentQuestion++;
+    strTillsmsCorrectAnswer = [];
+    document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
+
+    // update current answer in array and resave it to varuble
+    arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion++;
+    ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion;
+    // move to next question or end exer
     setTimeout(() => {
         if(ntillsmsCurrentQuestion <  arrtillsmsQuestions[tillsmsCurrentExer].content.length) {
             startQuestion();
         } else {
             // questionsEnd();
         }
-    }, 2500);
+    }, 2100);
 }

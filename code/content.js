@@ -175,6 +175,13 @@ const DATA = {
                 curretntQuestion: 0,
                 content: [
                 {
+                    type: `manyPics`,
+                    question: `שאלה עם המון תמונות שאפשר לבחור מהן כמה שרוצים`,
+                    // recomended: no more than 16 answers, 8 if the are longer than one word
+                    answers: ["../assets/images/tillsms/exemple8.jpg","../assets/images/tillsms/exemple8.jpg","../assets/images/tillsms/exemple8.jpg", "../assets/images/tillsms/exemple8.jpg", "../assets/images/tillsms/exemple8.jpg", "../assets/images/tillsms/exemple8.jpg"],// the legth will determine how many answers will apear
+                    correctAns: [`ans1`, `ans3`] // the legth will determine how many answers are reqwiered
+                },
+                {
                     type: `manyChoices`,
                     question: `שאלה עם המון אפשרויות שאפשר לבחור מהן כמה שרוצים`,
                     // recomended: no more than 16 answers, 8 if the are longer than one word
@@ -185,8 +192,8 @@ const DATA = {
                     type: `manyChoices`,
                     question: `שאלה עם המון אפשרויות שאפשר לבחור מהן כמה שרוצים`,
                     // recomended: no more than 16 answers, 8 if the are longer than one word
-                    answers: [ "בדיקה 1", "תשובה 2", "תשובה 3", "תשובה 4", "תשובה 5", "תשובה 6", "תשובה 7", "תשובה 8", "תשובה 9", "תשובה 10", "תשובה 11", "תשובה 12", "תשובה 13", "תשובה 14", "תשובה 15", "תשובה 16",],// the legth will determine how many answers will apear
-                    correctAns: [`ans1`, `ans2`, `ans5`] // the legth will determine how many answers are reqwiered
+                    answers: [ "תשובה 1", "תשובה 2", "תשובה 3", "תשובה 4", "תשובה 3", "תשובה 4",],// the legth will determine how many answers will apear
+                    correctAns: [`ans1`] // the legth will determine how many answers are reqwiered
                 },
             ],},
             {
