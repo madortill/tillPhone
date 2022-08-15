@@ -249,30 +249,32 @@ const checkAnswer = () => {
     document.querySelector(`.tillsmsAnswerKeybord`).style.pointerEvents ="none";
     document.querySelector(`.tillsmsSendArrow`).removeEventListener("click", checkAnswer);
     // check if answer was correct, if so update varuble and send messege
-    let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble", `Exer${tillsmsCurrentExer}Question${ntillsmsCurrentQuestion}`]},
-    El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
-    El("div",{classes: ["tillsmsQuestion", `Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`]},),
-    );
-    document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(feedback);
-    if(compareOutOfOrder(tillsmsCurrentAns, objTillsmsCurrentQuestion.correctAns)) {
-        ntillsmsCorrectAnswers++;
-        document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = "כל הכבוד! תשובה נכונה"
-    } else if (objTillsmsCurrentQuestion.type === "manyChoices"){
-        document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `אופס! טעות. התשובה היא: <br> ${strTillsmsCorrectAnswer.join(', ')}`
-    } else if (objTillsmsCurrentQuestion.type === "manyPics") {
-        document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `אופס! טעות. התשובה היא:`
-        strTillsmsCorrectAnswer.forEach(src => {
-            let pic = El("img",{attributes: {src: src, class: "tillsmsSendBarPic"}});
-            document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).append(pic)
-        })
-    }
-    document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
+    setTimeout(() => {
+        let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble"]},
+        El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+        El("div",{classes: ["tillsmsQuestion", `Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`]},),
+        );
+        document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(feedback);
+        if(compareOutOfOrder(tillsmsCurrentAns, objTillsmsCurrentQuestion.correctAns)) {
+            ntillsmsCorrectAnswers++;
+            document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = "כל הכבוד! תשובה נכונה"
+        } else if (objTillsmsCurrentQuestion.type === "manyChoices"){
+            document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `אופס! טעות. התשובה היא: <br> ${strTillsmsCorrectAnswer.join(', ')}`
+        } else if (objTillsmsCurrentQuestion.type === "manyPics") {
+            document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `אופס! טעות. התשובה היא:`
+            strTillsmsCorrectAnswer.forEach(src => {
+                let pic = El("img",{attributes: {src: src, class: "tillsmsSendBarPic"}});
+                document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).append(pic)
+            })
+        }
+        document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
+        // update current answer in array and resave it to varuble
+        arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion++;
+        ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion;
+        document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${ntillsmsCurrentQuestion}/${arrtillsmsQuestions[tillsmsCurrentExer].content.length}`,
+        document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${ntillsmsCurrentQuestion}/${arrtillsmsQuestions[tillsmsCurrentExer].content.length}`;
+    }, 1500);
 
-    // update current answer in array and resave it to varuble
-    arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion++;
-    ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion;
-    document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${ntillsmsCurrentQuestion}/${arrtillsmsQuestions[tillsmsCurrentExer].content.length}`,
-    document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${ntillsmsCurrentQuestion}/${arrtillsmsQuestions[tillsmsCurrentExer].content.length}`,
     // move to next question or end exer
     setTimeout(() => {
         if(ntillsmsCurrentQuestion <  arrtillsmsQuestions[tillsmsCurrentExer].content.length) {
@@ -280,7 +282,7 @@ const checkAnswer = () => {
         } else {
             endTillsmsExer();
         }
-    }, 2100);
+    }, 3000);
 }
 
 /* endTillsmsExer
@@ -295,7 +297,7 @@ const endTillsmsExer = () => {
     document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).style.height = "84vh";
     document.querySelector(`.tillsmsAnswerKeybord`).classList.add("hidden")
 
-    let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble", `Exer${tillsmsCurrentExer}Question${ntillsmsCurrentQuestion}`]},
+    let feedback = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble"]},
     El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
     El("div",{classes: ["tillsmsQuestion", `Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`]}, "מעולה! התרגול הסתיים יכולים לעבור לתרגול הבא"),
     );
