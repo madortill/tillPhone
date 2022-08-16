@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
     document.querySelector(`.loader`).classList.add(`fade`);
     document.querySelector(`.nameEntry`).classList.add(`fade`);
     document.querySelector(`.submitName`).addEventListener(`click`,startApp);
-    document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
+    // document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
 });
 
 function openFullscreen() {
@@ -71,7 +71,7 @@ Description: hide and enable recent app, shoe home page*/
 const sendHome = () => {
     document.querySelector(`.homePage`).classList.remove(`hidden`);
     document.querySelector(`.${strCurrentApp}`).classList.add(`hidden`);
-    document.querySelector(`.appsContainer > .${strCurrentApp}App`).removeEventListener(`click`, eval(strCurrentApp));
+    // document.querySelector(`.appsContainer > .${strCurrentApp}App`).removeEventListener(`click`, eval(strCurrentApp));
     ldBar("#batteryProgress").set(Math.floor(nPercent));
     document.querySelector(".batteryProgressContainer").classList.add("progressAnimation");
     document.querySelector(".batteryProgressContainer").addEventListener("animationend", () => {

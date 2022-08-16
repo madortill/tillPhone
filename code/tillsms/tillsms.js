@@ -7,6 +7,9 @@ let pageNum = 1;
 let tillsmsCurrentExer;
 let tillsmsCurrentAns
 let objTillsmsCurrentQuestion;
+let nTillsmsAmountOfExers = arrtillsmsQuestions.length;
+
+let amountOfTillsmsQuestions = 0;
 
 /* tillsms
 --------------------------------------------------------------
@@ -25,7 +28,7 @@ const createtillsmsContent = () => {
     let navBar = El("div", {classes: ["tillsmsTopNav", "centerX"]},
         El("img",{ attributes: {class: "tillsmsCameraIcon", src: "../assets/images/tillsms/gift.svg"}}),
         El("div", {classes: ["tillsmsExercise", "tillsmsCategory1", "tillsmsCategory"], listeners: {click: switchCategory}}, "תרגולים",
-            El("div", {cls: "tillsmsExerciseCounter"}, arrtillsmsQuestions.length)
+            El("div", {cls: "tillsmsExerciseCounter"}, nTillsmsAmountOfExers)
         ),
         El("div", {classes: ["tillsmsInstractions", "tillsmsCategory2", "tillsmsCategory"], listeners: {click: switchCategory}}, "הוראות"),
         El("div", {classes: ["tillsmsProgress", "tillsmsCategory3", "tillsmsCategory"], listeners: {click: switchCategory}}, "התקדמות"),
@@ -46,6 +49,7 @@ const createtillsmsContent = () => {
             ),
             
         );
+        amountOfTillsmsQuestions += arrtillsmsQuestions[exer].content.length;
         document.querySelector(".tillsmsPageContent").append(exerContainer);
         arrtillsmsQuestions[exer].status = "בביצוע";
     }
@@ -235,6 +239,7 @@ const compareOutOfOrder = (arr1, arr2) => {
 Description: */
 const checkAnswer = () => {
     // save send bar content and empty it, send messege with answers
+    document.querySelector(".tillsmsExerArrow").style.pointerEvents = "none";
     let answerContentToSend = document.querySelector(`.tillsmsSendBar`).innerHTML;
     document.querySelector(".tillsmsSendBar").classList.remove("tillsmsSendBarWithPic")
     document.querySelector(`.tillsmsSendBar`).innerHTML = "";
@@ -277,6 +282,7 @@ const checkAnswer = () => {
 
     // move to next question or end exer
     setTimeout(() => {
+        document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
         if(ntillsmsCurrentQuestion <  arrtillsmsQuestions[tillsmsCurrentExer].content.length) {
             startQuestion();
         } else {
@@ -303,4 +309,56 @@ const endTillsmsExer = () => {
     );
     document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(feedback);
     document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
+
+    nTillsmsAmountOfExers--;
+    if(nTillsmsAmountOfExers > 0) {
+        document.querySelector(".tillsmsExerciseCounter").innerHTML = nTillsmsAmountOfExers;
+    } else {
+        document.querySelector(".tillsmsExerciseCounter").classList.add("hidden");
+        if(ntillsmsCorrectAnswers/amountOfTillsmsQuestions >= PASSING_RATE){ // win - add precentegt
+            document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `אלופים! סיימתם את כל התרגולים קבלו ${calcPercentageWin(ntillsmsCorrectAnswers, amountOfTillsmsQuestions)} אחוזים לסוללה שלכם`;
+        } else {// loose - remove 5 %
+            document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `איזה באסה! לא הצלחתם בתרגול וסתם בזבזבתם 5% מהסוללה שלכם`;
+            updatePercentage(-5);
+        }
+        let backToHome = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble",], listeners: {click: () => {sendHome(); restartTillsms();}}},
+            El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
+            El("div",{classes: ["tillsmsQuestion", "tillsmsSendHomeMessege"]}, "לחצו כדי לחזור למסך הבית",
+                El("img", {attributes: {src: "../assets/images/tillsms/backToHome.svg", class: "tillsmsSendHomeButton"}})
+            ),
+        );
+        document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(backToHome);
+        document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
+        let backToHomeMainPage = El("img", {attributes: {src: "../assets/images/tillsms/backToHome.svg", class: "tillsmsSendHomeButton tillsmsSendHomeButtonMainPage"}, listeners: {click: () => {sendHome(); restartTillsms();}}},);
+        document.querySelector(`.tillsmsMainPageHeader`).append(backToHomeMainPage);
+        // restartTillsms();
+    }
+    // document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
+}
+
+/* endTillsmsExer
+--------------------------------------------------------------
+Description: */
+const restartTillsms = () => {
+    arrtillsmsQuestions.forEach(exer => {
+        exer.curretntQuestion = 0;
+        exer.status = "לא הותחל";
+    })
+
+    document.querySelector(`.tillsmsMainPage`).classList.remove("hidden");
+    let header = document.querySelector(`.tillsmsExerheaderContainer`)
+    if(header) {
+        document.querySelector(`.tillsmsExerPage`).removeChild(header);
+    }
+    document.querySelector(`.tillsmsExerPage`).classList.add("hidden");
+    document.querySelectorAll(".tillsmsQuestionContainer").forEach( container => {
+        document.querySelector(`.tillsmsExerPage`).removeChild(container);
+    })
+    document.querySelector(`.tillsmsPageContent`).innerHTML = "";
+    document.querySelector(`.tillsmsMainPageHeader`).innerHTML = "";
+    
+    ntillsmsCorrectAnswers = 0;
+    amountOfTillsmsQuestions = 0;
+    nTillsmsAmountOfExers = arrtillsmsQuestions.length;
+    // createtillsmsContent();
 }
