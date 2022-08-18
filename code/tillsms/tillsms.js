@@ -176,9 +176,7 @@ const startQuestion = () => {
 
     // control grid columns
     document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns = "";
-    for(let i = 0; i < Math.ceil(Math.sqrt(objTillsmsCurrentQuestion.answers.length)); i++) {
-        document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns += " 1fr";
-    }
+    document.querySelector(`.tillsmsAnswersContainer`).style.gridTemplateColumns = `repeat(${Math.ceil(Math.sqrt(objTillsmsCurrentQuestion.answers.length))}, 1fr)`;
 }
 
 
