@@ -8,7 +8,7 @@ let tillsmsCurrentExer;
 let tillsmsCurrentAns
 let objTillsmsCurrentQuestion;
 let nTillsmsAmountOfExers = arrtillsmsQuestions.length;
-
+let bTillsmsRestart = false;
 let amountOfTillsmsQuestions = 0;
 
 /* tillsms
@@ -313,9 +313,9 @@ const endTillsmsExer = () => {
         document.querySelector(".tillsmsExerciseCounter").innerHTML = nTillsmsAmountOfExers;
     } else {
         document.querySelector(".tillsmsExerciseCounter").classList.add("hidden");
-        if(ntillsmsCorrectAnswers/amountOfTillsmsQuestions >= PASSING_RATE){ // win - add precentegt
+        if(ntillsmsCorrectAnswers/amountOfTillsmsQuestions >= PASSING_RATE && !bTillsmsRestart){ // win - add precentegt
             document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `אלופים! סיימתם את כל התרגולים קבלו ${calcPercentageWin(ntillsmsCorrectAnswers, amountOfTillsmsQuestions)} אחוזים לסוללה שלכם`;
-        } else {// loose - remove 5 %
+        } else if (ntillsmsCorrectAnswers/amountOfTillsmsQuestions <  PASSING_RATE){// loose - remove 5 %
             document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `איזה באסה! לא הצלחתם בתרגול וסתם בזבזבתם 5% מהסוללה שלכם`;
             updatePercentage(-5);
         }
@@ -358,5 +358,5 @@ const restartTillsms = () => {
     ntillsmsCorrectAnswers = 0;
     amountOfTillsmsQuestions = 0;
     nTillsmsAmountOfExers = arrtillsmsQuestions.length;
-    // createtillsmsContent();
+    bTillsmsRestart = true;
 }

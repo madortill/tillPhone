@@ -3,6 +3,7 @@ let nTillhangCorrectAnswers = 0;
 let nCorrectAns = 0;
 let nWrongAns = 0 
 let arrTillhangQuestion;
+let bTillhangRestart = false;
 const ALPHABET = [`א`,`ב`,`ג`,`ד`,`ה`,`ו`,`ז`,`ח`,`ט`,`י`,`כ`,`ל`,`מ`,`נ`,`ס`,`ע`,`פ`,`צ`,`ק`,`ר`,`ש`,`ת`];
 const LOOSE_QUESTION = 6;
 const AMOUNT_OF_TILLHANG_QUESTION = DATA.tillhang.amountOfQuestions; // how many questions we want out of the array
@@ -127,20 +128,31 @@ const tillhangEnd = () => {
         content = El("div", {classes: [`tillhangContainer`, `flexCenter`]},
             El("div",{cls: `tillhangTitleDefinition`}, `כל הכבוד הצלחתם להציל את האיש מתלייה!`),
             El("div",{cls: `tillhangDefinition`}, `ניחשתם נכון ${nTillhangCorrectAnswers} מושגים מתוך ${AMOUNT_OF_TILLHANG_QUESTION}`),
-            El("div",{cls: `tillhangDefinition`},`האיש רצה להודות לכם וטען לכם את הטלפון בעוד ${calcPercentageWin(nTillhangCorrectAnswers, AMOUNT_OF_TILLHANG_QUESTION)} אחוזים`),
-            // El("img",{classes: [`tillhangEndMan`], attributes: {src: `../assets/images/tillhang/man.png`}}),
-            El("div",{cls: `tillhangEndButton`, listeners: {click: sendHome}},`נמחקתי`),
+            El("div",{classes: [`tillhangDefinition`, "tillhangPrecentUpdate"]},),
+            El("div",{cls: `tillhangEndButton`, listeners: {click: sendHome}},`סיום`),
         );
+        document.querySelector(`.tillhang`).append(content);
+        if(!bTillhangRestart) {
+            document.querySelector(".tillhangPrecentUpdate").innerHTML = `האיש רצה להודות לכם וטען לכם את הטלפון בעוד ${calcPercentageWin(nTillhangCorrectAnswers, AMOUNT_OF_TILLHANG_QUESTION)} אחוזים`;
+        }
     } else {
         content = El("div", {classes: [`tillhangContainer`, `flexCenter`]},
             El("div",{cls: `tillhangTitleDefinition`}, `האיש נתלה! פשוט אי אפשר לסמוך עליכם`),
             El("div",{cls: `tillhangDefinition`}, `ניחשתם נכון ${nTillhangCorrectAnswers} מושגים מתוך ${AMOUNT_OF_TILLHANG_QUESTION}`),
             El("div",{cls: `tillhangDefinition`},`התקשרתם לאמבולנס והתבזבזו לכם 5 אחוזים`),
-            // El("img",{classes: [`tillhangEndMan`], attributes: {src: `../assets/images/tillhang/man.png`}}),
-            El("div",{cls: `tillhangEndButton`, listeners: {click: sendHome}},`נמחקתי`),
-
+            El("div",{cls: `tillhangEndButton`, listeners: {click: sendHome}},`סיום`),
         );
         updatePercentage(-5);
+        document.querySelector(`.tillhang`).append(content);
     }
-    document.querySelector(`.tillhang`).append(content);
+    restartTillhang();
+}
+
+/* restartTillhang
+--------------------------------------------------------------
+Description: */
+const restartTillhang = () => {
+    nTillhangCurrentQuestion = 0;
+    nTillhangCorrectAnswers = 0;
+    bTillhangRestart = true;
 }

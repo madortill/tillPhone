@@ -2,6 +2,7 @@
 let nTillderCurrentQuestion = 0;
 let nTillderCorrectAnswers = 0;
 let arrTillderQuestions = [];
+let bTillderRestart = false;
 // const
 const AMOUNT_OF_TILLDER_QUESTION = DATA.tillder.amountOfQuestions; // how many questions we want out of the array
 const DELAY_AFTER_QUESTION = 300;
@@ -130,32 +131,35 @@ const endTillderExer = () => {
         feedback = El("div", {classes: ["tillderFeedbackTitle"]}, 
         El("img", {attributes: {class: "tillderFeedBackIcon", src: "../assets/images/tillder/kol_hakavod.svg"}}),
         El("img", {attributes: {class: "tillderFeedBackTextEnd", src: "../assets/images/tillder/good_ending.svg"}}),
-        El("div", {cls: `Feedback`}, `קבלו ${calcPercentageWin(nTillderCorrectAnswers, AMOUNT_OF_TILLDER_QUESTION)}% לסוללה שלכם`),
+        El("div", {cls: `Feedback`},),
         El("img", {listeners: {click: sendHome}, attributes: {class: "tillderFeedBackEndButton endButtons", src: "../assets/images/tillder/finish_button.svg"}}),
-        El("img", {listeners: {click: restartTilder}, attributes: {class: "tillderFeedBackRestartButton endButtons", src: "../assets/images/tillder/restart_button .svg"}}),
         );
+        document.querySelector(`.tillderFeedBackContainer`).append(feedback);
+        if(!bTillderRestart) {
+            document.querySelector(".tillderFeedBackContainer .Feedback").innerHTML =  `קבלו ${calcPercentageWin(nTillderCorrectAnswers, AMOUNT_OF_TILLDER_QUESTION)}% לסוללה שלכם`;
+        }
     } else {// loose - remove 5 %
         feedback = El("div", {classes: ["tillderFeedbackTitle"]}, 
         El("img", {attributes: {class: "tillderFeedBackIcon", src: "../assets/images/tillder/oyyy.svg"}}),
         El("img", {attributes: {class: "tillderFeedBackTextEnd", src: "../assets/images/tillder/bad_ending.svg"}}),
         El("div", {cls: `Feedback`}, `סתם בזבזתם 5%....`),
-        El("img", {listeners: {click: restartTilder}, attributes: {class: "tillderFeedBackRestartButton endButtons", src: "../assets/images/tillder/restart_button .svg"}}),
+        El("img", {listeners: {click: sendHome}, attributes: {class: "tillderFeedBackEndButton endButtons", src: "../assets/images/tillder/finish_button.svg"}}),
         );
         updatePercentage(-5);
+        document.querySelector(`.tillderFeedBackContainer`).append(feedback);
     }
-    document.querySelector(`.tillderFeedBackContainer`).append(feedback);
+    restartTillder();
 }
 
-/* restartTilder
+/* restartTillder
 --------------------------------------------------------------
 Description: */
-const restartTilder = () => {
+const restartTillder = () => {
     // reset verubles
     nTillderCurrentQuestion = 0;
     nTillderCorrectAnswers = 0;
     arrTillderQuestions = shuffle(DATA.tillder.appContent);
-    addContentToQuestion();
-
+    bTillderRestart = true;
 }
 
 const handlePan = () => {
