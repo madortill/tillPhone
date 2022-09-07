@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
     document.querySelector(`.loader`).classList.add(`fade`);
     document.querySelector(`.nameEntry`).classList.add(`fade`);
     document.querySelector(`.submitName`).addEventListener(`click`,startApp);
-    document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
+    // document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
 });
 
 function openFullscreen() {
@@ -52,14 +52,15 @@ const startApp = () => {
     userName = document.querySelector(`#name`).value;
     document.querySelector(`.nameEntry`).classList.add(`hidden`);
     let app;
+    let dad;
     for(key of Object.keys(DATA)){
-        app = El("div", {classes: [`app`, `${key}App`], listeners: {"click": eval(key)}},
+        app = El("div", {classes: [`app`, `${key}App`], listeners: {"click": window[key]}},
             El("img", {attributes: {class: `appIcon`, src: DATA[key].icon}}),
             El("div", {cls: `appTitle`}, key),
         );
         document.querySelector(`.appsContainer`).append(app);
     };
-    alert(`${userName}! הסוללה במצב 0% וזקוקה להטענה! זה הזמן לשחק במשחקים ולצבור נקודות כדי להגיע ל100%.`, `מוכנים לאתגר!`);
+    customAlert(`${userName}! הסוללה במצב 0% וזקוקה להטענה! זה הזמן לשחק במשחקים ולצבור נקודות כדי להגיע ל100%.`, `מוכנים לאתגר!`);
     new ldBar("#batteryProgress");
     document.querySelector("#batteryProgress").style.width = "52vw"
     document.querySelector("#batteryProgress").style.height = "52vw"
@@ -84,7 +85,7 @@ const sendHome = () => {
 Description: gets an allert in animation.
 parameters: text - the content of the alert, button - the content of the button
  */
-const alert = (text, button) => {
+const customAlert = (text, button) => {
     document.querySelector(`.alertText`).innerHTML = text;
     document.querySelector(`.alertButton`).innerHTML = button;
     // add alert in animation

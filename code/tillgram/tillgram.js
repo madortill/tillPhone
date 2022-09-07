@@ -4,7 +4,7 @@ const AMOUNT_OF_TILLGRAM_QUESTION = DATA.tillgram.appContent.length;
 /* tillgram
 --------------------------------------------------------------
 Description: start tillgram app*/
-const tillgram = () => {
+var tillgram = () => {
     strCurrentApp = "tillgram";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillgram`).classList.remove(`hidden`);

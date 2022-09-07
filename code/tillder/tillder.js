@@ -10,7 +10,7 @@ const DELAY_AFTER_QUESTION = 300;
 /* tillder
 --------------------------------------------------------------
 Description: start tillder app*/
-const tillder = () => {
+var tillder = () => {
     strCurrentApp = "tillder";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillder`).classList.remove(`hidden`);

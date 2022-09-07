@@ -12,7 +12,7 @@ const AMOUNT_OF_TILLHANG_QUESTION = DATA.tillhang.amountOfQuestions; // how many
 /* tillhang
 --------------------------------------------------------------
 Description: start tillhang app*/
-const tillhang = () => {
+var tillhang = () => {
     strCurrentApp = "tillhang";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillhang`).classList.remove(`hidden`);

@@ -7,7 +7,7 @@ const AMOUNT_OF_TILLONE_QUESTION = DATA.tillone.amountOfQuestions; // how many q
 /* tillone
 --------------------------------------------------------------
 Description: start tillone app*/
-const tillone = () => {
+var tillone = () => {
     strCurrentApp = "tillone";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillone`).classList.remove(`hidden`);

@@ -1,4 +1,4 @@
-// question
+// verubels
 let ntillsmsCorrectAnswers = 0;
 let strTillsmsCorrectAnswer = [];
 let ntillsmsCurrentQuestion;
@@ -11,10 +11,29 @@ let nTillsmsAmountOfExers = arrtillsmsQuestions.length;
 let bTillsmsRestart = false;
 let amountOfTillsmsQuestions = 0;
 
+let simon = {
+    count: 0,
+    possibilities: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+    currentGame: [],
+    player: [],
+    sound:
+    [   new Audio('../../assets/sounds/cell-phone-1-nr0.mp3'), 
+        new Audio('../../assets/sounds/cell-phone-1-nr1.mp3'), 
+        new Audio('../../assets/sounds/cell-phone-1-nr2.mp3'), 
+        new Audio('../../assets/sounds/cell-phone-1-nr3.mp3'), 
+        new Audio('../../assets/sounds/cell-phone-1-nr4.mp3'), 
+        new Audio('../../assets/sounds/cell-phone-1-nr5.mp3'), 
+        new Audio('../../assets/sounds/cell-phone-1-nr6.mp3'), 
+        new Audio('../../assets/sounds/cell-phone-1-nr7.mp3'), 
+        new Audio('../../assets/sounds/cell-phone-1-nr8.mp3'), 
+        new Audio('../../assets/sounds/cell-phone-1-nr9.mp3'), ],
+    soundOn: true
+}
+
 /* tillsms
 --------------------------------------------------------------
 Description: start tillsms app*/
-const tillsms = () => {
+var tillsms = () => {
     strCurrentApp = "tillsms";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillsms`).classList.remove(`hidden`);
@@ -26,7 +45,7 @@ const tillsms = () => {
 Description: start tillsms app*/
 const createtillsmsContent = () => {
     let navBar = El("div", {classes: ["tillsmsTopNav", "centerX"]},
-        El("img",{ attributes: {class: "tillsmsCameraIcon", src: "../assets/images/tillsms/gift.svg"}}),
+        El("img",{ attributes: {class: "tillsmsCameraIcon", src: "../assets/images/tillsms/gift.svg"}, listeners: {click: startSimonGame}}),
         El("div", {classes: ["tillsmsExercise", "tillsmsCategory1", "tillsmsCategory"], listeners: {click: switchCategory}}, "תרגולים",
             El("div", {cls: "tillsmsExerciseCounter"}, nTillsmsAmountOfExers)
         ),
@@ -360,3 +379,102 @@ const restartTillsms = () => {
     nTillsmsAmountOfExers = arrtillsmsQuestions.length;
     bTillsmsRestart = true;
 }
+
+
+// simon game ------------------------------------------------------------------------
+/* startSimonGame
+--------------------------------------------------------------
+Description: */
+const startSimonGame = () => {
+    document.querySelector(".tillsmsMainPage").classList.add("hidden");
+    document.querySelector(".tillsmsGameContainer").classList.remove("hidden");
+    simon.possibilities.forEach(num => {
+        let simonButton = El("div", {classes: [`simonButton`, `simonButton${num}`],listeners:{click:addToPlayer}}, num);
+        document.querySelector(".tillsmsSimonButtonsContainer").append(simonButton);
+    });
+    document.querySelector(".tillsmsStartGame").addEventListener("click", generateMove, {once: true});
+    document.querySelector(".tillsmsSoundControlPic").addEventListener("click", controlSound);
+    document.querySelector(".tillsmsSimonButtonsContainer").style.pointerEvents = "none";
+
+    // generateMove();
+}
+
+const generateMove = () => {
+    simon.currentGame.push(simon.possibilities[(Math.floor(Math.random()*simon.possibilities.length))]);
+    showMoves();
+}
+
+const showMoves = () => {
+    // showMoves
+    let i = 0;
+    let moves = setInterval(function(){
+      playGame(simon.currentGame[i], "flash");
+      i++;
+      if (i >= simon.currentGame.length) {
+        clearInterval(moves);
+        document.querySelector(".tillsmsSimonButtonsContainer").style.pointerEvents = "all";
+      }
+    }, 600);
+    // clear player
+    simon.player = [];
+}
+
+const playGame = (field, indication) => {
+    document.querySelector(`.simonButton${field}`).classList.add(indication);
+    sound(field);
+    setTimeout(function(){
+        document.querySelector(`.simonButton${field}`).classList.remove(indication);
+    }, 300);
+}
+
+const addToPlayer = (event) => {
+    let field = event.currentTarget.classList[1].slice(11);
+    simon.player.push(field);
+    //playerTurn
+    if (simon.player[simon.player.length - 1] !== simon.currentGame[simon.player.length - 1]) {
+        document.querySelector(".tillsmsSimonButtonsContainer").style.pointerEvents = "none";
+        console.log('Wrong move! Try again!');
+        playGame(field, "flashRed");
+        // clearGame(); 
+        setTimeout(() => {
+            showMoves();
+        }, 500);
+    } else {
+        console.log('Good Move!');
+        sound(field);
+        playGame(field, "flashGreen")
+        let check = simon.player.length === simon.currentGame.length;
+        if (check) {
+          if(simon.count == 9){
+            console.log('You won! Congrats.');
+          } else {
+            console.log('Next round!');
+            simon.count++;
+            generateMove();
+          }
+        }
+    }
+} 
+
+const sound = (name) => {
+   let soundEffect =  new Audio(`../../assets/sounds/cell-phone-1-nr${name}.mp3`);
+   if(simon.soundOn) {
+       soundEffect.play();
+   }
+}
+
+function controlSound() {
+    if(simon.soundOn) {
+        simon.soundOn = false;
+        document.querySelector(".tillsmsSoundControlPic").setAttribute("src", "../assets/images/tillsms/muteButton.svg");
+    } else {
+        simon.soundOn = true;
+        document.querySelector(".tillsmsSoundControlPic").setAttribute("src", "../assets/images/tillsms/unmuteButton.svg");
+    }
+}
+
+// function clearGame() {
+//     simon.currentGame = [];
+//     simon.count = 0;
+//     generateMove();
+// }

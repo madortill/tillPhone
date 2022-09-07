@@ -9,7 +9,7 @@ const LOSE_GAME = DATA.tilloto.lose;
 /* tilloto
 --------------------------------------------------------------
 Description: start tilloto app*/
-const tilloto = () => {
+var tilloto = () => {
     strCurrentApp = "tilloto";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tilloto`).classList.remove(`hidden`);
