@@ -382,6 +382,13 @@ const startSimonGame = () => {
         let simonButton = El("div", {classes: [`simonButton`, `simonButton${num}`],listeners:{click:addToPlayer}}, num);
         document.querySelector(".tillsmsSimonButtonsContainer").append(simonButton);
     });
+    document.querySelector(".tillsmsStartGameInfo").addEventListener("click", () => {
+        if(String(document.querySelector(".tillsmsStartGameInfoText").classList).includes("hidden")) {
+            document.querySelector(".tillsmsStartGameInfoText").classList.remove("hidden"); 
+        } else {
+            document.querySelector(".tillsmsStartGameInfoText").classList.add("hidden");
+        }
+    });
     document.querySelector(".tillsmsStartGameButton").addEventListener("click", generateMove, {once: true});
     document.querySelector(".tillsmsSoundControlPic").addEventListener("click", controlSound);
     document.querySelector(".tillsmsSimonButtonsContainer").style.pointerEvents = "none";

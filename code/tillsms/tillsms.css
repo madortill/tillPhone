@@ -420,3 +420,15 @@
     border-radius: 50%;
     padding: 1em;
 }
+
+.tillsmsStartGameInfo {
+    width: 7vw;
+    background-color: #1c7c9f;
+    color: #89C2D7;
+    border: 0.3em solid #89C2D7;
+    border-radius: 50%;
+    padding: 0.3em;
+    top: 7vh;
+    left: 5vw;
+    position: absolute;
+}
