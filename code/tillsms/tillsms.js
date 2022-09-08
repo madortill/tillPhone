@@ -16,7 +16,8 @@ let simon = {
     possibilities: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
     currentGame: [],
     player: [],
-    soundOn: true
+    soundOn: true,
+    mistakes: 0,
 }
 
 /* tillsms
@@ -424,10 +425,15 @@ const addToPlayer = (event) => {
         document.querySelector(".tillsmsSimonButtonsContainer").style.pointerEvents = "none";
         console.log('Wrong move! Try again!');
         playGame(field, "flashRed");
-        // clearGame(); 
-        setTimeout(() => {
-            showMoves();
-        }, 500);
+        if(simon.mistakes === 2) { // restart game
+            clearGame(); 
+        } else { // restart level
+            simon.mistakes++;
+            console.log(simon.mistakes);
+            setTimeout(() => {
+                showMoves();
+            }, 500);
+        }
     } else {
         console.log('Good Move!');
         sound(field);
@@ -462,8 +468,13 @@ function controlSound() {
     }
 }
 
-// function clearGame() {
-//     simon.currentGame = [];
-//     simon.count = 0;
-//     generateMove();
-// }
+function clearGame() {
+    simon.currentGame = [];
+    simon.count = 0;
+    simon.mistakes = 0;
+    document.querySelector(".tillsmsRestartGame").classList.remove("hidden");
+    document.querySelector(".tillsmsRestartGameButton").addEventListener("click", () => {
+        document.querySelector(".tillsmsRestartGame").classList.add("hidden");
+        generateMove();
+    })
+}
