@@ -24,6 +24,12 @@
 }
 
 @font-face {
+    font-family: Calibri;
+    src: url("../assets/fonts/calibri/calibrib.ttf");
+    font-weight: 800;
+}
+
+@font-face {
     font-family: DancingScript;
     src: url("../assets/fonts/dancingScript/DancingScript-SemiBold.ttf");
     font-weight: 500;

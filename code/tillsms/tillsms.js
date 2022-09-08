@@ -382,7 +382,7 @@ const startSimonGame = () => {
         let simonButton = El("div", {classes: [`simonButton`, `simonButton${num}`],listeners:{click:addToPlayer}}, num);
         document.querySelector(".tillsmsSimonButtonsContainer").append(simonButton);
     });
-    document.querySelector(".tillsmsStartGame").addEventListener("click", generateMove, {once: true});
+    document.querySelector(".tillsmsStartGameButton").addEventListener("click", generateMove, {once: true});
     document.querySelector(".tillsmsSoundControlPic").addEventListener("click", controlSound);
     document.querySelector(".tillsmsSimonButtonsContainer").style.pointerEvents = "none";
 
@@ -390,6 +390,7 @@ const startSimonGame = () => {
 }
 
 const generateMove = () => {
+    document.querySelector(".tillsmsStartGame").classList.add("hidden");
     simon.currentGame.push(simon.possibilities[(Math.floor(Math.random()*simon.possibilities.length))]);
     showMoves();
 }
@@ -476,5 +477,5 @@ function clearGame() {
     document.querySelector(".tillsmsRestartGameButton").addEventListener("click", () => {
         document.querySelector(".tillsmsRestartGame").classList.add("hidden");
         generateMove();
-    })
+    }, {once: true})
 }
