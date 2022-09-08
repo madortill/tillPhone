@@ -432,3 +432,11 @@
     left: 5vw;
     position: absolute;
 }
+
+.tillsmsStartGameInfoText {
+    position: absolute;
+    right: 5vw;
+    top: 7vh;
+    width: 70vw;
+    font-size: 1.2em;
+}
