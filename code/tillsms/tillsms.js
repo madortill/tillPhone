@@ -16,17 +16,6 @@ let simon = {
     possibilities: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
     currentGame: [],
     player: [],
-    sound:
-    [   new Audio('../../assets/sounds/cell-phone-1-nr0.mp3'), 
-        new Audio('../../assets/sounds/cell-phone-1-nr1.mp3'), 
-        new Audio('../../assets/sounds/cell-phone-1-nr2.mp3'), 
-        new Audio('../../assets/sounds/cell-phone-1-nr3.mp3'), 
-        new Audio('../../assets/sounds/cell-phone-1-nr4.mp3'), 
-        new Audio('../../assets/sounds/cell-phone-1-nr5.mp3'), 
-        new Audio('../../assets/sounds/cell-phone-1-nr6.mp3'), 
-        new Audio('../../assets/sounds/cell-phone-1-nr7.mp3'), 
-        new Audio('../../assets/sounds/cell-phone-1-nr8.mp3'), 
-        new Audio('../../assets/sounds/cell-phone-1-nr9.mp3'), ],
     soundOn: true
 }
 
@@ -457,7 +446,7 @@ const addToPlayer = (event) => {
 } 
 
 const sound = (name) => {
-   let soundEffect =  new Audio(`../../assets/sounds/cell-phone-1-nr${name}.mp3`);
+   let soundEffect =  new Audio(`../assets/sounds/cell-phone-1-nr${name}.mp3`);
    if(simon.soundOn) {
        soundEffect.play();
    }
