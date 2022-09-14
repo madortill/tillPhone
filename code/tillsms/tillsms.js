@@ -19,6 +19,7 @@ let simon = {
     soundOn: true,
     mistakes: 0,
 }
+const SIMON_ROUNDS_TO_WIN = 8;
 
 /* tillsms
 --------------------------------------------------------------
@@ -376,6 +377,7 @@ const restartTillsms = () => {
 --------------------------------------------------------------
 Description: */
 const startSimonGame = () => {
+    document.querySelector(".tillsmsCameraIcon").removeEventListener("click", startSimonGame);
     document.querySelector(".tillsmsMainPage").classList.add("hidden");
     document.querySelector(".tillsmsGameContainer").classList.remove("hidden");
     simon.possibilities.forEach(num => {
@@ -383,16 +385,11 @@ const startSimonGame = () => {
         document.querySelector(".tillsmsSimonButtonsContainer").append(simonButton);
     });
     document.querySelector(".tillsmsStartGameInfo").addEventListener("click", () => {
-        if(String(document.querySelector(".tillsmsStartGameInfoText").classList).includes("hidden")) {
-            document.querySelector(".tillsmsStartGameInfoText").classList.remove("hidden"); 
-        } else {
-            document.querySelector(".tillsmsStartGameInfoText").classList.add("hidden");
-        }
+        customAlert("איך משחקים בסיימון??<br> בכל סיבוב תתווסף עוד ספרה לסדרה. עליכם ללחוץ על כל הספרות שהופיעו עד כה לפי סדר הופעתן <br>יש לכם 3 פסילות לפני שהמשחק מתאפס", "הבנתי! קטן עליי");
     });
     document.querySelector(".tillsmsStartGameButton").addEventListener("click", generateMove, {once: true});
     document.querySelector(".tillsmsSoundControlPic").addEventListener("click", controlSound);
     document.querySelector(".tillsmsSimonButtonsContainer").style.pointerEvents = "none";
-
     // generateMove();
 }
 
@@ -431,28 +428,28 @@ const addToPlayer = (event) => {
     //playerTurn
     if (simon.player[simon.player.length - 1] !== simon.currentGame[simon.player.length - 1]) {
         document.querySelector(".tillsmsSimonButtonsContainer").style.pointerEvents = "none";
-        console.log('Wrong move! Try again!');
         playGame(field, "flashRed");
         if(simon.mistakes === 2) { // restart game
+            document.querySelector(`.tillsmsGameHeart3`).setAttribute("src", "../assets/images/tillsms/heartEmpty.svg")
             clearGame(); 
         } else { // restart level
             simon.mistakes++;
-            console.log(simon.mistakes);
+            document.querySelector(`.tillsmsGameHeart${simon.mistakes}`).setAttribute("src", "../assets/images/tillsms/heartEmpty.svg")
             setTimeout(() => {
                 showMoves();
             }, 500);
         }
     } else {
-        console.log('Good Move!');
         sound(field);
         playGame(field, "flashGreen")
         let check = simon.player.length === simon.currentGame.length;
         if (check) {
-          if(simon.count == 9){
-            console.log('You won! Congrats.');
+          if(simon.count == SIMON_ROUNDS_TO_WIN - 1){
+            setTimeout(endSimonGame, 1000);
+            document.querySelector(".tillsmsGameFeedbackLevel").innerHTML = `${SIMON_ROUNDS_TO_WIN} / ${simon.count + 1}`;
           } else {
-            console.log('Next round!');
             simon.count++;
+            document.querySelector(".tillsmsGameFeedbackLevel").innerHTML = `${SIMON_ROUNDS_TO_WIN} / ${simon.count}`;
             generateMove();
           }
         }
@@ -466,7 +463,7 @@ const sound = (name) => {
    }
 }
 
-function controlSound() {
+const controlSound = () => {
     if(simon.soundOn) {
         simon.soundOn = false;
         document.querySelector(".tillsmsSoundControlPic").setAttribute("src", "../assets/images/tillsms/muteButton.svg");
@@ -476,13 +473,42 @@ function controlSound() {
     }
 }
 
-function clearGame() {
+const clearGame = () => {
     simon.currentGame = [];
     simon.count = 0;
     simon.mistakes = 0;
+    document.querySelector(".tillsmsGameFeedbackLevel").innerHTML = `${SIMON_ROUNDS_TO_WIN} / ${0}`;
     document.querySelector(".tillsmsRestartGame").classList.remove("hidden");
     document.querySelector(".tillsmsRestartGameButton").addEventListener("click", () => {
         document.querySelector(".tillsmsRestartGame").classList.add("hidden");
+        for (let i = 1; i <= 3; i++) {
+            document.querySelector(`.tillsmsGameHeart${i}`).setAttribute("src", "../assets/images/tillsms/heartFull.svg")
+        }
         generateMove();
     }, {once: true})
+}
+
+
+const endSimonGame = () => {
+    let endGame = El("div",{cls: "tillsmsEndGame"},
+        El("img", {attributes: {class: "tillsmsGameEndPerson", src: "../assets/images/tillsms/person.svg"}}),
+        El("div",{},
+            El("div",{cls: "tillsmsGameEndName"}, "סיימון"),
+            El("div",{cls: "tillsmsgameEndNumber"}, `05${simon.currentGame.join("")}`),
+            ),
+        El("div",{cls: "tillsmsGameEndIconContainer"},
+            El("img", {attributes: {class: "tillsmsGameEndIcon", src: "../assets/images/tillsms/phone.svg"}}),
+            El("div", {attributes: {class: "tillsmsGameEndIcon",}},"%"),
+            El("img", {attributes: {class: "tillsmsGameEndIcon", src: "../assets/images/tillsms/trophy.svg"}}),
+        ),
+        El("div",{cls: "tillsmsGameEndText"}, `כל הכבוד הצלחת להתקשר לסיימון כדי להודות לך הוא שלח לך 2% לסוללה`),
+        El("img", {attributes: {class: "tillsmsGameEndButton", src: "../assets/images/tillsms/endGameButton.svg"}}),
+    );
+    document.querySelector(".tillsmsGameContainer").append(endGame);
+    updatePercentage(2);
+
+    document.querySelector(".tillsmsGameEndButton").addEventListener("click", ()=> {
+        document.querySelector(".tillsmsMainPage").classList.remove("hidden");
+        document.querySelector(".tillsmsGameContainer").classList.add("hidden");
+    })
 }
