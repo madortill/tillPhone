@@ -19,7 +19,7 @@ let simon = {
     soundOn: true,
     mistakes: 0,
 }
-const SIMON_ROUNDS_TO_WIN = 8;
+const SIMON_ROUNDS_TO_WIN = 5;
 
 /* tillsms
 --------------------------------------------------------------
@@ -490,15 +490,21 @@ const clearGame = () => {
 
 
 const endSimonGame = () => {
+    let soundEffect =  new Audio(`../assets/sounds/phone-call-14472.mp3`);
+    if(simon.soundOn) {
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+                soundEffect.play();
+            }, `${i}200`)
+        }
+    }
     let endGame = El("div",{cls: "tillsmsEndGame"},
+        El("div",{cls: "tillsmsGameEndName"}, "סיימון"),
         El("img", {attributes: {class: "tillsmsGameEndPerson", src: "../assets/images/tillsms/person.svg"}}),
-        El("div",{},
-            El("div",{cls: "tillsmsGameEndName"}, "סיימון"),
-            El("div",{cls: "tillsmsgameEndNumber"}, `05${simon.currentGame.join("")}`),
-            ),
+        El("div",{cls: "tillsmsgameEndNumber"}, `05${simon.currentGame.join("")}`),
         El("div",{cls: "tillsmsGameEndIconContainer"},
             El("img", {attributes: {class: "tillsmsGameEndIcon", src: "../assets/images/tillsms/phone.svg"}}),
-            El("div", {attributes: {class: "tillsmsGameEndIcon",}},"%"),
+            El("img", {attributes: {class: "tillsmsGameEndIcon", src: "../assets/images/tillsms/party.svg"}}),
             El("img", {attributes: {class: "tillsmsGameEndIcon", src: "../assets/images/tillsms/trophy.svg"}}),
         ),
         El("div",{cls: "tillsmsGameEndText"}, `כל הכבוד הצלחת להתקשר לסיימון כדי להודות לך הוא שלח לך 2% לסוללה`),

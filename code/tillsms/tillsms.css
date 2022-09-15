@@ -445,7 +445,7 @@
     top: 0;
     left: 0;
     width: 90vw;
-    height: 90vh;
+    height: 88vh;
     z-index: 4;
     color: white;
     background: linear-gradient(-45deg, #e73c7e 10%, var(--tillsmsMainDark) 40%, var(--tillsmsMainLight) 70%);
@@ -455,14 +455,14 @@
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    padding: 5vh 5vw;
+    padding: 6vh 5vw;
 }
 
 .tillsmsGameEndPerson {
     top: 15vh;
     width: 34vw;
     padding: 1.3em 0.8em 0.3em;
-    border: 0.5em solid #ffffff;
+    border: 0.3em solid #ffffff;
     border-radius: 50%;
     opacity: 0.75;
 }
@@ -495,20 +495,15 @@
 }
 
 .tillsmsGameEndIconContainer {
-    width: 50vw;
+    width: 60vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .tillsmsGameEndIcon {
+    padding: 0.2em;
     width: 13vw;
-    height: 7vh;
-    border: 0.07em solid white;
+    border: 0.14em solid white;
     border-radius: 50%;
-    text-align: center;
-    font-size: 2em;
-    line-height: 1.4;
-    font-family: system-ui;
-    font-weight: 100;
 }
