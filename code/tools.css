@@ -206,6 +206,10 @@
     font-weight: bold;
 }
 
+.disabled {
+    filter: grayscale(1) brightness(1.4);
+}
+
 .hidden {
     display: none;
 }

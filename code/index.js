@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
     document.querySelector(`.loader`).classList.add(`fade`);
     document.querySelector(`.nameEntry`).classList.add(`fade`);
     document.querySelector(`.submitName`).addEventListener(`click`,startApp);
-    document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
+    // document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
 });
 
 function openFullscreen() {
@@ -52,7 +52,6 @@ const startApp = () => {
     userName = document.querySelector(`#name`).value;
     document.querySelector(`.nameEntry`).classList.add(`hidden`);
     let app;
-    let dad;
     for(key of Object.keys(DATA)){
         app = El("div", {classes: [`app`, `${key}App`], listeners: {"click": window[key]}},
             El("img", {attributes: {class: `appIcon`, src: DATA[key].icon}}),

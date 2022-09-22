@@ -13,7 +13,7 @@
     background-color: var(--tillsmsMainDark);
     position: absolute;
     width: 100%;
-    height: 15vh;
+    height: 20vh;
     box-shadow: 0px -3px 10px black;
 }
 
@@ -32,24 +32,17 @@
 .tillsmsTopNav {
     width: 95%;
     color: white;
-    display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     position: absolute;
     bottom: 0;
 }
 
-
-.tillsmsCategory {
-    padding: 0.2em 1em;
-    margin: 0 0.2em;
-    opacity: 0.7;
+.tillsmsExerTitleMain {
+    font-size: 2em;
+    top: -13vh;
 }
 
-.tillsmsChoosenCategory {
-    border-bottom: 0.2em white solid;
-    opacity: 1;
-}
 
 .tillsmsExercise  {
     display: flex;
@@ -57,21 +50,17 @@
 }
 
 .tillsmsExerciseCounter {
-    color: var(--tillsmsMainDark);
-    background-color: white;
-    border-radius: 50%;
-    width: 4.5vw;
+    width: 53.5vw;
     text-align: center;
-    font-size: 0.7em;
-    font-weight: 200;
+    top: -6vh;
     margin-right: 0.7em;
 }
 
 .tillsmsContainer {
     position: absolute;
     width: 100%;
-    top: 15vh;
-    height: 85vh;
+    top: 20vh;
+    height: 80vh;
     overflow-y: scroll;
 }
 
@@ -93,7 +82,7 @@
 }
 
 .tillsmsExerTitle {
-    font-size: 1.1em; 
+    font-size: 1.1em;
 }
 
 .tillsmsExerStatus {
@@ -506,4 +495,9 @@
     width: 13vw;
     border: 0.14em solid white;
     border-radius: 50%;
+}
+
+/* progress */
+#tillsmsProgressBar { 
+    width: 60vw;
 }

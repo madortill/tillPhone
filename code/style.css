@@ -192,13 +192,13 @@ body, html {
     padding-left: 0.3em;
 }
 
-.ldBar path.mainline {
+#batteryProgress.ldBar path.mainline {
     stroke-width: 4;
     stroke: rgb(210, 8, 8);
     stroke-linecap: round;
 }
 
-.ldBar path.baseline {
+#batteryProgress.ldBar path.baseline {
     stroke-width: 6;
     stroke-linecap: round;
 }
@@ -208,7 +208,7 @@ body, html {
     transform: translate(-50%, -50%);
 }
 
-.ldBar.label-center>.ldBar-label {
+#batteryProgress.ldBar.label-center>.ldBar-label {
     font-size: 1.3em;
     color: white;
 }

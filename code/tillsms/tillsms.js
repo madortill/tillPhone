@@ -10,6 +10,7 @@ let objTillsmsCurrentQuestion;
 let nTillsmsAmountOfExers = arrtillsmsQuestions.length;
 let bTillsmsRestart = false;
 let amountOfTillsmsQuestions = 0;
+let nTillsmsQuestionAnswered = 0;
 
 let simon = {
     count: 0,
@@ -19,7 +20,7 @@ let simon = {
     soundOn: true,
     mistakes: 0,
 }
-const SIMON_ROUNDS_TO_WIN = 8;
+const SIMON_ROUNDS_TO_WIN = 2;
 
 /* tillsms
 --------------------------------------------------------------
@@ -37,11 +38,10 @@ Description: start tillsms app*/
 const createtillsmsContent = () => {
     let navBar = El("div", {classes: ["tillsmsTopNav", "centerX"]},
         El("img",{ attributes: {class: "tillsmsCameraIcon", src: "../assets/images/tillsms/gift.svg"}, listeners: {click: startSimonGame}}),
-        El("div", {classes: ["tillsmsExercise", "tillsmsCategory1", "tillsmsCategory"], listeners: {click: switchCategory}}, "תרגולים",
-            El("div", {cls: "tillsmsExerciseCounter"}, nTillsmsAmountOfExers)
+        El("div", {classes: ["tillsmsExercise", "tillsmsCategory1", "tillsmsCategory", "centerX"],},
+            El("div", {classes: ["centerX", "tillsmsExerTitleMain"]},  "תרגולים"),
+            El("div", {classes: ["tillsmsExerciseCounter", "centerX"]}, `${nTillsmsAmountOfExers} צאטים שלא נקראו`),
         ),
-        El("div", {classes: ["tillsmsInstractions", "tillsmsCategory2", "tillsmsCategory"], listeners: {click: switchCategory}}, "הוראות"),
-        El("div", {classes: ["tillsmsProgress", "tillsmsCategory3", "tillsmsCategory"], listeners: {click: switchCategory}}, "התקדמות"),
     );
     document.querySelector(".tillsmsMainPageHeader").append(navBar);
     document.querySelector(".tillsmsExercise").classList.add("tillsmsChoosenCategory");
@@ -63,29 +63,6 @@ const createtillsmsContent = () => {
         document.querySelector(".tillsmsPageContent").append(exerContainer);
         arrtillsmsQuestions[exer].status = "בביצוע";
     }
-    document.querySelectorAll(".tillsmsContainer").forEach(elem => {
-        elem.addEventListener("swiped", switchCategory);
-    })
-}
-
-/* switchCategory
---------------------------------------------------------------
-Description: */
-const switchCategory = (event) => {
-    document.querySelector(`.tillsmsCategory${pageNum}`).classList.remove("tillsmsChoosenCategory");
-    document.querySelector(`.tillsmsContainer${pageNum}`).classList.add("hidden");
-    if(event.type === "click") {
-        pageNum = Number(event.currentTarget.classList[1].slice(15));
-    } else {
-        pageNum = Number(event.currentTarget.classList[1].slice(16));
-        if(event.detail.dir === "right" && pageNum < 3) {
-            pageNum++;
-        } else if (event.detail.dir === "left" && pageNum > 1) {
-            pageNum--;
-        };
-    }
-    document.querySelector(`.tillsmsCategory${pageNum}`).classList.add("tillsmsChoosenCategory");
-    document.querySelector(`.tillsmsContainer${pageNum}`).classList.remove("hidden");
 }
 
 /* startExer
@@ -174,6 +151,8 @@ const startQuestion = () => {
         default:
             break;
     }
+    document.querySelector(`.tillsmsSendArrow`).classList.add("disabled");
+
 
     strTillsmsCorrectAnswer = [];
     objTillsmsCurrentQuestion.answers.forEach((ans, index) => {
@@ -225,8 +204,10 @@ const onClickManyChoices = (event) => {
     }
     // add or remove check button listener
     if(tillsmsCurrentAns.length === objTillsmsCurrentQuestion.correctAns.length){
+        document.querySelector(`.tillsmsSendArrow`).classList.remove("disabled");
         document.querySelector(`.tillsmsSendArrow`).addEventListener("click", checkAnswer);
     } else {
+        document.querySelector(`.tillsmsSendArrow`).classList.add("disabled");
         document.querySelector(`.tillsmsSendArrow`).removeEventListener("click", checkAnswer);
     }
 }
@@ -286,6 +267,9 @@ const checkAnswer = () => {
         ntillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].curretntQuestion;
         document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${ntillsmsCurrentQuestion}/${arrtillsmsQuestions[tillsmsCurrentExer].content.length}`,
         document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${ntillsmsCurrentQuestion}/${arrtillsmsQuestions[tillsmsCurrentExer].content.length}`;
+        nTillsmsQuestionAnswered++
+        ldBar("#tillsmsProgressBar").set(Math.round((nTillsmsQuestionAnswered/amountOfTillsmsQuestions) * 100));
+
     }, 1500);
 
     // move to next question or end exer
@@ -320,7 +304,7 @@ const endTillsmsExer = () => {
 
     nTillsmsAmountOfExers--;
     if(nTillsmsAmountOfExers > 0) {
-        document.querySelector(".tillsmsExerciseCounter").innerHTML = nTillsmsAmountOfExers;
+        document.querySelector(".tillsmsExerciseCounter").innerHTML = `${nTillsmsAmountOfExers} צאטים שלא נקראו`;
     } else {
         document.querySelector(".tillsmsExerciseCounter").classList.add("hidden");
         if(ntillsmsCorrectAnswers/amountOfTillsmsQuestions >= PASSING_RATE && !bTillsmsRestart){ // win - add precentegt
@@ -491,12 +475,17 @@ const clearGame = () => {
 
 const endSimonGame = () => {
     let soundEffect =  new Audio(`../assets/sounds/phone-call-14472.mp3`);
+    let ringing
     if(simon.soundOn) {
-        for (let i = 0; i < 5; i++) {
-            setTimeout(() => {
-                soundEffect.play();
-            }, `${i}200`)
-        }
+        let counter = 0;
+        soundEffect.play();
+        ringing = setInterval(() => {
+            soundEffect.play();
+            counter++;
+            if(counter === 4) {
+                clearInterval(ringing)
+            }
+        }, 2000);
     }
     let endGame = El("div",{cls: "tillsmsEndGame"},
         El("div",{cls: "tillsmsGameEndName"}, "סיימון"),
@@ -516,5 +505,6 @@ const endSimonGame = () => {
     document.querySelector(".tillsmsGameEndButton").addEventListener("click", ()=> {
         document.querySelector(".tillsmsMainPage").classList.remove("hidden");
         document.querySelector(".tillsmsGameContainer").classList.add("hidden");
+        clearInterval(ringing);
     })
 }
