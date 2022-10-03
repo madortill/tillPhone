@@ -70,6 +70,12 @@
     font-weight: 500;
 }
 
+@font-face {
+    font-family: Bangers;
+    src: url("../assets/fonts/bingo/Bangers-Regular.ttf");
+    font-weight: 500;
+}
+
 /* animations */
 @keyframes fadeOut {
     100% {
@@ -159,6 +165,24 @@
 	}
 	100% {
 		background-position: 0% 50%;
+	}
+}
+
+@keyframes flashRed {
+	0% {
+		background-color: white;
+	}
+	25% {
+        background-color: #f44336;
+	}
+	50% {
+		background-color: white;
+	}
+	75% {
+        background-color: #f44336;
+	}
+	100% {
+		background-color: white;
 	}
 }
 

@@ -108,14 +108,14 @@ const DATA = {
             },
         ],
     },
-    // tilloto
-    "tilloto": {
-        "icon": "../assets/images/homePage/tilloto.jpg",
+    // tillery
+    "tillery": {
+        "icon": "../assets/images/homePage/tillery.png",
         "amountOfQuestions": 6, // how many pers of cards will actualy appear
         "lose": 20, // how many attemptes they have until they lose
         "appContent":  [
             {
-                "src": "../assets/images/tilloto/exemple1.jpg",
+                "src": "../assets/images/tillery/exemple1.jpg",
                 "group": "1",
             },
             {
@@ -123,7 +123,7 @@ const DATA = {
                 "group": "1",
             },
             {
-                "src": "../assets/images/tilloto/exemple6.jpg",
+                "src": "../assets/images/tillery/exemple6.jpg",
                 "group": "2",
             },
             {
@@ -131,7 +131,7 @@ const DATA = {
                 "group": "2",
             },
             {
-                "src": "../assets/images/tilloto/exemple7.jpg",
+                "src": "../assets/images/tillery/exemple7.jpg",
                 "group": "3",
             },
             {
@@ -139,7 +139,7 @@ const DATA = {
                 "group": "3",
             },
             {
-                "src": "../assets/images/tilloto/exemple8.jpg",
+                "src": "../assets/images/tillery/exemple8.jpg",
                 "group": "4",
             },
             {
@@ -147,7 +147,7 @@ const DATA = {
                 "group": "4",
             },
             {
-                "src": "../assets/images/tilloto/exemple4.jpg",
+                "src": "../assets/images/tillery/exemple4.jpg",
                 "group": "5",
             },
             {
@@ -155,7 +155,7 @@ const DATA = {
                 "group": "5",
             },
             {
-                "src": "../assets/images/tilloto/exemple5.jpg",
+                "src": "../assets/images/tillery/exemple5.jpg",
                 "group": "6",
             },
             {
@@ -227,5 +227,30 @@ const DATA = {
             ],},
         ]
         
+    },
+    // tilloto
+    "tilloto": {
+        "icon": "../assets/images/homePage/tilloto.png",
+        "amountOfQuestions": 2, // how many questions will actualy appear
+        "appContent":  [
+            ["1מושג", "1הסבר על מושג"],
+            ["2מושג", "2הסבר על מושג"],
+            ["3מושג", "3הסבר על מושג"],
+            ["4מושג", "4הסבר על מושג"],
+            ["5מושג", "5הסבר על מושג"],
+            ["6מושג", "6הסבר על מושג"],
+            ["7מושג", "7הסבר על מושג"],
+            ["8מושג", "8הסבר על מושג"],
+            ["9מושג", "9הסבר על מושג"],
+            ["10מושג", "10הסבר על מושג"],
+            ["11מושג", "11הסבר על מושג"],
+            ["12מושג", "12הסבר על מושג"],
+            ["13מושג", "13הסבר על מושג"],
+            ["14מושג", "14הסבר על מושג"],
+            ["15מושג", "15הסבר על מושג"],
+            ["16מושג", "16הסבר על מושג"],
+            ["17מושג", "17הסבר על מושג"],
+            ["18מושג", "18הסבר על מושג"],
+        ],
     },
 };

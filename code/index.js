@@ -175,8 +175,8 @@ function El(tagName, options = {}, ...children) {
     return el;
 }
 
-const scaleFontSize = (element) => {
-    element.style.fontSize = "1em"
+const scaleFontSize = (element, initialFont) => {
+    element.style.fontSize = `${initialFont}em`
     let fontSize = Number(element.style.fontSize.replace("em", ""));
     while (element.scrollHeight > element.clientHeight) {
         element.style.fontSize = `${fontSize - 0.1}em`;
