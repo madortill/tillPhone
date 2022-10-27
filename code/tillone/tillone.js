@@ -2,6 +2,7 @@
 let nTilloneCurrentQuestion = 0;
 let nTilloneCorrectAnswers = 0;
 let arrTilloneQuestions = [];
+let bTilloneVisited
 // const
 const AMOUNT_OF_TILLONE_QUESTION = DATA.tillone.amountOfQuestions; // how many questions we want out of the array
 /* tillone
@@ -11,8 +12,12 @@ var tillone = () => {
     strCurrentApp = "tillone";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillone`).classList.remove(`hidden`);
-    arrTilloneQuestions = shuffle(DATA.tillone.appContent);
-    addContentToTilloneQuestion();
+    document.querySelector(`#backToHomePage`).classList.remove(`hidden`);
+    if(!bTilloneVisited) {
+        bTilloneVisited = true;
+        arrTilloneQuestions = shuffle(DATA.tillone.appContent);
+        addContentToTilloneQuestion();
+    }
 }
 
 /* addContentToTilloneQuestion

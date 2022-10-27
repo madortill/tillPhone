@@ -11,6 +11,7 @@ let nTillsmsAmountOfExers = arrtillsmsQuestions.length;
 let bTillsmsRestart = false;
 let amountOfTillsmsQuestions = 0;
 let nTillsmsQuestionAnswered = 0;
+let bTillsmsVisited = false;
 
 let simon = {
     count: 0,
@@ -29,7 +30,11 @@ var tillsms = () => {
     strCurrentApp = "tillsms";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillsms`).classList.remove(`hidden`);
-    createtillsmsContent();
+    document.querySelector(`#backToHomePage`).classList.remove(`hidden`);
+    if(!bTillsmsVisited){
+        bTillsmsVisited = true;
+        createtillsmsContent();
+    }
 }
 
 /* createtillsmsContent
@@ -81,6 +86,7 @@ const startExer = (event) => {
         El("div",{cls: "tillsmsExerHeader"},
         El("img",{attributes: {class: "tillsmsExerArrow",src: "../assets/images/tillsms/arrowRight.svg"}, listeners: {"click": () => {
             document.querySelector(`.tillsmsMainPage`).classList.remove("hidden");
+            document.querySelector(`#backToHomePage`).classList.remove(`hidden`);
             document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerStatus`).innerHTML = `סטטוס: ${arrtillsmsQuestions[tillsmsCurrentExer].status}`;
             let header = document.querySelector(`.tillsmsExerheaderContainer`)
             document.querySelector(`.tillsmsExerPage`).removeChild(header);
@@ -106,6 +112,7 @@ const startExer = (event) => {
 --------------------------------------------------------------
 Description: */
 const startQuestion = () => {
+    document.querySelector(`#backToHomePage`).classList.add(`hidden`);
     // restore event listeners and save current question object
     objTillsmsCurrentQuestion = arrtillsmsQuestions[tillsmsCurrentExer].content[ntillsmsCurrentQuestion];
     // create question container on first visit and shoe it on next visits
@@ -268,7 +275,7 @@ const checkAnswer = () => {
         document.querySelector(".tillsmsExerPage .tillsmsExerCounter").innerHTML = `${ntillsmsCurrentQuestion}/${arrtillsmsQuestions[tillsmsCurrentExer].content.length}`,
         document.querySelector(`.tillsmsExer${tillsmsCurrentExer} .tillsmsExerCounter`).innerHTML = `${ntillsmsCurrentQuestion}/${arrtillsmsQuestions[tillsmsCurrentExer].content.length}`;
         nTillsmsQuestionAnswered++
-        ldBar("#tillsmsProgressBar").set(Math.round((nTillsmsQuestionAnswered/amountOfTillsmsQuestions) * 100));
+        // ldBar("#tillsmsProgressBar").set(Math.round((nTillsmsQuestionAnswered/amountOfTillsmsQuestions) * 100));
 
     }, 1500);
 
@@ -313,7 +320,7 @@ const endTillsmsExer = () => {
             document.querySelector(`.Exer${tillsmsCurrentExer}anwser${ntillsmsCurrentQuestion}Feedback`).innerHTML = `איזה באסה! לא הצלחתם בתרגול וסתם בזבזבתם 5% מהסוללה שלכם`;
             updatePercentage(-5);
         }
-        let backToHome = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble",], listeners: {click: () => {sendHome(); restartTillsms();}}},
+        let backToHome = El("div",{classes: ["animate__pulse", "tillsmsQuestionBubble",], listeners: {click: sendHome}},
             El("img",{ attributes: {src: "../assets/images/tillsms/blue.svg", class: "bubbleArrow"}}),
             El("div",{classes: ["tillsmsQuestion", "tillsmsSendHomeMessege"]}, "לחצו כדי לחזור למסך הבית",
                 El("img", {attributes: {src: "../assets/images/tillsms/backToHome.svg", class: "tillsmsSendHomeButton"}})
@@ -321,7 +328,7 @@ const endTillsmsExer = () => {
         );
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(backToHome);
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
-        let backToHomeMainPage = El("img", {attributes: {src: "../assets/images/tillsms/backToHome.svg", class: "tillsmsSendHomeButton tillsmsSendHomeButtonMainPage"}, listeners: {click: () => {sendHome(); restartTillsms();}}},);
+        let backToHomeMainPage = El("img", {attributes: {src: "../assets/images/tillsms/backToHome.svg", class: "tillsmsSendHomeButton tillsmsSendHomeButtonMainPage"}, listeners: {click: sendHome}},);
         document.querySelector(`.tillsmsMainPageHeader`).append(backToHomeMainPage);
         // restartTillsms();
     }

@@ -1,5 +1,6 @@
 let userName;
 let nPercent = 0;
+let lastPrecent = 0;
 let strCurrentApp;
 const PERCENT_PER_APP = 100/Object.keys(DATA).length;
 const PASSING_RATE = 0.5;
@@ -60,6 +61,7 @@ const startApp = () => {
         document.querySelector(`.appsContainer`).append(app);
     };
     customAlert(`${userName}! הסוללה במצב 0% וזקוקה להטענה! זה הזמן לשחק במשחקים ולצבור נקודות כדי להגיע ל100%.`, `מוכנים לאתגר!`);
+    document.querySelector(`#backToHomePage`).addEventListener("click", sendHome);
     new ldBar("#batteryProgress");
     document.querySelector("#batteryProgress").style.width = "52vw"
     document.querySelector("#batteryProgress").style.height = "52vw"
@@ -71,12 +73,15 @@ Description: hide and enable recent app, shoe home page*/
 const sendHome = () => {
     document.querySelector(`.homePage`).classList.remove(`hidden`);
     document.querySelector(`.${strCurrentApp}`).classList.add(`hidden`);
-    // document.querySelector(`.appsContainer > .${strCurrentApp}App`).removeEventListener(`click`, eval(strCurrentApp));
-    ldBar("#batteryProgress").set(Math.floor(nPercent));
-    document.querySelector(".batteryProgressContainer").classList.add("progressAnimation");
-    document.querySelector(".batteryProgressContainer").addEventListener("animationend", () => {
-        document.querySelector(".batteryProgressContainer").classList.remove("progressAnimation");
-    },)
+    document.querySelector(`#backToHomePage`).classList.add(`hidden`);
+    if(lastPrecent !== nPercent) {
+        lastPrecent = nPercent;
+        ldBar("#batteryProgress").set(Math.floor(nPercent));
+        document.querySelector(".batteryProgressContainer").classList.add("progressAnimation");
+        document.querySelector(".batteryProgressContainer").addEventListener("animationend", () => {
+            document.querySelector(".batteryProgressContainer").classList.remove("progressAnimation");
+        },)
+    }
 }
 
 /* alert

@@ -1,3 +1,4 @@
+let bTillgramVisited = false;
 // const
 const AMOUNT_OF_TILLGRAM_QUESTION = DATA.tillgram.appContent.length;
 
@@ -8,7 +9,11 @@ var tillgram = () => {
     strCurrentApp = "tillgram";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillgram`).classList.remove(`hidden`);
-    createTillgramContent();
+    document.querySelector(`#backToHomePage`).classList.remove(`hidden`);
+    if(!bTillgramVisited){
+        bTillgramVisited = true;
+        createTillgramContent();
+    }
 }
 
 /* createTillgramContent

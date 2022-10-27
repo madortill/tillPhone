@@ -3,6 +3,7 @@ let arrTillotoTerm = [];
 let arrTillotoInfo = [];
 let arrInfoCurrentNum = [];
 let nInfoCurrentNum;
+let bTillotoVisited;
 const BINGO_SQUERS = 16;
 
 let isBingo = [[false, false, false, false],
@@ -17,6 +18,10 @@ var tilloto = () => {
     strCurrentApp = "tilloto";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tilloto`).classList.remove(`hidden`);
+    document.querySelector(`#backToHomePage`).classList.remove(`hidden`);
+    if(!bTillotoVisited){
+      bTillotoVisited = true;
+    }
     document.querySelector(".tillotoRandomTermGemerator").addEventListener("click", generateRandomBingoInfo);
     arrTillotoData = shuffle(DATA.tilloto.appContent.slice(0, 16));
     createBingoBord();

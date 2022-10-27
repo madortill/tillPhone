@@ -26,9 +26,9 @@
 
 .tillgramPageContent{ 
     position: absolute;
-    bottom: 0vh;
+    bottom: 8vh;
     width: 100vw;
-    height: 85vh;
+    height: 77vh;
     overflow-y: scroll;
 }
 

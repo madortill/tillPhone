@@ -3,8 +3,9 @@ let ntilleryCorrectAnswers = 0;
 let ntilleryWrongAnswers = 0;
 let nFlippedCards = 0;
 let arrtilleryCards = [];
+let bTilleryVisited = false;
 // const
-const AMOUNT_OF_tillery_QUESTION = DATA.tillery.amountOfQuestions;
+const AMOUNT_OF_TILLERY_QUESTION = DATA.tillery.amountOfQuestions;
 const LOSE_GAME = DATA.tillery.lose;
 /* tillery
 --------------------------------------------------------------
@@ -13,16 +14,22 @@ var tillery = () => {
     strCurrentApp = "tillery";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillery`).classList.remove(`hidden`);
-    arrtilleryCards = shuffle(DATA.tillery.appContent);
-    createtilleryContent();
+    document.querySelector(`#backToHomePage`).classList.remove(`hidden`);
+    if(!bTilleryVisited){
+        bTilleryVisited = true;
+        arrtilleryCards = shuffle(DATA.tillery.appContent);
+        createtilleryContent();
+    }
 }
 
 /* createtilleryContent
 --------------------------------------------------------------
 Description: start tillgram app*/
 const createtilleryContent = () => {
-    let title = El("div", {classes: [`tilleryCardTitle`]}, `tillery`);
-    document.querySelector(`.tillery`).append(title)
+    let title = El("div", {classes: [`tilleryCardTitle`]}, `גלריה`,
+        El("div",{cls: "tilleryInstractions"}, "התאימו בין המושג לתמונה במשחק הזיכרון")
+    );
+    document.querySelector(`.tillery`).prepend(title)
     let card;
     for(let i = 0; i < arrtilleryCards.length; i++) {
         if(Object.keys(arrtilleryCards[i])[0] === "src"){
@@ -32,12 +39,15 @@ const createtilleryContent = () => {
             );
         } else {
             card = El("div", {classes: [`tilleryCard`, `tilleryCard${arrtilleryCards[i].group}`, `flexCenter`], listeners: {click: flipCard}},
-                El("div", {attributes: {class: `tilleryCardBack`}}, arrtilleryCards[i].definitions),
+                El("div", {attributes: {class: `tilleryCardBack`}},
+                    El("div", {attributes: {class: `tilleryCardBackText`}}, arrtilleryCards[i].definitions),
+                ),
                 El("img", {attributes: {class: `tilleryCardFront`, src: `../assets/images/tillery/tillLogo.svg`}}),
             );
         }
         document.querySelector(`.tilleryBoard`).append(card)
     }
+    tilleryEnd();
 }
 
 const flipBackCards = () => {
@@ -72,7 +82,7 @@ const flipCard = (event) => {
     }
 
     // If there are no more cards that we can flip, we won the game
-    if (ntilleryCorrectAnswers === AMOUNT_OF_tillery_QUESTION) {
+    if (ntilleryCorrectAnswers === AMOUNT_OF_TILLERY_QUESTION || ntilleryWrongAnswers > LOSE_GAME) {
         tilleryEnd();
     }
 }
@@ -81,14 +91,20 @@ const flipCard = (event) => {
 --------------------------------------------------------------
 Description: start tillgram app*/
 const tilleryEnd = () => {
+    document.querySelector(`.tilleryBoardContainer`).classList.add(`hidden`);
+    let end;
     if(ntilleryWrongAnswers > LOSE_GAME) {
-        updatePercentage(-5);
+        document.querySelector(`.tilleryInstractions`).innerHTML = "אויי... כמעט! לא בדיוק ההתאמה שחיפשנו";
+        end = El("div", {cls: `tilleryEndContainer`}, 
+            El("div",{},`נגמרו לכם המהלכים... הספקתם להשלים רק ${ntilleryCorrectAnswers} זוגות`,),
+            El("div",{},`איזה זכרון נהדר יש לכם... זכרתם להטעין גם הטלפון ונוספו לכם ${updatePercentage(-5)} אחוזים`),
+        );
     } else {
-        calcPercentageWin(ntilleryCorrectAnswers, AMOUNT_OF_tillery_QUESTION)
+        document.querySelector(`.tilleryInstractions`).innerHTML = "ידענו שאתם מתאימים למשימה!";
+        end = El("div", {cls: `tilleryEndContainer`}, 
+            El("div",{},`כל הכבוד! הצלחתם להתאים את כל המושגים לתמונות ב ${ntilleryWrongAnswers} מהלכים בלבד!`,),
+            El("div",{},`איזה זכרון נהדר יש לכם... זכרתם להטעין גם הטלפון ונוספו לכם ${calcPercentageWin(ntilleryCorrectAnswers, AMOUNT_OF_TILLERY_QUESTION)} אחוזים`),
+        );
     }
-    // setTimeout(sendHome, 1000);
-    document.querySelector(`.tilleryBoardContainer`).classList.add(`.hidden`);
-    let end = El("div", {cls: `tilleryEndContainer`}, 
-        
-    );
+    document.querySelector(`.tillery`).append(end);
 }

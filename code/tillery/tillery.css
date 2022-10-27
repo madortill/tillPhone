@@ -1,10 +1,7 @@
 .tillery {
     font-family: "Rubik";
-    /* background: linear-gradient(135deg,  #6f00fc 0%,#fc7900 50%,#fcc700 100%); */
     background-color: white;
-    background: linear-gradient(135deg,  #6f00fc 0%,#6d77c7 50%,#2f92c0 100%);
-
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 .tilleryBoardContainer {
@@ -13,18 +10,15 @@
 
 .tilleryBoard,
 .win {
-    /* border-radius: 18px; */
-    /* box-shadow: 0 25px 50px rgb(33 33 33 / 25%); */
     transition: transform .6s cubic-bezier(0.4, 0.0, 0.2, 1);
     backface-visibility: hidden;
 }
 
 .tilleryBoard {
-    /* background-color: black; */
-    padding: 1.4em;
-    margin: 0.3em;display: grid;
+    padding-bottom: 1.4em;
+    display: grid;
     grid-template-columns: repeat(3, auto);
-    grid-gap: 1.9em;
+    grid-gap: 0.5em;
 }
 
 .tilleryBoardContainer.flipped .tilleryBoard {
@@ -37,29 +31,34 @@
 
 .tilleryCard {
     position: relative;
-    width: 22vw;
-    height: 12vh;
+    width: 30vw;
+    height: 16vh;
 }
 
 .tilleryCardFront,
 .tilleryCardBack {
-    padding: 2vw;
     position: absolute;
-    /* border-radius: 3vw; */
     width: 100%;
     height: 100%;
-    /* background: linear-gradient(135deg,  #6f00fc 0%,#6d77c7 50%,#2f92c0 100%); */
-    background-color: white;transition: transform .6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    background-color: #ffa600;
+    /* background: linear-gradient(135deg, #efb636fa 0%,#ffa600 50%,#ffa600 100%); */
+    color: white;
+    transition: transform .6s cubic-bezier(0.4, 0.0, 0.2, 1);
     backface-visibility: hidden;
+    border-radius: 0.8rem;
+    box-shadow: #dbd5de 0.2rem 0.2rem;
 }
 
 .tilleryCardBack {
     transform: rotateY(180deg) rotateZ(50deg);
     user-select: none;
     text-align: center;
-    font-size: 2em;
-    line-height: 2.5em;
-    background-color: white;}
+    font-size: 1.6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+}
 
 .tilleryCard.flipped .tilleryCardFront {
     transform: rotateY(180deg) rotateZ(50deg);
@@ -70,12 +69,29 @@
 }
 
 .tilleryCardTitle {
-    font-size: 3em;
-    padding: 0.2em;
-    font-weight: bold;
-    color: white;
-    border-bottom: white solid 0.15em;
-    width: 80vw;
-    font-family: 'Assistant';
+    font-size: 2.8em;
+    padding-bottom: 0.2em;
+    color: #d37900;
+    font-family: 'Rubik';
     text-align: center;
+}
+
+.tilleryInstractions {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.tilleryEndContainer div {
+    width: 80vw;
+    height: 12vh;
+    background-color: #ffa600;
+    border-radius: 0.8rem;
+    box-shadow: #dbd5de 0.4rem 0.4rem;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    padding-top: 2rem;
+    margin: 1rem;
+    font-size: 1.2rem;
+    font-weight: 800;
 }

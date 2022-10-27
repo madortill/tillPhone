@@ -3,6 +3,7 @@ let nTillderCurrentQuestion = 0;
 let nTillderCorrectAnswers = 0;
 let arrTillderQuestions = [];
 let bTillderRestart = false;
+let bTillderVisited = false
 // const
 const AMOUNT_OF_TILLDER_QUESTION = DATA.tillder.amountOfQuestions; // how many questions we want out of the array
 const DELAY_AFTER_QUESTION = 300;
@@ -14,8 +15,12 @@ var tillder = () => {
     strCurrentApp = "tillder";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillder`).classList.remove(`hidden`);
-    arrTillderQuestions = shuffle(DATA.tillder.appContent);
-    addContentToQuestion();
+    document.querySelector(`#backToHomePage`).classList.remove(`hidden`);
+    if(!bTillderVisited) {
+        bTillderVisited = true
+        arrTillderQuestions = shuffle(DATA.tillder.appContent);
+        addContentToQuestion();
+    }
 }
 
 /* addContentToQuestion
@@ -135,9 +140,7 @@ const endTillderExer = () => {
         El("img", {listeners: {click: sendHome}, attributes: {class: "tillderFeedBackEndButton endButtons", src: "../assets/images/tillder/finish_button.svg"}}),
         );
         document.querySelector(`.tillderFeedBackContainer`).append(feedback);
-        if(!bTillderRestart) {
-            document.querySelector(".tillderFeedBackContainer .Feedback").innerHTML =  `קבלו ${calcPercentageWin(nTillderCorrectAnswers, AMOUNT_OF_TILLDER_QUESTION)}% לסוללה שלכם`;
-        }
+        document.querySelector(".tillderFeedBackContainer .Feedback").innerHTML =  `קבלו ${calcPercentageWin(nTillderCorrectAnswers, AMOUNT_OF_TILLDER_QUESTION)}% לסוללה שלכם`;
     } else {// loose - remove 5 %
         feedback = El("div", {classes: ["tillderFeedbackTitle"]}, 
         El("img", {attributes: {class: "tillderFeedBackIcon", src: "../assets/images/tillder/oyyy.svg"}}),
@@ -148,7 +151,7 @@ const endTillderExer = () => {
         updatePercentage(-5);
         document.querySelector(`.tillderFeedBackContainer`).append(feedback);
     }
-    restartTillder();
+    // restartTillder();
 }
 
 /* restartTillder

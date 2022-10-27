@@ -4,6 +4,7 @@ let nCorrectAns = 0;
 let nWrongAns = 0 
 let arrTillhangQuestion;
 let bTillhangRestart = false;
+let bTillhangVisited = false;
 const ALPHABET = [`א`,`ב`,`ג`,`ד`,`ה`,`ו`,`ז`,`ח`,`ט`,`י`,`כ`,`ל`,`מ`,`נ`,`ס`,`ע`,`פ`,`צ`,`ק`,`ר`,`ש`,`ת`];
 const LOOSE_QUESTION = 6;
 const AMOUNT_OF_TILLHANG_QUESTION = DATA.tillhang.amountOfQuestions; // how many questions we want out of the array
@@ -16,8 +17,12 @@ var tillhang = () => {
     strCurrentApp = "tillhang";
     document.querySelector(`.homePage`).classList.add(`hidden`);
     document.querySelector(`.tillhang`).classList.remove(`hidden`);
-    arrTillhangQuestion = shuffle(DATA.tillhang.appContent);
-    createHangman();
+    document.querySelector(`#backToHomePage`).classList.remove(`hidden`);
+    if(!bTillhangVisited){
+        bTillhangVisited = true;
+        arrTillhangQuestion = shuffle(DATA.tillhang.appContent);
+        createHangman();
+    }
 }
 
 /* tillhang
@@ -145,7 +150,7 @@ const tillhangEnd = () => {
         updatePercentage(-5);
         document.querySelector(`.tillhang`).append(content);
     }
-    restartTillhang();
+    // restartTillhang();
 }
 
 /* restartTillhang
