@@ -328,8 +328,6 @@ const endTillsmsExer = () => {
         );
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).append(backToHome);
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
-        let backToHomeMainPage = El("img", {attributes: {src: "../assets/images/tillsms/backToHome.svg", class: "tillsmsSendHomeButton tillsmsSendHomeButtonMainPage"}, listeners: {click: sendHome}},);
-        document.querySelector(`.tillsmsMainPageHeader`).append(backToHomeMainPage);
         // restartTillsms();
     }
     // document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";

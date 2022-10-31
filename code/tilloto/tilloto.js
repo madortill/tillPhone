@@ -21,10 +21,10 @@ var tilloto = () => {
     document.querySelector(`#backToHomePage`).classList.remove(`hidden`);
     if(!bTillotoVisited){
       bTillotoVisited = true;
+      document.querySelector(".tillotoRandomTermGemerator").addEventListener("click", generateRandomBingoInfo);
+      arrTillotoData = shuffle(DATA.tilloto.appContent.slice(0, 16));
+      createBingoBord();
     }
-    document.querySelector(".tillotoRandomTermGemerator").addEventListener("click", generateRandomBingoInfo);
-    arrTillotoData = shuffle(DATA.tilloto.appContent.slice(0, 16));
-    createBingoBord();
 }
   
 const createBingoBord = () => {
@@ -53,6 +53,7 @@ const clickBingoSqure = (event) => {
     if (termNum === nInfoCurrentNum) {
         arrInfoCurrentNum.push(nInfoCurrentNum);
         event.currentTarget.style.backgroundColor = "var(--tillotoMainLight)";
+        document.querySelector(".tillotoInfoContainer").innerHTML = `מעולים! הגרילו שוב כדי להמשיך`;
         event.currentTarget.removeEventListener("click", clickBingoSqure);
         let placement = event.currentTarget.id;
         isBingo[placement.slice(0,1)][placement.slice(1)] = true;
@@ -89,6 +90,7 @@ const checkForBingo = () => {
 }
   
 const wingame = () => {
+    document.querySelector(".tillotoInfoContainer").innerHTML = `בינגו! עם המזל שלכם מי צריך לוטו??`;
     winConfetti();
 }
   
@@ -103,10 +105,7 @@ const winConfetti = () => {
     const stop = () => {
         setTimeout(function() {
             confetti.stop()
-            document.querySelector(".darkScreen").classList.remove("hidden");
-            // document.querySelector(".restartButton").addEventListener("click", () => {
-            //   window.location.reload();
-            // });
+            document.querySelector(".tillotoInfoContainer").innerHTML = `כל הכבוד! זכיתם בלוטו ב${calcPercentageWin(1,1)} אחוזים`;
         }, 5000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
     };
     // after this here we are calling both the function so it works
@@ -180,33 +179,6 @@ const isWinDiagonal2 = () => {
     } else {
       isWinDiagonal2 = true;
     }
-}
-  
-function shuffle(arr) {
-    let tmp = arr.slice();
-    for (let i = 0; i < arr.length; i++) {
-        let index = Math.floor(Math.random() * tmp.length);
-        arr[i] = tmp[index];
-        tmp = tmp.slice(0, index).concat(tmp.slice(index + 1));
-    }
-    return arr;
-}
-  
-/* El
---------------------------------------------------------------
-Description: create html elements */
-function El(tagName, options = {}, ...children) {
-    let el = Object.assign(document.createElement(tagName), options.fields || {});
-    if (options.classes && options.classes.length) el.classList.add(...options.classes);
-    else if (options.cls) el.classList.add(options.cls);
-    if (options.id) el.id = options.id;
-    el.append(...children.filter(el => el));
-    for (let listenerName of Object.keys(options.listeners || {}))
-        if (options.listeners[listenerName]) el.addEventListener(listenerName, options.listeners[listenerName], false);
-    for (let attributeName of Object.keys(options.attributes || {})) {
-        if (options.attributes[attributeName] !== undefined) el.setAttribute(attributeName, options.attributes[attributeName]);
-    }
-    return el;
 }
   
   

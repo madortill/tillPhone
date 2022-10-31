@@ -8,7 +8,6 @@
     <script src="content.js" type="text/javascript"></script>
     <script src="index.js" type="text/javascript"></script>
     <script src="sortToGrops.js" type="text/javascript"></script>
-    <!-- <script src="questions.js" type="text/javascript"></script> -->
     <script src="tillder/tillder.js" type="text/javascript"></script>
     <script src="tillhang/tillhang.js" type="text/javascript"></script>
     <script src="tillone/tillone.js" type="text/javascript"></script>
@@ -16,6 +15,7 @@
     <script src="tillery/tillery.js" type="text/javascript"></script>
     <script src="tillsms/tillsms.js" type="text/javascript"></script>
     <script src="tilloto/tilloto.js" type="text/javascript"></script>
+    <script src="tillwatch/tillwatch.js" type="text/javascript"></script>
     <!-- librarys -->
     <script src="../assets/librarys/dragDropTouch.js" type="text/javascript"></script>
     <script src="../assets/librarys/swiped-events.min.js" type="text/javascript"></script>
@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="tillery/tillery.css">
     <link rel="stylesheet" href="tillsms/tillsms.css">
     <link rel="stylesheet" href="tilloto/tilloto.css">
+    <link rel="stylesheet" href="tillwatch/tillwatch.css">
     <!-- must come last -->
     <link rel="stylesheet" href="tools.css"> 
 
@@ -109,12 +110,8 @@
             <div class="tillotoInstractions centerX">הגרילו הסבר ולחצו על המושג התואם לו</div>
             <div class="tillotoBingoContainer"></div>
             <div class="tillotoBingoTitle centerX">!bingo</div>
-            <p></p>
-            <!-- <div class="darkScreen hidden">
-              <div class="restartButton">
-                <img class="restartButtonPic" src="./assets/restart.svg">
-              </div>
-            </div> -->
+            <!-- confetti -->
+            <p></p> 
         </div>
         <!-- tillsms -->
         <div class="tillsms hidden bg">
@@ -152,7 +149,9 @@
                 <div class="tillsmsSimonButtonsContainer centerX"></div>
             </div>
         </div>
-
+        <!-- tillwatch -->
+        <div class="tillwatch hidden bg">
+        </div>
         <!-- battery progress -->
         <div class="batteryProgressContainer darkScreen">
             <div id="batteryProgress" class="label-center centerX" data-value="0" data-preset="circle"></div>

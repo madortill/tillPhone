@@ -2,7 +2,6 @@
     --tillotoMainDrak: #0b667b;
     --tillotoMainMedium: #107187;
     --tillotoMainLight: #95c1d1;
-    --yellow: #e3c12d;
   }
   
   .tilloto {
@@ -115,6 +114,19 @@
 
   .flashRed {
     animation: flashRed 2s;
+  }
+
+  .tillotoEnd {
+    font-family: 'Rubik';
+    background-color: var(--tillotoMainLight);
+    border: 0.2rem solid var(--tillotoMainDrak);
+    width: 90vw;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 32vh;
+    padding: 0.2em;
+    color: var(--tillotoMainDrak);
   }
 
   /* confetti */

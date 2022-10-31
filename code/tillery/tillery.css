@@ -69,10 +69,11 @@
 }
 
 .tilleryCardTitle {
-    font-size: 2.8em;
-    padding-bottom: 0.2em;
-    color: #d37900;
+    font-size: 2.2em;
+    padding-bottom: 0.3em;
+    color: #5e5e5e;
     font-family: 'Rubik';
+    font-weight: 600;
     text-align: center;
 }
 
@@ -94,4 +95,32 @@
     margin: 1rem;
     font-size: 1.2rem;
     font-weight: 800;
+}
+
+.tilleryMovesImg, .tilleryPairsImg {
+    width: 6vw;
+}
+
+.tilleryMovesContainer, .tilleryPairsContainer {
+    width: 50vw;
+    height: 6vh;
+    background-color: #16c8d5;
+    border-radius: 1.8rem;
+    box-shadow: #dbd5de 0.1rem 0.1rem;
+    display: flex;
+    align-items:center;
+    justify-content: space-evenly;
+    font-size: 1.2rem;
+    text-align: center;
+    color: white;
+}
+
+.tilleryPairsContainer {
+    width: 35vw;
+}
+
+.tilleryTrackersContainer {
+    display: flex;
+    justify-content: space-evenly;
+    width: 91vw;
 }

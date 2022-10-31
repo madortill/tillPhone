@@ -14,7 +14,7 @@ window.addEventListener("load", () => {
     document.querySelector(`.loader`).classList.add(`fade`);
     document.querySelector(`.nameEntry`).classList.add(`fade`);
     document.querySelector(`.submitName`).addEventListener(`click`,startApp);
-    document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
+    // document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
 });
 
 function openFullscreen() {
@@ -187,4 +187,11 @@ const scaleFontSize = (element, initialFont) => {
         element.style.fontSize = `${fontSize - 0.1}em`;
         fontSize = Number(element.style.fontSize.replace("em", ""));
     }
+}
+
+/* addSpace
+--------------------------------------------------------------
+Description: change hyphen to space */
+const addSpace = (phrase) => {
+    return phrase.replace(/_/g, ' ');
 }

@@ -1,12 +1,12 @@
 // question
 let ntilleryCorrectAnswers = 0;
-let ntilleryWrongAnswers = 0;
+let ntilleryMovesUsed = 0;
 let nFlippedCards = 0;
 let arrtilleryCards = [];
 let bTilleryVisited = false;
 // const
 const AMOUNT_OF_TILLERY_QUESTION = DATA.tillery.amountOfQuestions;
-const LOSE_GAME = DATA.tillery.lose;
+const MOVES = DATA.tillery.moves;
 /* tillery
 --------------------------------------------------------------
 Description: start tillery app*/
@@ -26,8 +26,18 @@ var tillery = () => {
 --------------------------------------------------------------
 Description: start tillgram app*/
 const createtilleryContent = () => {
-    let title = El("div", {classes: [`tilleryCardTitle`]}, `גלריה`,
-        El("div",{cls: "tilleryInstractions"}, "התאימו בין המושג לתמונה במשחק הזיכרון")
+    let title = El("div", {classes: [`tilleryCardTitle`]}, `TILLERY`,
+        El("div",{cls: "tilleryTrackersContainer"},
+            El("div",{cls: "tilleryMovesContainer"},
+            El("img",{cls: "tilleryMovesImg", attributes: {src: "../assets/images/tillery/arrows-repeat.svg"}},),
+                El("div",{cls: "tilleryMoves"}, `${ntilleryMovesUsed}/${MOVES} מהלכים`),
+            ),
+            El("div",{cls: "tilleryPairsContainer"},
+            El("img",{cls: "tilleryPairsImg", attributes: {src: "../assets/images/tillery/playing-cards.svg"}},),
+                El("div",{cls: "tilleryPairs"}, `${ntilleryCorrectAnswers} זוגות`),
+            ),
+        ),
+        El("div",{cls: "tilleryInstractions"}, "התאימו בין המושג לתמונה במשחק הזיכרון"),
     );
     document.querySelector(`.tillery`).prepend(title)
     let card;
@@ -47,16 +57,19 @@ const createtilleryContent = () => {
         }
         document.querySelector(`.tilleryBoard`).append(card)
     }
-    tilleryEnd();
+    // tilleryEnd();
 }
 
 const flipBackCards = () => {
     document.querySelectorAll('.tilleryCard:not(.matched)').forEach(card => {
         card.classList.remove('flipped');
         card.addEventListener("click", flipCard);
-    })
-    ntilleryWrongAnswers++;
-    nFlippedCards = 0
+    });
+    nFlippedCards = 0;
+    // If there are no more cards that we can flip, we won the game
+    if (ntilleryCorrectAnswers === AMOUNT_OF_TILLERY_QUESTION || ntilleryMovesUsed > MOVES) {
+        tilleryEnd();
+    }
 }
 
 const flipCard = (event) => {
@@ -72,18 +85,17 @@ const flipCard = (event) => {
         const flippedCards = document.querySelectorAll('.flipped:not(.matched)')
         if (flippedCards[0].classList[1] === flippedCards[1].classList[1]) {
             ntilleryCorrectAnswers++;
+            document.querySelector(".tilleryPairs").innerHTML = `${ntilleryCorrectAnswers} זוגות`;
             flippedCards[0].classList.add('matched');
             flippedCards[1].classList.add('matched');
         }
 
+        ntilleryMovesUsed++;
+        document.querySelector(".tilleryMoves").innerHTML = `${ntilleryMovesUsed}/${MOVES} מהלכים`;
+
         setTimeout(() => {
             flipBackCards()
         }, 1000)
-    }
-
-    // If there are no more cards that we can flip, we won the game
-    if (ntilleryCorrectAnswers === AMOUNT_OF_TILLERY_QUESTION || ntilleryWrongAnswers > LOSE_GAME) {
-        tilleryEnd();
     }
 }
 
@@ -92,17 +104,19 @@ const flipCard = (event) => {
 Description: start tillgram app*/
 const tilleryEnd = () => {
     document.querySelector(`.tilleryBoardContainer`).classList.add(`hidden`);
+    document.querySelector(`.tilleryTrackersContainer`).classList.add(`hidden`);
     let end;
-    if(ntilleryWrongAnswers > LOSE_GAME) {
+    if(ntilleryMovesUsed > MOVES) {
+        updatePercentage(-5);
         document.querySelector(`.tilleryInstractions`).innerHTML = "אויי... כמעט! לא בדיוק ההתאמה שחיפשנו";
         end = El("div", {cls: `tilleryEndContainer`}, 
             El("div",{},`נגמרו לכם המהלכים... הספקתם להשלים רק ${ntilleryCorrectAnswers} זוגות`,),
-            El("div",{},`איזה זכרון נהדר יש לכם... זכרתם להטעין גם הטלפון ונוספו לכם ${updatePercentage(-5)} אחוזים`),
+            El("div",{},`הזיכרון שלכם לא משהו... שכחתם להטעין את הטלפון וסתם בזבזתם 5 אחוזים`),
         );
     } else {
         document.querySelector(`.tilleryInstractions`).innerHTML = "ידענו שאתם מתאימים למשימה!";
         end = El("div", {cls: `tilleryEndContainer`}, 
-            El("div",{},`כל הכבוד! הצלחתם להתאים את כל המושגים לתמונות ב ${ntilleryWrongAnswers} מהלכים בלבד!`,),
+            El("div",{},`כל הכבוד! הצלחתם להתאים את כל המושגים לתמונות ב ${ntilleryMovesUsed} מהלכים בלבד!`,),
             El("div",{},`איזה זכרון נהדר יש לכם... זכרתם להטעין גם הטלפון ונוספו לכם ${calcPercentageWin(ntilleryCorrectAnswers, AMOUNT_OF_TILLERY_QUESTION)} אחוזים`),
         );
     }

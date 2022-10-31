@@ -112,7 +112,7 @@ const DATA = {
     "tillery": {
         "icon": "../assets/images/homePage/tillery.png",
         "amountOfQuestions": 6, // how many pers of cards will actualy appear
-        "lose": 20, // how many attemptes they have until they lose
+        "moves": 20, // how many moves they have until they lose
         "appContent":  [
             {
                 "src": "../assets/images/tillery/exemple1.jpg",
@@ -252,5 +252,19 @@ const DATA = {
             ["17מושג", "17הסבר על מושג"],
             ["18מושג", "18הסבר על מושג"],
         ],
+    },
+    // tillwatch
+    "tillwatch": {
+        "icon": "../assets/images/homePage/tillwatch.png",
+        "amountOfQuestions": 2, // how many questions will actualy appear
+        "appContent": {
+            "playlistName": [
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "https://www.youtube.com/embed/4rg6puSP9ks",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי"
+                },
+            ],
+        },
     },
 };
