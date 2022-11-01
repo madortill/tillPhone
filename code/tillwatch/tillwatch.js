@@ -79,8 +79,8 @@ const videoFullscreen = () => {
     let iframe = document.querySelector("#videoPlayer");
     var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
     if (requestFullScreen) {
-        console.log(requestFullScreen);
         requestFullScreen.bind(iframe)();
+        screen.orientation.lock("landscape");
     }
 }
 
@@ -102,6 +102,8 @@ function onPlayerStateChange(event) {
     if (event.data === 0) {
         console.log("done");
         event.target.stopVideo();
+        screen.orientation.lock("portrait");
         document.exitFullscreen();
+
     }
 }
