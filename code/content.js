@@ -261,21 +261,21 @@ const DATA = {
             "playlistName": [
                 {
                     "videoTitle": "שם הסרטון",
-                    "src": "ysb_gxJ8LE4",
+                    "src": "n0t9iFlGO20",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": true,
-                },
-                {
-                    "videoTitle": "שם הסרטון",
-                    "src": "w141thRQ-ks",
-                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": false,
+                    "forceToWatch": 0,
                 },
                 {
                     "videoTitle": "שם הסרטון",
                     "src": "n0t9iFlGO20",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": false,
+                    "forceToWatch": 1,
+                },
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "w141thRQ-ks",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": 1,
                 },
             ],
             "playlistName1": [

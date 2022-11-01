@@ -37,6 +37,7 @@ const startTillwatch = () => {
             document.querySelector(`.tillwatchThumbnailsContainer.${playlists}`).append(thumbnailContainer);
         });
     }
+    document.querySelector(".tillwatchBackButton").addEventListener("click", onClickTillwatchBack);
 }
 
 /* onClickThumbnail
@@ -44,7 +45,12 @@ const startTillwatch = () => {
 Description: */
 const onClickThumbnail = (event) => {
     document.querySelector(".tillwatchContentContainer").classList.add("hidden");
-    // document.querySelector(".tillwatchVideoContainer").innerHTML = "";
+    document.querySelector(".tillwatchVideoContainer").classList.remove("hidden");
+    // back button
+    document.querySelector(".tillwatchBackButton").classList.remove("hidden");
+    document.querySelector(".tillwatchVideoContainer").innerHTML = "";
+    let videoPlayer = El("div", {id: "videoPlayer"});
+    document.querySelector(".tillwatchVideoContainer").append(videoPlayer)
     let index = event.currentTarget.getAttribute("data-index");
     let playlist = event.currentTarget.getAttribute("data-playlist");
     let videoInfo = TILLWATCH_CONTENT[playlist][index];
@@ -52,16 +58,16 @@ const onClickThumbnail = (event) => {
     player = new YT.Player("videoPlayer", {
         videoId: videoInfo.src,
         playerVars: {
-            controls: 0,
+            controls: videoInfo.forceToWatch,
             playlist: videoInfo.src,
         },
         events: {
-            // onReady: onPlayerReady,
             onStateChange: onPlayerStateChange,
         },
     });
-
-    if (videoInfo.forceToWatch) {
+    if (!videoInfo.forceToWatch) { // forced to watch
+        let fullScreen = El("div", {id: "tillwatchFullScreenButton", cls: "centerItem", listeners: {click: videoFullscreen}}, "צפייה במסך מלא");
+        document.querySelector(".tillwatchVideoContainer").append(fullScreen)
         console.log("force");
     } else {
         console.log("not force");
@@ -69,17 +75,25 @@ const onClickThumbnail = (event) => {
     }
 }
 
-// document.querySelector(".check").addEventListener("click", () => {
-//     let iframe = document.querySelector("#videoPlayer")
-//     var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
-//     if (requestFullScreen) {
-//       requestFullScreen.bind(iframe)();
-//     }
-// });
+const videoFullscreen = () => {
+    let iframe = document.querySelector("#videoPlayer");
+    var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+    if (requestFullScreen) {
+      requestFullscreen.bind(iframe)();
+    }
+}
 
-// autoplay video
-const onPlayerReady = (event) => {
-    event.target.playVideo();
+// backButton
+const onClickTillwatchBack = () => {
+    if(document.querySelector(".tillwatchSearchPage").classList[1] === "hidden"){ // video page
+        document.querySelector(".tillwatchContentContainer").classList.remove("hidden");
+        document.querySelector(".tillwatchVideoContainer").classList.add("hidden");
+        document.querySelector(".tillwatchVideoContainer").innerHTML = "";
+    } else {// search page
+        document.querySelector(".tillwatchMainPage").classList.remove("hidden");
+        document.querySelector(".tillwatchSearchPage").classList.add("hidden");
+    }
+    document.querySelector(".tillwatchBackButton").classList.add("hidden");
 }
 
 // when video ends
@@ -87,6 +101,6 @@ function onPlayerStateChange(event) {
     if (event.data === 0) {
         console.log("done");
         event.target.stopVideo();
-        // document.exitFullscreen();
+        document.exitFullscreen();
     }
 }

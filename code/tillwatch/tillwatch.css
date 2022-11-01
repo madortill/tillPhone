@@ -9,6 +9,11 @@
     top: 13vh;
     height: 77vh;
     overflow-y: scroll;
+    width: 100%;
+}
+
+.tillwatchContentContainer::-webkit-scrollbar {
+    display: none;
 }
 
 .tillwatchThumbnailsContainer {
@@ -34,6 +39,34 @@
 }
 
 #videoPlayer {
+    position: absolute;
+    top: 13vh;
     width: 100vw;
     height: 32vh;
+}
+
+.tillwatchTopBar {
+    position: absolute;
+    top: 5vh;
+    width: 100vw;
+    height: 8vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.tillwatchTopButtons {
+    height: 4vh;
+    padding: 0 1rem;
+}
+
+#tillwatchFullScreenButton {
+    width: 95vw;
+    height: 7vh;
+    background-color: rgba(255, 255, 255, 0.18);
+    border-radius: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
