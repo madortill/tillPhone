@@ -79,7 +79,8 @@ const videoFullscreen = () => {
     let iframe = document.querySelector("#videoPlayer");
     var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
     if (requestFullScreen) {
-      requestFullscreen.bind(iframe)();
+        console.log(requestFullScreen);
+        requestFullScreen.bind(iframe)();
     }
 }
 
