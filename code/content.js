@@ -261,8 +261,81 @@ const DATA = {
             "playlistName": [
                 {
                     "videoTitle": "שם הסרטון",
-                    "src": "https://www.youtube.com/embed/4rg6puSP9ks",
-                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי"
+                    "src": "ysb_gxJ8LE4",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": true,
+                },
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "w141thRQ-ks",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": false,
+                },
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "n0t9iFlGO20",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": false,
+                },
+            ],
+            "playlistName1": [
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "ysb_gxJ8LE4",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": true,
+                },
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "ysb_gxJ8LE4",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": false,
+                },
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "ysb_gxJ8LE4",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": false,
+                },
+            ],
+            "playlistName2": [
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "ysb_gxJ8LE4",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": true,
+                },
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "ysb_gxJ8LE4",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": false,
+                },
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "ysb_gxJ8LE4",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": false,
+                },
+            ],
+            "playlistName3": [
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "ysb_gxJ8LE4",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": true,
+                },
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "ysb_gxJ8LE4",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": false,
+                },
+                {
+                    "videoTitle": "שם הסרטון",
+                    "src": "ysb_gxJ8LE4",
+                    "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
+                    "forceToWatch": false,
                 },
             ],
         },

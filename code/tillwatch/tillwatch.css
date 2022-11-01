@@ -1,4 +1,39 @@
 .tillwatch {
     background-color: rgb(0, 0, 0);
     font-family: "Heebo";
+    color: white;
+}
+
+.tillwatchContentContainer {
+    position: absolute;
+    top: 13vh;
+    height: 77vh;
+    overflow-y: scroll;
+}
+
+.tillwatchThumbnailsContainer {
+    display: flex;
+    overflow-x: scroll;
+    width: 90vw;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    margin: 1rem;
+}
+
+.tillwatchVideoThumbnail {
+    width: 45vw;
+    min-width: 45vw;
+    height: 16vh;
+    background-size: 100% 136%;
+    background-position: center;
+}
+
+.tillwatchPlaylistTitle {
+    margin: 1rem;
+}
+
+#videoPlayer {
+    width: 100vw;
+    height: 32vh;
 }
