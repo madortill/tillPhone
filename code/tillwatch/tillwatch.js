@@ -69,7 +69,7 @@ const onClickThumbnail = (event) => {
             onStateChange: onPlayerStateChange,
         },
     });
-    if (!videoInfo.forceToWatch) { // forced to watch
+    if (!videoInfo.forceToWatch && !iOS()) { // forced to watch only works on android
         let fullScreen = El("div", {id: "tillwatchFullScreenButton", cls: "centerItem", listeners: {click: videoFullscreen}}, "צפייה במסך מלא");
         document.querySelector(".tillwatchVideoContainer").append(fullScreen)
         console.log("force");
@@ -115,7 +115,7 @@ function onPlayerStateChange(event) {
         }
 
         event.target.stopVideo();
-        if(screen.orientation === "landscape") {
+        if(screen.orientation.type.includes("landscape")) {
             screen.orientation.lock("portrait");
             document.exitFullscreen();
         }

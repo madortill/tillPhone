@@ -14,22 +14,8 @@ window.addEventListener("load", () => {
     document.querySelector(`.loader`).classList.add(`fade`);
     document.querySelector(`.nameEntry`).classList.add(`fade`);
     document.querySelector(`.submitName`).addEventListener(`click`,startApp);
-    // document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
-    alert(iOS());
+    document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
 });
-
-function iOS() {
-    return [
-      'iPad Simulator',
-      'iPhone Simulator',
-      'iPod Simulator',
-      'iPad',
-      'iPhone',
-      'iPod'
-    ].includes(navigator.platform)
-    // iPad on iOS 13 detection
-    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
-  }
 
 function openFullscreen() {
     if (elem.requestFullscreen) {
@@ -209,3 +195,16 @@ Description: change hyphen to space */
 const addSpace = (phrase) => {
     return phrase.replace(/_/g, ' ');
 }
+
+function iOS() {
+    return [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+    ].includes(navigator.platform)
+    // iPad on iOS 13 detection
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+  }
