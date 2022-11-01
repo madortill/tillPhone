@@ -7,7 +7,7 @@
 .tillwatchContentContainer {
     position: absolute;
     top: 13vh;
-    height: 77vh;
+    height: 74vh;
     overflow-y: scroll;
     width: 100%;
 }
@@ -32,6 +32,9 @@
     height: 16vh;
     background-size: 100% 136%;
     background-position: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
 .tillwatchPlaylistTitle {
@@ -70,4 +73,8 @@
     align-items: center;
     justify-content: center;
     user-select: none;
+}
+
+.tillwatchWatchedSymbol {
+    width: 9vw;
 }

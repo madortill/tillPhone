@@ -1,6 +1,10 @@
 // question
 let bTillwatchVisited = false;
 let player;
+let currVideoIndex;
+let currVideoPlaylist;
+let nTillwatchCorrectAns = 0;
+let nTillwatchTotalAns = 0;
 const TILLWATCH_CONTENT = DATA.tillwatch.appContent
 
 /* tillwatch
@@ -28,10 +32,11 @@ const startTillwatch = () => {
         );
         document.querySelector(".tillwatchContentContainer").append(playlistContainor);
         TILLWATCH_CONTENT[playlists].forEach((video, index) => {
+            nTillwatchTotalAns++;
             let thumbnailContainer = El("div",{cls: "thumbnailContainer"},
                 El("div",{cls: "thumbnailTitle"}, video.videoTitle),
             );
-            let thumbnail = El("div",{cls: "tillwatchVideoThumbnail", attributes: {"data-index": index, "data-playlist": playlists}, listeners: {click: onClickThumbnail}},);
+            let thumbnail = El("div",{cls: "tillwatchVideoThumbnail", attributes: {id: `${playlists}${index}`,"data-index": index, "data-playlist": playlists}, listeners: {click: onClickThumbnail}},);
             thumbnail.style.backgroundImage = `url("http://img.youtube.com/vi/${video.src}/0.jpg")`;
             thumbnailContainer.prepend(thumbnail);
             document.querySelector(`.tillwatchThumbnailsContainer.${playlists}`).append(thumbnailContainer);
@@ -44,16 +49,15 @@ const startTillwatch = () => {
 --------------------------------------------------------------
 Description: */
 const onClickThumbnail = (event) => {
+    currVideoIndex = event.currentTarget.getAttribute("data-index");
+    currVideoPlaylist = event.currentTarget.getAttribute("data-playlist");
+    let videoInfo = TILLWATCH_CONTENT[currVideoPlaylist][currVideoIndex];
     document.querySelector(".tillwatchContentContainer").classList.add("hidden");
     document.querySelector(".tillwatchVideoContainer").classList.remove("hidden");
-    // back button
     document.querySelector(".tillwatchBackButton").classList.remove("hidden");
     document.querySelector(".tillwatchVideoContainer").innerHTML = "";
     let videoPlayer = El("div", {id: "videoPlayer"});
     document.querySelector(".tillwatchVideoContainer").append(videoPlayer)
-    let index = event.currentTarget.getAttribute("data-index");
-    let playlist = event.currentTarget.getAttribute("data-playlist");
-    let videoInfo = TILLWATCH_CONTENT[playlist][index];
 
     player = new YT.Player("videoPlayer", {
         videoId: videoInfo.src,
@@ -100,10 +104,21 @@ const onClickTillwatchBack = () => {
 // when video ends
 function onPlayerStateChange(event) {
     if (event.data === 0) {
-        console.log("done");
+        let thumbnail = document.querySelector(`#${currVideoPlaylist}${currVideoIndex}`);
+        if(thumbnail.classList.length === 1) {
+            let symbol = El("img",{attributes: {src: "../assets/images/tillwatch/eye.svg", class: "tillwatchWatchedSymbol"}});
+            thumbnail.style.boxShadow = "inset 0 0 0 1000px rgba(0,0,0,.5)";
+            thumbnail.append(symbol);
+            thumbnail.classList.add("watched");
+            console.log("watched");
+            nTillwatchCorrectAns++;
+        }
+
         event.target.stopVideo();
-        screen.orientation.lock("portrait");
-        document.exitFullscreen();
+        if(screen.orientation === "landscape") {
+            screen.orientation.lock("portrait");
+            document.exitFullscreen();
+        }
 
     }
 }
