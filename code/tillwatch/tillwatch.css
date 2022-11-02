@@ -4,7 +4,7 @@
     color: white;
 }
 
-.tillwatchContentContainer {
+.tillwatchMainPage {
     position: absolute;
     top: 13vh;
     height: 74vh;
@@ -12,7 +12,7 @@
     width: 100%;
 }
 
-.tillwatchContentContainer::-webkit-scrollbar {
+.tillwatchMainPage::-webkit-scrollbar {
     display: none;
 }
 
@@ -77,4 +77,27 @@
 
 .tillwatchWatchedSymbol {
     width: 9vw;
+}
+
+#tillwatchSearchBar {
+    top: 24vw;
+    width: 92vw;
+    height: 8vw;
+    background-color: rgba(255, 255, 255, 0.18);
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 0.5rem;
+    font-family: "Heebo";
+}
+
+.tillwatchSearchScrollContainer {
+    top: 40vw;
+    width: 92vw;
+    height: 63vh;
+    overflow-y: scroll;
+}
+
+.tillwatchSearchScrollContainer::-webkit-scrollbar {
+    display: none;
 }

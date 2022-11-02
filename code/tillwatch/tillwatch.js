@@ -5,6 +5,8 @@ let currVideoIndex;
 let currVideoPlaylist;
 let nTillwatchCorrectAns = 0;
 let nTillwatchTotalAns = 0;
+let strCurrPage;
+let strLastPage = "Main";
 const TILLWATCH_CONTENT = DATA.tillwatch.appContent
 
 /* tillwatch
@@ -25,12 +27,13 @@ var tillwatch = () => {
 --------------------------------------------------------------
 Description: */
 const startTillwatch = () => {
+    strCurrPage = "Main";
     for(playlists of Object.keys(TILLWATCH_CONTENT)) {
         let playlistContainor = El("div",{cls: "tillwatchPlaylistContainor"},
             El("div",{cls: "tillwatchPlaylistTitle"}, addSpace(playlists)),
             El("div",{classes: ["tillwatchThumbnailsContainer", playlists]},),
         );
-        document.querySelector(".tillwatchContentContainer").append(playlistContainor);
+        document.querySelector(".tillwatchMainPage").append(playlistContainor);
         TILLWATCH_CONTENT[playlists].forEach((video, index) => {
             nTillwatchTotalAns++;
             let thumbnailContainer = El("div",{cls: "thumbnailContainer"},
@@ -43,6 +46,7 @@ const startTillwatch = () => {
         });
     }
     document.querySelector(".tillwatchBackButton").addEventListener("click", onClickTillwatchBack);
+    document.querySelector(".tillwatchSearchButton").addEventListener("click", onClickTillwatchSearch);
 }
 
 /* onClickThumbnail
@@ -52,12 +56,14 @@ const onClickThumbnail = (event) => {
     currVideoIndex = event.currentTarget.getAttribute("data-index");
     currVideoPlaylist = event.currentTarget.getAttribute("data-playlist");
     let videoInfo = TILLWATCH_CONTENT[currVideoPlaylist][currVideoIndex];
-    document.querySelector(".tillwatchContentContainer").classList.add("hidden");
-    document.querySelector(".tillwatchVideoContainer").classList.remove("hidden");
+    document.querySelector(`.tillwatch${strCurrPage}Page`).classList.add("hidden");
+    document.querySelector(".tillwatchVideoPage").classList.remove("hidden");
     document.querySelector(".tillwatchBackButton").classList.remove("hidden");
-    document.querySelector(".tillwatchVideoContainer").innerHTML = "";
+    document.querySelector(".tillwatchVideoPage").innerHTML = "";
     let videoPlayer = El("div", {id: "videoPlayer"});
-    document.querySelector(".tillwatchVideoContainer").append(videoPlayer)
+    document.querySelector(".tillwatchVideoPage").append(videoPlayer)
+    strLastPage = strCurrPage;
+    strCurrPage = "Video";
 
     player = new YT.Player("videoPlayer", {
         videoId: videoInfo.src,
@@ -71,11 +77,10 @@ const onClickThumbnail = (event) => {
     });
     if (!videoInfo.forceToWatch && !iOS()) { // forced to watch only works on android
         let fullScreen = El("div", {id: "tillwatchFullScreenButton", cls: "centerItem", listeners: {click: videoFullscreen}}, "צפייה במסך מלא");
-        document.querySelector(".tillwatchVideoContainer").append(fullScreen)
+        document.querySelector(".tillwatchVideoPage").append(fullScreen)
         console.log("force");
     } else {
         console.log("not force");
-
     }
 }
 
@@ -90,15 +95,18 @@ const videoFullscreen = () => {
 
 // backButton
 const onClickTillwatchBack = () => {
-    if(document.querySelector(".tillwatchSearchPage").classList[1] === "hidden"){ // video page
-        document.querySelector(".tillwatchContentContainer").classList.remove("hidden");
-        document.querySelector(".tillwatchVideoContainer").classList.add("hidden");
-        document.querySelector(".tillwatchVideoContainer").innerHTML = "";
-    } else {// search page
-        document.querySelector(".tillwatchMainPage").classList.remove("hidden");
-        document.querySelector(".tillwatchSearchPage").classList.add("hidden");
+    if (strLastPage === "Main") {
+        document.querySelector(".tillwatchBackButton").classList.add("hidden");
     }
-    document.querySelector(".tillwatchBackButton").classList.add("hidden");
+    document.querySelector(`.tillwatch${strCurrPage}Page`).classList.add("hidden");
+    document.querySelector(`.tillwatch${strLastPage}Page`).classList.remove("hidden");
+    // switch varuble value
+    let curr = strLastPage;
+    strLastPage = strCurrPage;
+    strCurrPage = curr; 
+    if(strLastPage !== "Main" && strCurrPage !== "main") {
+        strLastPage = "Main";
+    }
 }
 
 // when video ends
@@ -120,5 +128,26 @@ function onPlayerStateChange(event) {
             document.exitFullscreen();
         }
 
+    }
+}
+
+// onClickTillwatchSearch
+const onClickTillwatchSearch = () => {
+    document.querySelector(`.tillwatch${strCurrPage}Page`).classList.add("hidden");
+    strLastPage = strCurrPage;
+    strCurrPage = "Search";
+    document.querySelector(".tillwatchSearchPage").classList.remove("hidden");
+    document.querySelector(".tillwatchBackButton").classList.remove("hidden");
+    for(playlists of Object.keys(TILLWATCH_CONTENT)) {
+        TILLWATCH_CONTENT[playlists].forEach((video, index) => {
+            let searchVideo = El("div",{cls: "searchVideoContainer"},
+                El("div",{cls: "tillwatchSearchVideoTitle"}, video.videoTitle),
+                // El("div",{classes: ["tillwatchSearchVideoThumbnail", playlists]},),
+            );
+            let thumbnail = El("div",{cls: "tillwatchVideoThumbnail", attributes: {"data-index": index, "data-playlist": playlists}, listeners: {click: onClickThumbnail}},);
+            thumbnail.style.backgroundImage = `url("http://img.youtube.com/vi/${video.src}/0.jpg")`;
+            searchVideo.prepend(thumbnail);
+            document.querySelector(".tillwatchSearchScrollContainer").append(searchVideo);
+        });
     }
 }

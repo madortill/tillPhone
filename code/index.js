@@ -14,7 +14,7 @@ window.addEventListener("load", () => {
     document.querySelector(`.loader`).classList.add(`fade`);
     document.querySelector(`.nameEntry`).classList.add(`fade`);
     document.querySelector(`.submitName`).addEventListener(`click`,startApp);
-    document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
+    // document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
 });
 
 function openFullscreen() {
