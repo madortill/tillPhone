@@ -57,6 +57,7 @@ const onClickThumbnail = (event) => {
     currVideoPlaylist = event.currentTarget.getAttribute("data-playlist");
     let videoInfo = TILLWATCH_CONTENT[currVideoPlaylist][currVideoIndex];
     document.querySelector(`.tillwatch${strCurrPage}Page`).classList.add("hidden");
+    document.querySelector("#backToHomePage").classList.add("hidden");
     document.querySelector(".tillwatchVideoPage").classList.remove("hidden");
     document.querySelector(".tillwatchBackButton").classList.remove("hidden");
     document.querySelector(".tillwatchVideoPage").innerHTML = "";
@@ -97,6 +98,7 @@ const videoFullscreen = () => {
 const onClickTillwatchBack = () => {
     if (strLastPage === "Main") {
         document.querySelector(".tillwatchBackButton").classList.add("hidden");
+        document.querySelector("#backToHomePage").classList.remove("hidden");
     }
     document.querySelector(`.tillwatch${strCurrPage}Page`).classList.add("hidden");
     document.querySelector(`.tillwatch${strLastPage}Page`).classList.remove("hidden");
@@ -134,17 +136,19 @@ function onPlayerStateChange(event) {
 // onClickTillwatchSearch
 const onClickTillwatchSearch = () => {
     document.querySelector(`.tillwatch${strCurrPage}Page`).classList.add("hidden");
+    document.querySelector("#backToHomePage").classList.add("hidden");
     strLastPage = strCurrPage;
     strCurrPage = "Search";
     document.querySelector(".tillwatchSearchPage").classList.remove("hidden");
     document.querySelector(".tillwatchBackButton").classList.remove("hidden");
+    document.querySelector(".tillwatchSearchScrollContainer").innerHTML = "";
     for(playlists of Object.keys(TILLWATCH_CONTENT)) {
         TILLWATCH_CONTENT[playlists].forEach((video, index) => {
             let searchVideo = El("div",{cls: "searchVideoContainer"},
                 El("div",{cls: "tillwatchSearchVideoTitle"}, video.videoTitle),
                 // El("div",{classes: ["tillwatchSearchVideoThumbnail", playlists]},),
             );
-            let thumbnail = El("div",{cls: "tillwatchVideoThumbnail", attributes: {"data-index": index, "data-playlist": playlists}, listeners: {click: onClickThumbnail}},);
+            let thumbnail = El("div",{cls: "tillwatchSearchThumbnail", attributes: {"data-index": index, "data-playlist": playlists}, listeners: {click: onClickThumbnail}},);
             thumbnail.style.backgroundImage = `url("http://img.youtube.com/vi/${video.src}/0.jpg")`;
             searchVideo.prepend(thumbnail);
             document.querySelector(".tillwatchSearchScrollContainer").append(searchVideo);

@@ -29,7 +29,7 @@
 .tillwatchVideoThumbnail {
     width: 45vw;
     min-width: 45vw;
-    height: 16vh;
+    height: 27vw;
     background-size: 100% 136%;
     background-position: center;
     display: flex;
@@ -60,7 +60,7 @@
 }
 
 .tillwatchTopButtons {
-    height: 4vh;
+    height: 7.5vw;
     padding: 0 1rem;
 }
 
@@ -91,13 +91,36 @@
     font-family: "Heebo";
 }
 
+#tillwatchSearchBar:focus {
+    outline: none;
+}
+
 .tillwatchSearchScrollContainer {
     top: 40vw;
-    width: 92vw;
-    height: 63vh;
+    width: 100vw;
+    height: 60vh;
     overflow-y: scroll;
 }
 
 .tillwatchSearchScrollContainer::-webkit-scrollbar {
     display: none;
+}
+
+.tillwatchSearchThumbnail {
+    width: 35vw;
+    min-width: 35vw;
+    height: 23vw;
+    background-size: 100% 136%;
+    background-position: center;
+}
+
+.searchVideoContainer {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.08);
+    margin: 0.2rem 0;
+}
+
+.tillwatchSearchVideoTitle {
+    margin: 1rem;
 }
