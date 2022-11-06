@@ -5,7 +5,6 @@ let currVideoIndex;
 let currVideoPlaylist;
 let nTillwatchCorrectAns = 0;
 let nTillwatchTotalAns = 0;
-let strCurrPage;
 let strLastPage = "Main";
 const TILLWATCH_CONTENT = DATA.tillwatch.appContent
 
@@ -59,11 +58,11 @@ const onClickThumbnail = (event) => {
     document.querySelector(`.tillwatch${strCurrPage}Page`).classList.add("hidden");
     document.querySelector("#backToHomePage").classList.add("hidden");
     document.querySelector(".tillwatchVideoPage").classList.remove("hidden");
+    document.querySelector(".tillwatchBackButton").setAttribute("src", "../assets/images/tillwatch/arrow-right.svg");
     document.querySelector(".tillwatchBackButton").classList.remove("hidden");
     document.querySelector(".tillwatchVideoPage").innerHTML = "";
     let videoPlayer = El("div", {id: "videoPlayer"});
-    document.querySelector(".tillwatchVideoPage").append(videoPlayer)
-    strLastPage = strCurrPage;
+    document.querySelector(".tillwatchVideoPage").append(videoPlayer);
     strCurrPage = "Video";
 
     player = new YT.Player("videoPlayer", {
@@ -96,19 +95,13 @@ const videoFullscreen = () => {
 
 // backButton
 const onClickTillwatchBack = () => {
-    if (strLastPage === "Main") {
-        document.querySelector(".tillwatchBackButton").classList.add("hidden");
-        document.querySelector("#backToHomePage").classList.remove("hidden");
-    }
+    document.querySelector(".tillwatchVideoPage").innerHTML = "";
     document.querySelector(`.tillwatch${strCurrPage}Page`).classList.add("hidden");
-    document.querySelector(`.tillwatch${strLastPage}Page`).classList.remove("hidden");
-    // switch varuble value
-    let curr = strLastPage;
-    strLastPage = strCurrPage;
-    strCurrPage = curr; 
-    if(strLastPage !== "Main" && strCurrPage !== "main") {
-        strLastPage = "Main";
-    }
+    strCurrPage = "Main";
+    document.querySelector(`.tillwatch${strCurrPage}Page`).classList.remove("hidden");
+    document.querySelector(".tillwatchBackButton").classList.add("hidden");
+    document.querySelector("#backToHomePage").classList.remove("hidden");
+    document.querySelector("#backToHomePage").classList.remove("hidden");
 }
 
 // when video ends
@@ -135,13 +128,15 @@ function onPlayerStateChange(event) {
 
 // onClickTillwatchSearch
 const onClickTillwatchSearch = () => {
+    document.querySelector(".tillwatchVideoPage").innerHTML = "";
     document.querySelector(`.tillwatch${strCurrPage}Page`).classList.add("hidden");
     document.querySelector("#backToHomePage").classList.add("hidden");
-    strLastPage = strCurrPage;
     strCurrPage = "Search";
     document.querySelector(".tillwatchSearchPage").classList.remove("hidden");
+    document.querySelector(".tillwatchBackButton").setAttribute("src", "../assets/images/tillwatch/cross-small.svg");
     document.querySelector(".tillwatchBackButton").classList.remove("hidden");
     document.querySelector(".tillwatchSearchScrollContainer").innerHTML = "";
+    document.querySelector(".tillwatchSearchScrollContainer").scrollTop = 0;
     for(playlists of Object.keys(TILLWATCH_CONTENT)) {
         TILLWATCH_CONTENT[playlists].forEach((video, index) => {
             let searchVideo = El("div",{cls: "searchVideoContainer"},
