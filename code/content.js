@@ -266,13 +266,13 @@ const DATA = {
                     "forceToWatch": 0,
                 },
                 {
-                    "videoTitle": "שם הסרטון",
+                    "videoTitle": "תפוח",
                     "src": "n0t9iFlGO20",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
                     "forceToWatch": 1,
                 },
                 {
-                    "videoTitle": "שם הסרטון",
+                    "videoTitle": "גלידה",
                     "src": "w141thRQ-ks",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
                     "forceToWatch": 1,
@@ -280,19 +280,19 @@ const DATA = {
             ],
             "playlistName1": [
                 {
-                    "videoTitle": "שם הסרטון",
+                    "videoTitle": "כלבלבים",
                     "src": "ysb_gxJ8LE4",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
                     "forceToWatch": 1,
                 },
                 {
-                    "videoTitle": "שם הסרטון",
+                    "videoTitle": "חלומות",
                     "src": "n0t9iFlGO20",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
                     "forceToWatch": 1,
                 },
                 {
-                    "videoTitle": "שם הסרטון",
+                    "videoTitle": "משחק מחשב",
                     "src": "w141thRQ-ks",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
                     "forceToWatch": 1,
@@ -300,19 +300,19 @@ const DATA = {
             ],
             "playlistName2": [
                 {
-                    "videoTitle": "שם הסרטון",
+                    "videoTitle": "בולונז",
                     "src": "ysb_gxJ8LE4",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
                     "forceToWatch": 1,
                 },
                 {
-                    "videoTitle": "שם הסרטון",
+                    "videoTitle": "ראול",
                     "src": "n0t9iFlGO20",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
                     "forceToWatch": 1,
                 },
                 {
-                    "videoTitle": "שם הסרטון",
+                    "videoTitle": "בתיה",
                     "src": "w141thRQ-ks",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
                     "forceToWatch": 1,

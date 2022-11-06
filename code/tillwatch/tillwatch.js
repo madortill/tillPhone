@@ -141,12 +141,37 @@ const onClickTillwatchSearch = () => {
         TILLWATCH_CONTENT[playlists].forEach((video, index) => {
             let searchVideo = El("div",{cls: "searchVideoContainer"},
                 El("div",{cls: "tillwatchSearchVideoTitle"}, video.videoTitle),
-                // El("div",{classes: ["tillwatchSearchVideoThumbnail", playlists]},),
             );
             let thumbnail = El("div",{cls: "tillwatchSearchThumbnail", attributes: {"data-index": index, "data-playlist": playlists}, listeners: {click: onClickThumbnail}},);
             thumbnail.style.backgroundImage = `url("http://img.youtube.com/vi/${video.src}/0.jpg")`;
             searchVideo.prepend(thumbnail);
             document.querySelector(".tillwatchSearchScrollContainer").append(searchVideo);
         });
+    }
+    document.querySelector("#tillwatchSearchBar").addEventListener("input", onInputTillwatchSearch)
+}
+
+const onInputTillwatchSearch = () => {
+    let bSearchMatch = false;
+    document.querySelector(".tillwatchSearchScrollContainer").innerHTML = "";
+    for(playlists of Object.keys(TILLWATCH_CONTENT)) {
+        TILLWATCH_CONTENT[playlists].forEach((video, index) => {
+            if(video.videoTitle.includes(document.querySelector("#tillwatchSearchBar").value)) {
+                bSearchMatch = true
+                let searchVideo = El("div",{cls: "searchVideoContainer"},
+                    El("div",{cls: "tillwatchSearchVideoTitle"}, video.videoTitle),
+                );
+                let thumbnail = El("div",{cls: "tillwatchSearchThumbnail", attributes: {"data-index": index, "data-playlist": playlists}, listeners: {click: onClickThumbnail}},);
+                thumbnail.style.backgroundImage = `url("http://img.youtube.com/vi/${video.src}/0.jpg")`;
+                searchVideo.prepend(thumbnail);
+                document.querySelector(".tillwatchSearchScrollContainer").append(searchVideo);
+            }
+        });
+    }
+    if (!bSearchMatch) {
+        let noMatchMessege = El("div",{cls: "tillwatchNoMatchMessege"}, "אוף! לא מצאנו סרטון תואם",
+            El("div",{cls: "tillwatchNoMatchMessegeInner"}, "בדקו שהקלדתם נכון את שם הסרטון או נסו לחפש סרטון אחר"),
+        );
+        document.querySelector(".tillwatchSearchScrollContainer").append(noMatchMessege);
     }
 }
