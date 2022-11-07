@@ -96,11 +96,13 @@ const videoFullscreen = () => {
         requestFullScreen.bind(iframe)();
         screen.orientation.lock("landscape");
     }
-    window.addEventListener("orientationchange", () => {document.exitFullscreen();});
+    window.addEventListener("orientationchange", videoExitFullscreen);
 }
 
-const videoExitFullscreen = () => {
-    if(screen.orientation.type.includes("landscape")) {
+const videoExitFullscreen = (event) => {
+    if (event && screen.orientation.type.includes("portrait")) {
+        document.exitFullscreen();
+    } else if(screen.orientation.type.includes("landscape")) {
         screen.orientation.lock("portrait");
         document.exitFullscreen();
     }
