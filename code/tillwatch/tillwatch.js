@@ -6,6 +6,7 @@ let currVideoPlaylist;
 let nTillwatchCorrectAns = 0;
 let nTillwatchTotalAns = 0;
 let strLastPage = "Main";
+const ANS_PER_VIDEO = 1;
 const TILLWATCH_CONTENT = DATA.tillwatch.appContent
 
 /* tillwatch
@@ -57,6 +58,7 @@ const onClickThumbnail = (event) => {
     let videoInfo = TILLWATCH_CONTENT[currVideoPlaylist][currVideoIndex];
     document.querySelector(`.tillwatch${strCurrPage}Page`).classList.add("hidden");
     document.querySelector("#backToHomePage").classList.add("hidden");
+    document.querySelector(".tillwatchSearchButton").classList.add("invisible");
     document.querySelector(".tillwatchVideoPage").classList.remove("hidden");
     document.querySelector(".tillwatchBackButton").setAttribute("src", "../assets/images/tillwatch/arrow-right.svg");
     document.querySelector(".tillwatchBackButton").classList.remove("hidden");
@@ -75,13 +77,16 @@ const onClickThumbnail = (event) => {
             onStateChange: onPlayerStateChange,
         },
     });
-    if (!videoInfo.forceToWatch && !iOS()) { // forced to watch only works on android
+    if (!videoInfo.forceToWatch && !iOS()) { // full screen only works on android
         let fullScreen = El("div", {id: "tillwatchFullScreenButton", cls: "centerItem", listeners: {click: videoFullscreen}}, "צפייה במסך מלא");
         document.querySelector(".tillwatchVideoPage").append(fullScreen)
-        console.log("force");
-    } else {
-        console.log("not force");
     }
+
+    let videoInfoContainer = El("div", {cls: "tillwatchVideoInfoContainer",},
+        El("div", {id: "videoPageVideoTitle"}, videoInfo.videoTitle),
+        El("div", {id: "watchVideoNotice"}, "צפו בסרטון עד הסוף כדי לצבור אחוזים!"),
+    );
+    document.querySelector(".tillwatchVideoPage").append(videoInfoContainer)
 }
 
 const videoFullscreen = () => {
@@ -90,6 +95,14 @@ const videoFullscreen = () => {
     if (requestFullScreen) {
         requestFullScreen.bind(iframe)();
         screen.orientation.lock("landscape");
+    }
+    window.addEventListener("orientationchange", videoExitFullscreen);
+}
+
+const videoExitFullscreen = () => {
+    if(screen.orientation.type.includes("landscape")) {
+        screen.orientation.lock("portrait");
+        document.exitFullscreen();
     }
 }
 
@@ -101,7 +114,7 @@ const onClickTillwatchBack = () => {
     document.querySelector(`.tillwatch${strCurrPage}Page`).classList.remove("hidden");
     document.querySelector(".tillwatchBackButton").classList.add("hidden");
     document.querySelector("#backToHomePage").classList.remove("hidden");
-    document.querySelector("#backToHomePage").classList.remove("hidden");
+    document.querySelector(".tillwatchSearchButton").classList.remove("invisible");
 }
 
 // when video ends
@@ -114,23 +127,23 @@ function onPlayerStateChange(event) {
             thumbnail.append(symbol);
             thumbnail.classList.add("watched");
             console.log("watched");
+            calcPercentageWin(ANS_PER_VIDEO, nTillwatchTotalAns);
             nTillwatchCorrectAns++;
-        }
+        } 
 
         event.target.stopVideo();
-        if(screen.orientation.type.includes("landscape")) {
-            screen.orientation.lock("portrait");
-            document.exitFullscreen();
-        }
-
+        videoExitFullscreen();
     }
 }
+
+
 
 // onClickTillwatchSearch
 const onClickTillwatchSearch = () => {
     document.querySelector(".tillwatchVideoPage").innerHTML = "";
     document.querySelector(`.tillwatch${strCurrPage}Page`).classList.add("hidden");
     document.querySelector("#backToHomePage").classList.add("hidden");
+    document.querySelector(".tillwatchSearchButton").classList.add("invisible");
     strCurrPage = "Search";
     document.querySelector(".tillwatchSearchPage").classList.remove("hidden");
     document.querySelector(".tillwatchBackButton").setAttribute("src", "../assets/images/tillwatch/cross-small.svg");

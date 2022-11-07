@@ -46,6 +46,7 @@
     top: 13vh;
     width: 100vw;
     height: 32vh;
+    z-index: 0;
 }
 
 .tillwatchTopBar {
@@ -134,4 +135,26 @@
     font-weight: 100;
     font-size: 0.9rem;
     color: #9e9e9e;
+}
+
+.tillwatchVideoInfoContainer {
+    position: absolute;
+    top: 53vh;
+    padding: 0.7rem;
+}
+
+#videoPageVideoTitle {
+    font-size: 1.2rem;
+}
+
+#watchVideoNotice {
+    color: #9e9e9e;
+}
+
+#tillwatchExitFullScreen {
+    z-index: 100;
+    position: absolute;
+    top: 10vh;
+    width: 5vw;
+    padding: 0.5rem;
 }

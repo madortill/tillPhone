@@ -238,3 +238,8 @@
 .hidden {
     display: none;
 }
+
+.invisible {
+    visibility: hidden;
+    pointer-events: none;
+}

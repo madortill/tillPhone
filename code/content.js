@@ -1,3 +1,5 @@
+const FORCE = 0;
+const DONT_FORCE = 1;
 const DATA = { 
     // tillder
     "tillder": {
@@ -263,19 +265,19 @@ const DATA = {
                     "videoTitle": "שם הסרטון",
                     "src": "n0t9iFlGO20",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": 0,
+                    "forceToWatch": FORCE,// force user to watch 
                 },
                 {
                     "videoTitle": "תפוח",
                     "src": "n0t9iFlGO20",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": 1,
+                    "forceToWatch": DONT_FORCE, // dont force user to watch
                 },
                 {
                     "videoTitle": "גלידה",
                     "src": "w141thRQ-ks",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": 1,
+                    "forceToWatch": DONT_FORCE, // dont force user to watch
                 },
             ],
             "playlistName1": [
@@ -283,19 +285,19 @@ const DATA = {
                     "videoTitle": "כלבלבים",
                     "src": "ysb_gxJ8LE4",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": 1,
+                    "forceToWatch": DONT_FORCE, // dont force user to watch
                 },
                 {
                     "videoTitle": "חלומות",
                     "src": "n0t9iFlGO20",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": 1,
+                    "forceToWatch": DONT_FORCE, // dont force user to watch
                 },
                 {
                     "videoTitle": "משחק מחשב",
                     "src": "w141thRQ-ks",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": 1,
+                    "forceToWatch": DONT_FORCE, // dont force user to watch
                 },
             ],
             "playlistName2": [
@@ -303,19 +305,19 @@ const DATA = {
                     "videoTitle": "בולונז",
                     "src": "ysb_gxJ8LE4",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": 1,
+                    "forceToWatch": DONT_FORCE, // dont force user to watch
                 },
                 {
                     "videoTitle": "ראול",
                     "src": "n0t9iFlGO20",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": 1,
+                    "forceToWatch": DONT_FORCE, // dont force user to watch
                 },
                 {
                     "videoTitle": "בתיה",
                     "src": "w141thRQ-ks",
                     "info": "מידע על הסרטוןןןןן מלא תוכןן יאייי",
-                    "forceToWatch": 1,
+                    "forceToWatch": DONT_FORCE, // dont force user to watch
                 },
             ],
         },
