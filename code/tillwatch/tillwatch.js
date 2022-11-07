@@ -96,7 +96,7 @@ const videoFullscreen = () => {
         requestFullScreen.bind(iframe)();
         screen.orientation.lock("landscape");
     }
-    window.addEventListener("orientationchange", videoExitFullscreen);
+    setTimeout(() => {window.addEventListener("orientationchange", videoExitFullscreen)}, 0);
 }
 
 const videoExitFullscreen = (event) => {
