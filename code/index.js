@@ -14,8 +14,7 @@ window.addEventListener("load", () => {
     document.querySelector(`.loader`).classList.add(`fade`);
     document.querySelector(`.nameEntry`).classList.add(`fade`);
     document.querySelector(`.submitName`).addEventListener(`click`,startApp);
-    window.scrollTo(0, 1);
-    // document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
+    document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
 });
 
 function openFullscreen() {
@@ -38,6 +37,7 @@ function exitHandler(){
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement){
         let addFullscreen = El("img", {attributes: {src: "../assets/images/homePage/fullScreenButton.svg", class: "fullScreenButton"}, listeners: {"click": openFullscreen}});
         document.querySelector(".logoAndFullScreen").prepend(addFullscreen);
+        document.exitFullscreen();
     } else {
         let addFullscreen = document.querySelector(".fullScreenButton")
         if (addFullscreen) {
