@@ -77,16 +77,18 @@ const onClickThumbnail = (event) => {
             onStateChange: onPlayerStateChange,
         },
     });
-    if (!videoInfo.forceToWatch && !iOS()) { // full screen only works on android
-        let fullScreen = El("div", {id: "tillwatchFullScreenButton", cls: "centerItem", listeners: {click: videoFullscreen}}, "צפייה במסך מלא");
-        document.querySelector(".tillwatchVideoPage").append(fullScreen)
-    }
-
+    
     let videoInfoContainer = El("div", {cls: "tillwatchVideoInfoContainer",},
-        El("div", {id: "videoPageVideoTitle"}, videoInfo.videoTitle),
-        El("div", {id: "watchVideoNotice"}, "צפו בסרטון עד הסוף כדי לצבור אחוזים!"),
+    El("div", {id: "videoPageVideoTitle"}, videoInfo.videoTitle),
+    El("div", {id: "watchVideoNotice"}, "צפו בסרטון עד הסוף כדי לצבור אחוזים!"),
+    El("div", {id: "videoPageVideoInfo"}, videoInfo.info),
     );
-    document.querySelector(".tillwatchVideoPage").append(videoInfoContainer)
+    document.querySelector(".tillwatchVideoPage").append(videoInfoContainer);
+
+    if (!videoInfo.forceToWatch && !iOS()) { // full screen only works on android
+        let fullScreen = El("div", {id: "tillwatchFullScreenButton", listeners: {click: videoFullscreen}}, "צפייה במסך מלא");
+        document.querySelector(".tillwatchVideoInfoContainer").prepend(fullScreen)
+    }
 }
 
 const videoFullscreen = () => {
