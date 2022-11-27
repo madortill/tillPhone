@@ -112,7 +112,7 @@ const DATA = {
     },
     // tillery
     "tillery": {
-        "icon": "../assets/images/homePage/tillery.png",
+        "icon": "../assets/images/homePage/tillery.svg",
         "amountOfQuestions": 6, // how many pers of cards will actualy appear
         "moves": 20, // how many moves they have until they lose
         "appContent":  [
@@ -168,7 +168,7 @@ const DATA = {
     },
     // tillsms
     "tillsms": {
-        "icon": "../assets/images/homePage/tillsms.webp",
+        "icon": "../assets/images/homePage/tillsms.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
         "appContent": [
             {
@@ -257,7 +257,7 @@ const DATA = {
     },
     // tillwatch
     "tillwatch": {
-        "icon": "../assets/images/homePage/tillwatch.png",
+        "icon": "../assets/images/homePage/tillwatch.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
         "appContent": {
             "playlistName": [
