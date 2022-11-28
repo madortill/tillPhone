@@ -24,7 +24,7 @@ const DATA = {
     },
     // tillhang
     "tillhang": {
-        "icon": "../assets/images/homePage/tillhang.png",
+        "icon": "../assets/images/homePage/tillhang.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
         "appContent":  [
             {
@@ -55,7 +55,7 @@ const DATA = {
     },
     // tillone
     "tillone": {
-        "icon": "../assets/images/homePage/tillOne.png",
+        "icon": "../assets/images/homePage/tillone.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
         "appContent":  [
             {
