@@ -90,7 +90,7 @@ const sendHome = () => {
 Description: gets an allert in animation.
 parameters: text - the content of the alert, button - the content of the button
  */
-const customAlert = (text, button) => {
+const customAlert = (text, button, onCloseAlert) => {
     document.querySelector(`.alertText`).innerHTML = text;
     document.querySelector(`.alertButton`).innerHTML = button;
     // add alert in animation
@@ -100,6 +100,9 @@ const customAlert = (text, button) => {
     document.querySelector(`.alertButton`).addEventListener("click", () => {
         document.querySelector(`.alertContainer`).style.animation = "removeAlert 2s forwards";
         document.querySelector(`.alert`).style.animation = "fadeOut 2s forwards";
+        if(onCloseAlert) {
+            onCloseAlert()
+        }
     })
 }
 
@@ -111,6 +114,7 @@ const updatePercentage = (nPercentToAdd) => {
     // createProgress();
     if(nPercent <= 0){
         // lowBattery();
+        customAlert("נגמרה הסוללה! תצטרכו להתחיל את הלומדה מהתחלה", "פעם הבאה אני אצליח!", restartTillphone)
     } else if (nPercent > 0 && nPercent <= 20){
         // change pic to low battery
         document.querySelector("#batteryImg").setAttribute("src", "../assets/images/topBar/batteryEmpty.svg");
@@ -195,6 +199,10 @@ const scaleFontSize = (element, initialFont) => {
 Description: change hyphen to space */
 const addSpace = (phrase) => {
     return phrase.replace(/_/g, ' ');
+}
+
+const restartTillphone = () => {
+    location. reload()
 }
 
 function iOS() {

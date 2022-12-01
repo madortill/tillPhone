@@ -116,9 +116,9 @@ const tillhangQuestionFeedback = (win) => {
     let next;
     nTillhangCurrentQuestion++;
     if(nTillhangCurrentQuestion < AMOUNT_OF_TILLHANG_QUESTION){
-        next = El("img", {cls: `tillHangNextQuestion`, attributes: {src: `../assets/images/tillhang/next.svg`}, listeners: {click: createHangman}})
+        next = El("div", {classes: [`tillHangNextQuestion`, `centerX`], listeners: {click: createHangman}}, "הבא")
     } else {
-        next = El("img", {cls: `tillHangNextQuestion`, attributes: {src: `../assets/images/tillhang/next.svg`}, listeners: {click: tillhangEnd}})
+        next = El("div", {classes: [`tillHangNextQuestion`, `centerX`], listeners: {click: tillhangEnd}}, "הבא")
     }
     document.querySelector(`.tillhang`).append(next);
 }
@@ -134,7 +134,7 @@ const tillhangEnd = () => {
             El("div",{cls: `tillhangTitleDefinition`}, `כל הכבוד הצלחתם להציל את האיש מתלייה!`),
             El("div",{cls: `tillhangDefinition`}, `ניחשתם נכון ${nTillhangCorrectAnswers} מושגים מתוך ${AMOUNT_OF_TILLHANG_QUESTION}`),
             El("div",{classes: [`tillhangDefinition`, "tillhangPrecentUpdate"]},),
-            El("div",{cls: `tillhangEndButton`, listeners: {click: sendHome}},`סיום`),
+            El("div",{classes: [`tillhangEndButton`, `centerX`], listeners: {click: sendHome}},`סיום`),
         );
         document.querySelector(`.tillhang`).append(content);
         if(!bTillhangRestart) {
@@ -145,7 +145,7 @@ const tillhangEnd = () => {
             El("div",{cls: `tillhangTitleDefinition`}, `האיש נתלה! פשוט אי אפשר לסמוך עליכם`),
             El("div",{cls: `tillhangDefinition`}, `ניחשתם נכון ${nTillhangCorrectAnswers} מושגים מתוך ${AMOUNT_OF_TILLHANG_QUESTION}`),
             El("div",{cls: `tillhangDefinition`},`התקשרתם לאמבולנס והתבזבזו לכם 5 אחוזים`),
-            El("div",{cls: `tillhangEndButton`, listeners: {click: sendHome}},`סיום`),
+            El("div",{classes: [`tillhangEndButton`, `centerX`], listeners: {click: sendHome}},`סיום`),
         );
         updatePercentage(-5);
         document.querySelector(`.tillhang`).append(content);

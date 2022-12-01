@@ -1,0 +1,68 @@
+.tillburger {
+    color: white;
+    font-family: "Rubik";
+    background-image: url("../../assets/images/tillburger/bg.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#tillburgerToppingsContainer {
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    padding-right: 0;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item {
+    position: relative;
+    display: block;
+    width: 75vw;
+    height: 11vh;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.toppingText {
+    padding: 0.9rem;
+    text-align: center;
+    /* font-size: 1.2rem; */
+}
+
+.lettuce {
+    background-image: url("../../assets/images/tillburger/lettuce.svg");
+}
+
+.tomato {
+    background-image: url("../../assets/images/tillburger/tomato.svg");
+}
+
+.patty {
+    background-image: url("../../assets/images/tillburger/patty.svg");
+}
+
+.onion {
+    background-image: url("../../assets/images/tillburger/onion.svg");
+}
+
+.buns {
+    width: 75vw;
+}
+
+.topBun {
+    margin-bottom: -2em;
+    position: relative;
+    z-index: 25;
+}
+
+

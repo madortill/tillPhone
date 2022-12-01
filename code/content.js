@@ -322,4 +322,17 @@ const DATA = {
             ],
         },
     },
+    // tillburger
+    "tillburger": {
+        "icon": "../assets/images/homePage/tilloto.png",
+        "amountOfQuestions": 2, // how many questions will actualy appear
+        "appContent": [
+            {
+                instructions: "סדרו את החודשים לפי סדר כרונולוגי",
+                rangeTop: "ראשון",
+                rangeBottom: "אחרון",
+                options: ["ינואר", "מאי", "יולי", "ספטמבר", "דצמבר", "fff"]
+            }
+        ]
+    },
 };

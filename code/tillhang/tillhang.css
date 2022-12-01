@@ -84,22 +84,23 @@
 }
 
 .tillHangNextQuestion {
-    position: absolute;
     bottom: 30vh;
-    left: 5vw;
+    background-color: #034442;
     width: 20vw;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    border-radius: 0.8rem;
 }
 
 .tillhangEndButton {
-    font-size: 1.5em;
-    font-weight: bold;
-    padding: 0 0.5em;
-    /* padding-bottom: 0.2em; */
-    border-radius: 0.3em;
-    background-image: url("../../assets/images/tillhang/buttonBook.svg");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    color: black;
+    bottom: 30vh;
+    background-color: #034442;
+    width: 20vw;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    border-radius: 0.8rem;
 }
 
 .tillhangEndMan {
