@@ -2,9 +2,10 @@
 let nTillburgerCurrentQuestion = 0;
 let nTillburgerCorrectAnswers = 0;
 let arrTillburgerQuestions = [];
+let arrTillburgerCurrentOptions = [];
 let bTillburgerVisited = false;
 // const
-const TOPPINGS = ["tomato","lettuce", "patty", "onion"];
+const TOPPINGS = ["tomato","patty", "lettuce", "onion"];
 
 /* tillburger
 --------------------------------------------------------------
@@ -17,25 +18,53 @@ var tillburger = () => {
     if(!bTillburgerVisited) {
         bTillburgerVisited = true;
         arrTillburgerQuestions = shuffle(DATA.tillburger.appContent);
+        startTillburger();
     }
-    startTillburger();
-    document.querySelectorAll(".tillburgerToppingsContainer .item").forEach((e, index) => {
-        e.style.zIndex = 10 + (document.querySelectorAll(".tillburgerToppingsContainer .item").length - index)
-        e.style.marginBottom = `-${3 * arrTillburgerQuestions[nTillburgerCurrentQuestion].options.length}px`;
-    })
-}
+    document.querySelectorAll(".tillburgerToppingsContainer .tillburgerTopping").forEach((e, index) => {
+        e.style.zIndex = 10 + (document.querySelectorAll(".tillburgerToppingsContainer .tillburgerTopping").length - index);
+    });
+} 
 
 /* startTillburger
 --------------------------------------------------------------
 Description: */
 const startTillburger = () => {
+    document.querySelector("#tillburgerToppingsContainer").innerHTML = "";
+    arrTillburgerCurrentOptions = shuffle(arrTillburgerQuestions[nTillburgerCurrentQuestion].options.slice());
+    let topingIndex = 0;
+    let toppings = shuffle(TOPPINGS)
+    arrTillburgerCurrentOptions.forEach(option => {
+        if(topingIndex >= TOPPINGS.length){topingIndex = 0}
+        let topping = El("div", {classes: ["tillburgerTopping", toppings[topingIndex]]},
+            El("div", {cls: "toppingText"}, option)
+        );
+        document.querySelector("#tillburgerToppingsContainer").append(topping);
+        topingIndex++;
+    });
+    
     new Sortable(tillburgerToppingsContainer, {
         animation: 150,
         onEnd: function (/**Event*/evt) {
-            document.querySelectorAll(".tillburgerToppingsContainer .item").forEach((e, index) => {
-                e.style.zIndex = 10 + (document.querySelectorAll(".tillburgerToppingsContainer .item").length - index)
+            document.querySelectorAll(".tillburgerToppingsContainer .tillburgerTopping").forEach((e, index) => {
+                e.style.zIndex = 10 + (document.querySelectorAll(".tillburgerToppingsContainer .tillburgerTopping").length - index);
             })
         },
+    });
+
+    document.querySelector(".tillburgerSubmitButton").addEventListener("click", onClickTillburgerSubmit);
+}
+
+/* onClickTillburgerSubmit
+--------------------------------------------------------------
+Description: */
+const onClickTillburgerSubmit = () => {
+    document.querySelectorAll(".tillburgerToppingsContainer .tillburgerTopping").forEach((e, index) => {
+        if (e.children[0].innerHTML === arrTillburgerQuestions[nTillburgerCurrentQuestion].options[index]) {
+            console.log("ניצחון");
+            e.style.filter = "drop-shadow(2px 4px 6px green)"
+        } else {
+            e.style.filter = "drop-shadow(2px 4px 6px red)"
+        }
     });
 }
 
