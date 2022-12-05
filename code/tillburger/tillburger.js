@@ -41,6 +41,11 @@ const startTillburger = () => {
         document.querySelector("#tillburgerToppingsContainer").append(topping);
         topingIndex++;
     });
+
+    document.querySelector(".topBun").innerHTML = arrTillburgerQuestions[nTillburgerCurrentQuestion].rangeTop;
+    document.querySelector(".bottomBun").innerHTML = arrTillburgerQuestions[nTillburgerCurrentQuestion].rangeBottom;
+    document.querySelector("#tillburgerExerInstruction").innerHTML = arrTillburgerQuestions[nTillburgerCurrentQuestion].instructions;
+
     
     new Sortable(tillburgerToppingsContainer, {
         animation: 150,

@@ -324,7 +324,7 @@ const DATA = {
     },
     // tillburger
     "tillburger": {
-        "icon": "../assets/images/homePage/tilloto.png",
+        "icon": "../assets/images/homePage/tillburger.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
         "appContent": [
             {

@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: space-between;
     height: 32vh;
-    margin-bottom: 8vh;
+    margin-bottom: 7vh;
 }
 
 .tillburgerTopping {
@@ -67,6 +67,11 @@
     width: 75vw;
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 800;
 }
 
 .topBun {
@@ -80,6 +85,7 @@
 .bottomBun {
     background-image: url("../../assets/images/tillburger/bunBottom.svg");
     height: 9vh;
+    padding-top: 0.5rem;
 }
 
 .tillburgerSubmitButton {
@@ -87,5 +93,13 @@
     position: absolute;
     left: 4vw;
     bottom: 2vh;
+}
+
+#tillburgerExerInstruction {
+    text-align: center;
+    position: absolute;
+    top: 10vh;
+    font-size: 1.4rem;
+    width: 100vw;
 }
 
