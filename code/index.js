@@ -5,7 +5,7 @@ let strCurrentApp;
 const PERCENT_PER_APP = 100/Object.keys(DATA).length;
 const PASSING_RATE = 0.5;
 const BONUS = 2;// NOT MORE THEN 5
-var elem = document.querySelector("html");
+// var elem = document.querySelector("html");
 
 /* loading function
 --------------------------------------------------------------

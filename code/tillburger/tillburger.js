@@ -60,10 +60,10 @@ Description: */
 const onClickTillburgerSubmit = () => {
     document.querySelectorAll(".tillburgerToppingsContainer .tillburgerTopping").forEach((e, index) => {
         if (e.children[0].innerHTML === arrTillburgerQuestions[nTillburgerCurrentQuestion].options[index]) {
-            console.log("ניצחון");
-            e.style.filter = "drop-shadow(2px 4px 6px green)"
+            console.log(e.classList[1]);
+            e.style.backgroundImage = `url("../assets/images/tillburger/${e.classList[1]}Right.svg")`
         } else {
-            e.style.filter = "drop-shadow(2px 4px 6px red)"
+            e.style.backgroundImage = `url("../assets/images/tillburger/${e.classList[1]}Wrong.svg")`
         }
     });
 }
