@@ -90,7 +90,7 @@ const DATA = {
     },
     // tillgram
     "tillgram": {
-        "icon": "../assets/images/homePage/tillgram.jpg",
+        "icon": "../assets/images/homePage/tillgram.svg",
         "appContent":  [
             {
                 "title": "כותרת לנושא",
@@ -166,6 +166,31 @@ const DATA = {
             },
         ],
     },
+    // tilloto
+    "tilloto": {
+        "icon": "../assets/images/homePage/tilloto.svg",
+        "amountOfQuestions": 2, // how many questions will actualy appear
+        "appContent":  [
+            ["1מושג", "1הסבר על מושג"],
+            ["2מושג", "2הסבר על מושג"],
+            ["3מושג", "3הסבר על מושג"],
+            ["4מושג", "4הסבר על מושג"],
+            ["5מושג", "5הסבר על מושג"],
+            ["6מושג", "6הסבר על מושג"],
+            ["7מושג", "7הסבר על מושג"],
+            ["8מושג", "8הסבר על מושג"],
+            ["9מושג", "9הסבר על מושג"],
+            ["10מושג", "10הסבר על מושג"],
+            ["11מושג", "11הסבר על מושג"],
+            ["12מושג", "12הסבר על מושג"],
+            ["13מושג", "13הסבר על מושג"],
+            ["14מושג", "14הסבר על מושג"],
+            ["15מושג", "15הסבר על מושג"],
+            ["16מושג", "16הסבר על מושג"],
+            ["17מושג", "17הסבר על מושג"],
+            ["18מושג", "18הסבר על מושג"],
+        ],
+    },
     // tillsms
     "tillsms": {
         "icon": "../assets/images/homePage/tillsms.svg",
@@ -229,31 +254,6 @@ const DATA = {
             ],},
         ]
         
-    },
-    // tilloto
-    "tilloto": {
-        "icon": "../assets/images/homePage/tilloto.png",
-        "amountOfQuestions": 2, // how many questions will actualy appear
-        "appContent":  [
-            ["1מושג", "1הסבר על מושג"],
-            ["2מושג", "2הסבר על מושג"],
-            ["3מושג", "3הסבר על מושג"],
-            ["4מושג", "4הסבר על מושג"],
-            ["5מושג", "5הסבר על מושג"],
-            ["6מושג", "6הסבר על מושג"],
-            ["7מושג", "7הסבר על מושג"],
-            ["8מושג", "8הסבר על מושג"],
-            ["9מושג", "9הסבר על מושג"],
-            ["10מושג", "10הסבר על מושג"],
-            ["11מושג", "11הסבר על מושג"],
-            ["12מושג", "12הסבר על מושג"],
-            ["13מושג", "13הסבר על מושג"],
-            ["14מושג", "14הסבר על מושג"],
-            ["15מושג", "15הסבר על מושג"],
-            ["16מושג", "16הסבר על מושג"],
-            ["17מושג", "17הסבר על מושג"],
-            ["18מושג", "18הסבר על מושג"],
-        ],
     },
     // tillwatch
     "tillwatch": {
@@ -325,14 +325,26 @@ const DATA = {
     // tillburger
     "tillburger": {
         "icon": "../assets/images/homePage/tillburger.svg",
-        "amountOfQuestions": 2, // how many questions will actualy appear
+        "amountOfQuestions": 3, // how many questions will actualy appear
         "appContent": [
             {
                 instructions: "סדרו את החודשים לפי סדר כרונולוגי",
                 rangeTop: "ראשון",
                 rangeBottom: "אחרון",
                 options: ["ינואר", "פברואר", "מרץ", "אפריל","מאי"]
-            }
+            },
+            {
+                instructions: "סדרו לפי סדר הפעולות",
+                rangeTop: "ראשונה",
+                rangeBottom: "אחרונה",
+                options: ["פעולה ראשונה", "פעולה שנייה", "פעולה שלישית", "פעולה רביעית",]
+            },
+            {
+                instructions: "סדרו לפי גודל החייה",
+                rangeTop: "הכי גדולה",
+                rangeBottom: "הכי קטנה",
+                options: ["פיל", "אריה", "כלב", "ארנב", "עכבר", "נמלה"]
+            },
         ]
     },
 };

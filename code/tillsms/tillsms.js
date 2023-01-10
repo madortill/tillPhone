@@ -21,7 +21,7 @@ let simon = {
     soundOn: true,
     mistakes: 0,
 }
-const SIMON_ROUNDS_TO_WIN = 2;
+const SIMON_ROUNDS_TO_WIN = 8;
 
 /* tillsms
 --------------------------------------------------------------

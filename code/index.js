@@ -5,7 +5,7 @@ let strCurrentApp;
 const PERCENT_PER_APP = 100/Object.keys(DATA).length;
 const PASSING_RATE = 0.5;
 const BONUS = 2;// NOT MORE THEN 5
-// var elem = document.querySelector("html");
+var elem = document.querySelector("html");
 
 /* loading function
 --------------------------------------------------------------
@@ -14,7 +14,7 @@ window.addEventListener("load", () => {
     document.querySelector(`.loader`).classList.add(`fade`);
     document.querySelector(`.nameEntry`).classList.add(`fade`);
     document.querySelector(`.submitName`).addEventListener(`click`,startApp);
-    document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
+    // document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
 });
 
 function openFullscreen() {
@@ -114,6 +114,7 @@ const updatePercentage = (nPercentToAdd) => {
     // createProgress();
     if(nPercent <= 0){
         // lowBattery();
+        nPercent = 0;
         customAlert("נגמרה הסוללה! תצטרכו להתחיל את הלומדה מהתחלה", "פעם הבאה אני אצליח!", restartTillphone)
     } else if (nPercent > 0 && nPercent <= 20){
         // change pic to low battery

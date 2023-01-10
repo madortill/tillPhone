@@ -6,7 +6,7 @@
     background-repeat: no-repeat;
 }
 
-#tillburgerToppingsContainer {
+#tillburgerToppingsContainer, .tillburgerToppingsFeedback {
     flex-basis: 0;
     -ms-flex-positive: 1;
     flex-grow: 1;
@@ -101,5 +101,79 @@
     top: 10vh;
     font-size: 1.4rem;
     width: 100vw;
+    height: 11vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.6rem;
+    box-sizing: border-box;
 }
 
+#tillburgerLifeContainer {
+    width: 100vw;
+    position: absolute;
+    top: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.tillburgerLifeFries {
+    width: 16vw;
+    padding: 0.3rem;
+}
+
+.menu {
+    background-image: url("../../assets/images/tillburger/menuBg.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 91vw;
+    height: 85vh;
+}
+
+.tillburgerFeedback {
+    width: 91vw;
+    text-align: center;
+    font-size: 1.3rem;
+    position: absolute;
+    top: 2vh;
+    padding: 1rem;
+    box-sizing: border-box;
+    height: 12vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tillburgerNextButton {
+    position: absolute;
+    bottom: 6vh;
+    padding: 0.5rem 0.8rem;
+    background-color: #aa6e2d;
+    border-radius: 1.5rem;
+}
+
+.tillburgerEndImg {
+    width: 71vw;
+    top: 15vh;
+}
+
+.endTillburgerText {
+    position: absolute;
+    top: 51vh;
+    text-align: center;
+    padding: 0 2rem;
+    font-size: 1.2rem;
+}
+
+.endTillburgerText2 {
+    position: absolute;
+    top: 61vh;
+    text-align: center;
+    padding: 0 2rem;
+    width: 91vw;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
