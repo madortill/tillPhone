@@ -92,6 +92,7 @@ const checkForBingo = () => {
 const wingame = () => {
     document.querySelector(".tillotoRandomTermGemerator").removeEventListener("click", generateRandomBingoInfo);
     document.querySelector(".tillotoInfoContainer").innerHTML = `בינגו! עם המזל שלכם מי צריך לוטו??`;
+    DATA.tilloto.completed = true;
     winConfetti();
 }
   

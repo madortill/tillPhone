@@ -330,35 +330,36 @@ const endTillsmsExer = () => {
         document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollTop = document.querySelector(`.tillsmsQuestionContainer${tillsmsCurrentExer}`).scrollHeight;
         // restartTillsms();
     }
+    DATA.tillsms.completed = true;
     // document.querySelector(".tillsmsExerArrow").style.pointerEvents = "all";
 }
 
-/* endTillsmsExer
---------------------------------------------------------------
-Description: */
-const restartTillsms = () => {
-    arrtillsmsQuestions.forEach(exer => {
-        exer.curretntQuestion = 0;
-        exer.status = "לא הותחל";
-    })
+// /* endTillsmsExer
+// --------------------------------------------------------------
+// Description: */
+// const restartTillsms = () => {
+//     arrtillsmsQuestions.forEach(exer => {
+//         exer.curretntQuestion = 0;
+//         exer.status = "לא הותחל";
+//     })
 
-    document.querySelector(`.tillsmsMainPage`).classList.remove("hidden");
-    let header = document.querySelector(`.tillsmsExerheaderContainer`)
-    if(header) {
-        document.querySelector(`.tillsmsExerPage`).removeChild(header);
-    }
-    document.querySelector(`.tillsmsExerPage`).classList.add("hidden");
-    document.querySelectorAll(".tillsmsQuestionContainer").forEach( container => {
-        document.querySelector(`.tillsmsExerPage`).removeChild(container);
-    })
-    document.querySelector(`.tillsmsPageContent`).innerHTML = "";
-    document.querySelector(`.tillsmsMainPageHeader`).innerHTML = "";
+//     document.querySelector(`.tillsmsMainPage`).classList.remove("hidden");
+//     let header = document.querySelector(`.tillsmsExerheaderContainer`)
+//     if(header) {
+//         document.querySelector(`.tillsmsExerPage`).removeChild(header);
+//     }
+//     document.querySelector(`.tillsmsExerPage`).classList.add("hidden");
+//     document.querySelectorAll(".tillsmsQuestionContainer").forEach( container => {
+//         document.querySelector(`.tillsmsExerPage`).removeChild(container);
+//     })
+//     document.querySelector(`.tillsmsPageContent`).innerHTML = "";
+//     document.querySelector(`.tillsmsMainPageHeader`).innerHTML = "";
     
-    ntillsmsCorrectAnswers = 0;
-    amountOfTillsmsQuestions = 0;
-    nTillsmsAmountOfExers = arrtillsmsQuestions.length;
-    bTillsmsRestart = true;
-}
+//     ntillsmsCorrectAnswers = 0;
+//     amountOfTillsmsQuestions = 0;
+//     nTillsmsAmountOfExers = arrtillsmsQuestions.length;
+//     bTillsmsRestart = true;
+// }
 
 
 // simon game ------------------------------------------------------------------------

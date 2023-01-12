@@ -150,6 +150,7 @@ const tillhangEnd = () => {
         updatePercentage(-5);
         document.querySelector(`.tillhang`).append(content);
     }
+    DATA.tillhang.completed = true;
     // restartTillhang();
 }
 

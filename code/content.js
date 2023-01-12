@@ -5,6 +5,7 @@ const DATA = {
     "tillder": {
         "icon": "../assets/images/homePage/tillder.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
+        "completed": false,
         "appContent":  [
             {
                 "type": "binary",
@@ -26,6 +27,7 @@ const DATA = {
     "tillhang": {
         "icon": "../assets/images/homePage/tillhang.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
+        "completed": false,
         "appContent":  [
             {
                 "src": "../assets/images/homePage/tillder.png",
@@ -57,6 +59,7 @@ const DATA = {
     "tillone": {
         "icon": "../assets/images/homePage/tillone.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
+        "completed": false,
         "appContent":  [
             {
                 "question": "שאלה ששואלת מה עדיף לעשות?",
@@ -91,6 +94,7 @@ const DATA = {
     // tillgram
     "tillgram": {
         "icon": "../assets/images/homePage/tillgram.svg",
+        "completed": false,
         "appContent":  [
             {
                 "title": "כותרת לנושא",
@@ -114,6 +118,7 @@ const DATA = {
     "tillery": {
         "icon": "../assets/images/homePage/tillery.svg",
         "amountOfQuestions": 6, // how many pers of cards will actualy appear
+        "completed": false,
         "moves": 20, // how many moves they have until they lose
         "appContent":  [
             {
@@ -170,6 +175,7 @@ const DATA = {
     "tilloto": {
         "icon": "../assets/images/homePage/tilloto.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
+        "completed": false,
         "appContent":  [
             ["1מושג", "1הסבר על מושג"],
             ["2מושג", "2הסבר על מושג"],
@@ -195,6 +201,7 @@ const DATA = {
     "tillsms": {
         "icon": "../assets/images/homePage/tillsms.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
+        "completed": false,
         "appContent": [
             {
                 pic: "../assets/images/tillsms/example1.jpg",
@@ -259,6 +266,7 @@ const DATA = {
     "tillwatch": {
         "icon": "../assets/images/homePage/tillwatch.svg",
         "amountOfQuestions": 2, // how many questions will actualy appear
+        "completed": false,
         "appContent": {
             "playlistName": [
                 {
@@ -326,6 +334,7 @@ const DATA = {
     "tillburger": {
         "icon": "../assets/images/homePage/tillburger.svg",
         "amountOfQuestions": 3, // how many questions will actualy appear
+        "completed": false,
         "appContent": [
             {
                 instructions: "סדרו את החודשים לפי סדר כרונולוגי",

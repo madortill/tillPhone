@@ -151,19 +151,20 @@ const endTillderExer = () => {
         updatePercentage(-5);
         document.querySelector(`.tillderFeedBackContainer`).append(feedback);
     }
+    DATA.tillder.completed = true;
     // restartTillder();
 }
 
-/* restartTillder
---------------------------------------------------------------
-Description: */
-const restartTillder = () => {
-    // reset verubles
-    nTillderCurrentQuestion = 0;
-    nTillderCorrectAnswers = 0;
-    arrTillderQuestions = shuffle(DATA.tillder.appContent);
-    bTillderRestart = true;
-}
+// /* restartTillder
+// --------------------------------------------------------------
+// Description: */
+// const restartTillder = () => {
+//     // reset verubles
+//     nTillderCurrentQuestion = 0;
+//     nTillderCorrectAnswers = 0;
+//     arrTillderQuestions = shuffle(DATA.tillder.appContent);
+//     bTillderRestart = true;
+// }
 
 const handlePan = () => {
        

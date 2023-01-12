@@ -83,6 +83,17 @@ const onRead = (event) => {
         document.querySelector(`.tillgramReadAnimation${currentPic}`).style.animation = "fadeInEnlarged 1s";
         DATA.tillgram.appContent[currentPic].notRead = false
     }
+    
+    let allRead = true;
+    DATA.tillgram.appContent.forEach(pic => {
+        if (pic.notRead) {
+            allRead = false;
+        }
+    });
+
+    if (allRead) {
+        DATA.tillgram.completed = true;
+    }
 }
 
 /* caruslePics

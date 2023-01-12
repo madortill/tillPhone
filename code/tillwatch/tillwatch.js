@@ -120,6 +120,7 @@ const onClickTillwatchBack = () => {
 
 // when video ends
 function onPlayerStateChange(event) {
+    DATA.tillwatch.completed = true;
     if (event.data === 0) {
         let thumbnail = document.querySelector(`#${currVideoPlaylist}${currVideoIndex}`);
         if(thumbnail.classList.length === 1) {

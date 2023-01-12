@@ -114,4 +114,5 @@ const tilloneEnd = () => {
         document.querySelector(`.tilloneFeedbackTitleIcon`).setAttribute(`src`, `../assets/images/tillone/crossCircle.svg`);
         updatePercentage(-5);
     }
+    DATA.tillone.completed = true;
 }

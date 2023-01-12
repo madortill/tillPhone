@@ -121,4 +121,5 @@ const tilleryEnd = () => {
         );
     }
     document.querySelector(`.tillery`).append(end);
+    DATA.tillery.completed = true;
 }

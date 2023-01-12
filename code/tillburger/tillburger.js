@@ -194,6 +194,7 @@ const endTillburgerExer = () => {
         updatePercentage(-5);
     }
     document.querySelector("#feedbackPage").append(endPage);
+    DATA.tillburger.completed = true;
 }
 
 

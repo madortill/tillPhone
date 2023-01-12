@@ -4,6 +4,7 @@ let lastPrecent = 0;
 let strCurrentApp;
 const PERCENT_PER_APP = 100/Object.keys(DATA).length;
 const PASSING_RATE = 0.5;
+const PASSING_GRADE = 60;
 const BONUS = 2;// NOT MORE THEN 5
 var elem = document.querySelector("html");
 
@@ -13,8 +14,12 @@ Description: */
 window.addEventListener("load", () => { 
     document.querySelector(`.loader`).classList.add(`fade`);
     document.querySelector(`.nameEntry`).classList.add(`fade`);
-    document.querySelector(`.submitName`).addEventListener(`click`,startApp);
-    // document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
+    document.querySelector(`.submitName`).addEventListener(`click`, () => {
+        if(document.querySelector(`#name`).value) {
+            startApp();
+        }
+    });
+    document.querySelector(`.submitName`).addEventListener(`click`,openFullscreen);
 });
 
 function openFullscreen() {
@@ -72,6 +77,7 @@ const startApp = () => {
 --------------------------------------------------------------
 Description: hide and enable recent app, shoe home page*/
 const sendHome = () => {
+    checkEndGame();
     document.querySelector(`.homePage`).classList.remove(`hidden`);
     document.querySelector(`.${strCurrentApp}`).classList.add(`hidden`);
     document.querySelector(`#backToHomePage`).classList.add(`hidden`);
@@ -117,8 +123,6 @@ const updatePercentage = (nPercentToAdd) => {
         nPercent = 0;
         customAlert("נגמרה הסוללה! תצטרכו להתחיל את הלומדה מהתחלה", "פעם הבאה אני אצליח!", restartTillphone)
     } else if (nPercent > 0 && nPercent <= 20){
-        customAlert(`${userName} הסוללה מלאה איזה כיף! ידענו שאפשר לסמוך עליכם. הטענתם את הסוללה והגעתם ל${Math.floor(nPercent)} אחוזים! אל תשכחו לצלם מסך למפקדים שיראו איזה אלופים אתם!`, `להתראות!`, endTillphone);
-
         // change pic to low battery
         document.querySelector("#batteryImg").setAttribute("src", "../assets/images/topBar/batteryEmpty.svg");
         document.querySelector(".ldBar path.mainline").style.stroke = "rgb(210, 8, 8)";
@@ -150,6 +154,26 @@ const calcPercentageWin = (correctAnswers, answers, bonus) => {
     }
     updatePercentage(percentage);
     return Math.floor(percentage);
+}
+
+/* calcPercentage
+--------------------------------------------------------------
+Description: calculate the current percentage and send to update */
+const checkEndGame = () => {
+    let allCompleted = true;
+    for (const app of Object.keys(DATA)) {
+        if (!DATA[app].completed) {
+            allCompleted = false;
+        }
+    }
+
+    if (allCompleted) {
+        if(nPercent >= PASSING_GRADE) {
+            customAlert(`${userName} הסוללה מלאה איזה כיף! ידענו שאפשר לסמוך עליכם. הטענתם את הסוללה והגעתם ל${Math.floor(nPercent)} אחוזים! אל תשכחו לצלם מסך למפקדים שיראו איזה אלופים אתם!`, `להתראות!`, endTillphone);
+        } else {
+            customAlert(`${userName} נרדמת בתפקיד?? הסוללה רק ב ${Math.floor(nPercent)} אחוזים מה תעשו בשעת ט"ש? מאמינים בכם שתנסו שוב ותצליחו!`, `פעם הבאה אני אצליח!`, restartTillphone);
+        }
+    }
 }
 
 /*
