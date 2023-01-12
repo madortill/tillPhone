@@ -177,3 +177,7 @@
     box-sizing: border-box;
     font-size: 1.2rem;
 }
+
+#tillburgerOpeningPage {
+    z-index: 4;
+}

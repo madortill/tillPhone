@@ -31,6 +31,14 @@ var tillburger = () => {
 --------------------------------------------------------------
 Description: */
 const startTillburger = () => {
+    startTillburgerExer();
+ 
+}
+
+/* startTillburgerExer
+--------------------------------------------------------------
+Description: */
+const startTillburgerExer = () => {
     document.querySelector("#feedbackPage").classList.add("hidden");
     document.querySelector(".tillburgerExerPage").classList.remove("hidden");
     document.querySelector("#tillburgerToppingsContainer").innerHTML = "";
@@ -137,7 +145,7 @@ const tillburgerEndQuestion = (win) => {
         if(nTillburgerCurrentQuestion === arrTillburgerQuestions.length) {
             nextBtn = El("div", {id: "tillburgerNextButton", cls: "centerX", listeners: {click: endTillburgerExer}}, "לסיום התרגול")
         } else {
-            nextBtn = El("div", {id: "tillburgerNextButton", cls: "centerX", listeners: {click: startTillburger}}, "ללקוח הבא")
+            nextBtn = El("div", {id: "tillburgerNextButton", cls: "centerX", listeners: {click: startTillburgerExer}}, "ללקוח הבא")
         }
         document.querySelector("#feedbackPage").append(nextBtn);
 

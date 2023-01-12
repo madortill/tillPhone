@@ -101,7 +101,7 @@ const customAlert = (text, button, onCloseAlert) => {
         document.querySelector(`.alertContainer`).style.animation = "removeAlert 2s forwards";
         document.querySelector(`.alert`).style.animation = "fadeOut 2s forwards";
         if(onCloseAlert) {
-            onCloseAlert()
+            onCloseAlert();
         }
     })
 }
@@ -113,10 +113,12 @@ const updatePercentage = (nPercentToAdd) => {
     nPercent = nPercent + nPercentToAdd
     // createProgress();
     if(nPercent <= 0){
-        // lowBattery();
+        // lowBattery;
         nPercent = 0;
         customAlert("נגמרה הסוללה! תצטרכו להתחיל את הלומדה מהתחלה", "פעם הבאה אני אצליח!", restartTillphone)
     } else if (nPercent > 0 && nPercent <= 20){
+        customAlert(`${userName} הסוללה מלאה איזה כיף! ידענו שאפשר לסמוך עליכם. הטענתם את הסוללה והגעתם ל${Math.floor(nPercent)} אחוזים! אל תשכחו לצלם מסך למפקדים שיראו איזה אלופים אתם!`, `להתראות!`, endTillphone);
+
         // change pic to low battery
         document.querySelector("#batteryImg").setAttribute("src", "../assets/images/topBar/batteryEmpty.svg");
         document.querySelector(".ldBar path.mainline").style.stroke = "rgb(210, 8, 8)";
@@ -132,7 +134,7 @@ const updatePercentage = (nPercentToAdd) => {
         nPercent = 100;
         document.querySelector("#batteryImg").setAttribute("src", "../assets/images/topBar/batteryFull.svg");
         document.querySelector(".ldBar path.mainline").style.stroke = "rgb(67, 172, 81)";
-        // endGame();
+        // endGame;
     }
     document.querySelector(`#battery`).innerHTML = `${Math.floor(nPercent)}%`;
 }
@@ -203,7 +205,11 @@ const addSpace = (phrase) => {
 }
 
 const restartTillphone = () => {
-    location. reload()
+    location.reload()
+}
+
+const endTillphone = () => {
+    window.close();
 }
 
 function iOS() {
