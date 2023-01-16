@@ -31,7 +31,10 @@ var tillburger = () => {
 --------------------------------------------------------------
 Description: */
 const startTillburger = () => {
-    startTillburgerExer();
+    document.querySelector("#tillburgerStartButton").addEventListener("click",() => {
+        document.querySelector("#tillburgerOpeningPage").classList.add("hidden");
+        startTillburgerExer();
+    })
  
 }
 

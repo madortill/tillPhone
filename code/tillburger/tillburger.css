@@ -147,7 +147,7 @@
     align-items: center;
 }
 
-#tillburgerNextButton {
+#tillburgerNextButton, #tillburgerStartButton {
     position: absolute;
     bottom: 6vh;
     padding: 0.5rem 0.8rem;
@@ -180,4 +180,23 @@
 
 #tillburgerOpeningPage {
     z-index: 4;
+}
+
+#tilburgerStartText {
+    width: 70vw;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    text-align: center;
+
+}
+
+#tillburgerStartHeadline {
+    width: 91vw;
+    text-align: center;
+    font-size: 1.6rem;
+    position: absolute;
+    top: 8vh;
+    padding: 1rem;
+    box-sizing: border-box;
+    font-weight: bold;
 }
